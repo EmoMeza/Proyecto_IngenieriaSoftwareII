@@ -1,4 +1,12 @@
 # Proyecto_IngenieriaSoftwareII
+
+##Como correr el proyecto en local##
+1. Tener pip instalado
+2. Instalar flask `sudo apt install python3-flask`
+2. Instalar los requerimientos con `pip install -r requirements.txt`
+3. Correr el proyecto con `flask run`
+
+
 REQUERIMIENTOS:
 Ing Soft IITema: Bug Tracker
 
