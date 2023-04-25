@@ -10,7 +10,6 @@ report_controller = Blueprint('report_controller', __name__)
 @report_controller.route('/reports/comments', methods=['POST'])
 def add_comment():
     data=request.json
-    print(data)
     if data['text'] == None:
         return jsonify({'message': 'Comment not added. Text is needed'}), 400
     if data['id_report'] == None:
@@ -33,7 +32,6 @@ def add_like():
 @report_controller.route('/reports/add', methods=['POST'])
 def add_report():
     data=request.json
-    print(data)
     if data['title'] == None:
         return jsonify({'message': 'Report not added. Title is needed'}), 400
     if data['description'] == None:
