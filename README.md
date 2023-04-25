@@ -1,6 +1,7 @@
 # Proyecto_IngenieriaSoftwareII
 
 Por defecto en la direccion de la base de datos tiene 192.168.1.69, para que funcione tienen que poner mi direccion
+linea 8, database.py
 ##Como correr el proyecto en local##
 1. Tener pip instalado
 2. Instalar flask `sudo apt install python3-flask`
