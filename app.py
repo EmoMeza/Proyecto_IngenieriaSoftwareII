@@ -7,11 +7,13 @@ from flask import abort
 import db.database as database
 from controllers.report_controller import report_controller
 from controllers.user_controller import user_controller
+from flask_cors import CORS
 
 db = database.db
 app = database.app
 app.register_blueprint(report_controller)
 app.register_blueprint(user_controller)
+CORS(app)
 
 with app.app_context():
     db.session.commit()
