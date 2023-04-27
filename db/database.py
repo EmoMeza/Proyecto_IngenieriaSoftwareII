@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 basedir = os.path.abspath(os.path.dirname(__file__))
 basedir = basedir[:-3]
 app = Flask(__name__, template_folder=basedir + '/templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://is2:123uwu@192.168.1.69/is2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://usuario:contra@192.168.1.69/is2'
 
 db = SQLAlchemy(app)
 
