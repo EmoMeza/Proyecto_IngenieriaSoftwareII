@@ -71,8 +71,8 @@ def get_report():
         return jsonify({'message': 'The id_product is not in the database'}), 400
     if quantity == None:
         return jsonify({'message': 'Quantity not specified'}), 400
-    #check if the quantity is bigger than the number of reports
-    if int(quantity) > database.reporte.query.count():
+    #check if the quantity is bigger than the number of reports with the product id
+    if int(quantity) > database.reporte.query.filter_by(id_producto=id_product).count():
         #return the number of quantity asked and the number of reports with the product id
         return jsonify({'message': 'The quantity is bigger than the number of reports. Quantity asked is: '+ quantity+' The number of reports with the product id is: ' + str(database.reporte.query.filter_by(id_producto=id_product).count())}), 400
 
