@@ -45,6 +45,22 @@ def add_report():
     db.session.commit()
     return jsonify({'message': 'Report added successfully.'}), 201
 
+@report_controller.route('/comments/get', methods=['GET'])
+def get_comments():
+    id_report = request.args.get('id_report')
+    #check if the id_report is in the database
+    if database.reporte.query.filter_by(id=id_report).first() == None:
+        return jsonify({'message': 'The id_report is not in the database'}), 400
+    comments = database.comentario.query.filter_by(id_reporte=id_report).all()
+    comments_json = []   
+    for comment in comments:
+        comment_json = {}
+        comment_json['id'] = comment.id
+        comment_json['description'] = comment.descripcion
+        comment_json['date'] = comment.fecha
+        comments_json.append(comment_json)
+    return jsonify(comments_json), 200
+
 
 @report_controller.route('/reports/get', methods=['GET'])
 def get_report():
