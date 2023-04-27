@@ -9,7 +9,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://usuario:contra@192.168.
 
 db = SQLAlchemy(app)
 
-#create a class named cliente with the information of the table inside the db.txt file
 class cliente(db.Model):
     __tablename__ = 'cliente'
     id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
