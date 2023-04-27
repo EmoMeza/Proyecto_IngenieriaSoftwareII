@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 basedir = os.path.abspath(os.path.dirname(__file__))
 basedir = basedir[:-3]
 app = Flask(__name__, template_folder=basedir + '/templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://usuario:contraseña@192.168.1.69/is2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://is2:123uwu@192.168.1.69/is2'
 
 db = SQLAlchemy(app)
 
@@ -26,6 +26,7 @@ class comentario(db.Model):
     contenido = db.Column('contenido', db.String(10000))
     id_cliente = db.Column('id_cliente', db.Integer, db.ForeignKey('cliente.id'))
     id_reporte = db.Column('id_reporte', db.Integer, db.ForeignKey('reporte.id'))
+    fecha = db.Column('fecha', db.DateTime, default=db.func.current_timestamp())
     def __init__(self, contenido, id_reporte):
         self.contenido = contenido
         self.id_reporte = id_reporte
