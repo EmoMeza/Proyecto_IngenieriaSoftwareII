@@ -88,6 +88,21 @@ def get_report():
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
+@report_controller.route('/reports/all', methods=['GET'])
+def get_all_reports():
+    reports = database.reporte.query.all()
+    reports_json = []   
+    for report in reports:
+        report_json = {}
+        report_json['id'] = report.id
+        report_json['title'] = report.titulo
+        report_json['description'] = report.descripcion
+        report_json['likes'] = report.likes
+        report_json['date'] = report.fecha
+        report_json['id_producto'] = report.id_producto
+        reports_json.append(report_json)
+    return jsonify(reports_json), 200
+
 def add_estado(nombre):
     estado = database.estado(nombre)
     db.session.add(estado)
