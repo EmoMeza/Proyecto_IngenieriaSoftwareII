@@ -5,11 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 basedir = os.path.abspath(os.path.dirname(__file__))
 basedir = basedir[:-3]
 app = Flask(__name__, template_folder=basedir + '/templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:contra@192.168.1.69/is2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://usuario:contra@192.168.1.69/is2'
 
 db = SQLAlchemy(app)
 
-#create a class named cliente with the information of the table inside the db.txt file
 class cliente(db.Model):
     __tablename__ = 'cliente'
     id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
@@ -26,6 +25,7 @@ class comentario(db.Model):
     contenido = db.Column('contenido', db.String(10000))
     id_cliente = db.Column('id_cliente', db.Integer, db.ForeignKey('cliente.id'))
     id_reporte = db.Column('id_reporte', db.Integer, db.ForeignKey('reporte.id'))
+    fecha = db.Column('fecha', db.DateTime, default=db.func.current_timestamp())
     def __init__(self, contenido, id_reporte):
         self.contenido = contenido
         self.id_reporte = id_reporte

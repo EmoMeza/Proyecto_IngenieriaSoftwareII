@@ -152,6 +152,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get all Comentarios in a Reporte",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/comments/get?id_report=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"comments",
+						"get"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

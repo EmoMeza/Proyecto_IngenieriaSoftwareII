@@ -56,7 +56,7 @@ def get_comments():
     for comment in comments:
         comment_json = {}
         comment_json['id'] = comment.id
-        comment_json['description'] = comment.descripcion
+        comment_json['contenido'] = comment.contenido
         comment_json['date'] = comment.fecha
         comments_json.append(comment_json)
     return jsonify(comments_json), 200
