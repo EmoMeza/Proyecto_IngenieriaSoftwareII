@@ -1,0 +1,61 @@
+
+  .scroll-cards__item {
+    --offset: 0.5em;
+    color: #000;
+   /*    position: sticky;  */ 
+    top: max(16vh, 10em);
+    padding: 2em 1.5em;
+    min-height: 19em;
+    background: #cac3d7;
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.1);
+    width: 120%;
+    border-style: groove;
+    border-color: rgb(128, 128, 153);
+    border-radius: 10px;
+    white-space: pre-wrap;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    
+  }
+  
+  .titulardo{
+    font-size: 2em;
+    margin: 0;
+    line-height: 1pt;
+
+  }
+  h2 {
+    font-size: 2em;
+    margin: 0;
+    line-height: 1pt;
+
+  }
+  .bug-state{
+    background-color: rgb(187, 74, 74);
+    font-size: 1.25em;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: right;
+    line-height: 0pt;
+  }
+  p {
+    font-size: 1.25em;
+    padding-top:20px ;
+  }
+  hr.tittle-separator{
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 2px;
+  }
+  h1.space-taker{
+    height: 10px;
+  }
+  .btn-inspect{
+  
+    margin: 0;
+    position: sticky;
+    top: 100%;
+    left: 85%;
+    background-color: rgb(55, 41, 94);
+    -ms-transform: translate(0,  88%);
+    transform: translate( 0%, 88%);
+    }

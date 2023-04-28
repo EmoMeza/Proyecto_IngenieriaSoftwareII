@@ -1,0 +1,66 @@
+[
+
+    {
+      "titulo": "Error al guardar los cambios",
+      "cuerpo": "Al intentar guardar los cambios en el formulario de registro de usuario, el sistema muestra un mensaje de error y los datos no se guardan correctamente. Esto sucede tanto en el modo de prueba como en el modo de producción.",
+      "encargado": "Juan Perez",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "No se pueden subir archivos",
+      "cuerpo": "Cuando intentamos subir un archivo al sistema, el proceso falla y se muestra un mensaje de error. Hemos probado con diferentes tipos de archivos y en diferentes navegadores, pero el problema persiste.",
+      "encargado": "Maria Garcia",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "La página se congela al cargar",
+      "cuerpo": "Al intentar cargar la página principal del sitio, esta se congela y no responde durante varios minutos. Esto sucede en diferentes dispositivos y navegadores, por lo que creemos que puede ser un problema del servidor.",
+      "encargado": "Pedro Rodriguez",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "Problemas de visualización en el móvil",
+      "cuerpo": "Al acceder al sitio desde un dispositivo móvil, la página no se visualiza correctamente y algunos elementos aparecen fuera de lugar. Hemos intentado ajustar el diseño, pero el problema persiste.",
+      "encargado": "Luisa Gomez",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "Error en la búsqueda de productos",
+      "cuerpo": "Al realizar una búsqueda de productos en el sitio, los resultados no se muestran correctamente y algunos productos que deberían aparecer no están en la lista. Hemos verificado los datos en la base de datos y están correctos, por lo que creemos que puede ser un problema de programación.",
+      "encargado": "Juan Perez",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "La página se carga demasiado lenta",
+      "cuerpo": "La página tarda demasiado tiempo en cargar, lo que hace que los usuarios abandonen el sitio antes de que se muestren los contenidos. Hemos intentado optimizar el código, pero el problema persiste.",
+      "encargado": "Maria Garcia",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "Problemas con el formulario de contacto",
+      "cuerpo": "El formulario de contacto no funciona correctamente y no se envían los mensajes a los destinatarios correspondientes. Hemos revisado la configuración del servidor de correo electrónico y todo parece estar correcto.",
+      "encargado": "Pedro Rodriguez",
+      "estado": "Abierto"
+    },
+    {
+      "titulo": "La página no se adapta a diferentes tamaños de pantalla",
+      "cuerpo": "La página no se visualiza correctamente en pantallas de diferentes tamaños y resoluciones, lo que hace que algunos elementos queden fuera de lugar o no se muestren correctamente. Hemos intentado ajustar el diseño, pero el problema persiste.",
+      "encargado": "Luisa Gomez",
+      "estado": "Abierto"
+    },
+    {    "titulo": "Problemas con el proceso de pago",
+        "cuerpo": "Cuando los usuarios intentan realizar el pago en el sitio, el proceso falla y no se completa la transacción. Hemos revisado la configuración de la pasarela de pago y todo parece estar en orden.",    "encargado": "Juan Perez",    "estado": "En proceso"  },  {    "titulo": "Error al eliminar un registro",    "cuerpo": "Cuando intentamos eliminar un registro de la base de datos, el sistema muestra un mensaje de error y el registro no se borra correctamente. Hemos revisado los permisos de la cuenta de usuario y están correctos.",    "encargado": "Maria Garcia",    "estado": "No Asignado"  },  {    "titulo": "La página muestra datos obsoletos",    "cuerpo": "La página muestra datos que ya deberían haber sido actualizados, lo que hace que los usuarios vean información incorrecta. Hemos revisado los procesos de actualización de la base de datos y están funcionando correctamente.", 
+          "encargado": "Pedro Rodriguez",   
+          "estado": "Abierto"  }, 
+    {    "titulo": "Problemas con la autenticación de usuarios",
+        "cuerpo": "Los usuarios no pueden iniciar sesión correctamente en el sitio, lo que les impide acceder a los contenidos y funciones correspondientes. Hemos revisado las credenciales de acceso y todo parece estar en orden.",    "encargado": "Luisa Gomez",    "estado": "En proceso"  },  {    "titulo": "Error en la función de búsqueda avanzada",    "cuerpo": "La función de búsqueda avanzada no funciona correctamente y no devuelve los resultados esperados. Hemos revisado el código de programación y no hemos encontrado errores evidentes.", 
+           "encargado": "Juan Perez",   
+            "estado": "Abierto"  
+    },
+    {    "titulo": "Problemas con la generación de facturas",    "cuerpo": "Cuando se intenta generar una factura, el sistema muestra un mensaje de error y no se completa el proceso. Hemos revisado los datos de facturación y todo parece estar en orden.",    "encargado": "Ana Lopez",    "estado": "En proceso"  },  {    "titulo": "Error en el proceso de registro de nuevos usuarios",    "cuerpo": "Los usuarios no pueden registrarse correctamente en el sitio, lo que les impide acceder a los contenidos y funciones correspondientes. Hemos revisado el formulario de registro y no hemos encontrado errores evidentes.",    "encargado": "Miguel Torres",    "estado": "Abierto"  },
+      {    "titulo": "La página web se carga lentamente",    "cuerpo": "Los usuarios reportan que la página web se carga lentamente y a veces muestra errores de conexión. Hemos revisado los servidores y la velocidad de conexión a Internet y todo parece estar en orden.",    "encargado": "Marcela Ruiz",    "estado": "En proceso"  },  {    "titulo": "Problemas con la integración de API externas",    "cuerpo": "Cuando se intenta integrar una API externa al sistema, el proceso falla y no se completa la integración. Hemos revisado la documentación de la API y todo parece estar en orden.",    "encargado": "Jorge Martinez",    "estado": "No Asignado"  },  {    "titulo": "Error en el proceso de recuperación de contraseña",    "cuerpo": "Los usuarios no pueden recuperar su contraseña correctamente en el sitio, lo que les impide acceder a sus cuentas. Hemos revisado el proceso de recuperación y no hemos encontrado errores evidentes.",    "encargado": "Valeria Perez",    "estado": "Abierto"  }]
+
+
+
+
+
