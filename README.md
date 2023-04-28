@@ -4,7 +4,7 @@
 
 El backend se encuentra en la carpeta api:
 
-###Como correr el proyecto en local
+### Como correr el proyecto en local
 
 1. Tener pip instalado
 2. Instalar flask `sudo apt install python3-flask`
