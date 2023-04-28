@@ -1,12 +1,17 @@
 # Proyecto_IngenieriaSoftwareII
 
+## Backend
+
 Por defecto en la direccion de la base de datos tiene 192.168.1.69, para que funcione tienen que poner mi direccion
 linea 8, database.py
 ##Como correr el proyecto en local##
 1. Tener pip instalado
 2. Instalar flask `sudo apt install python3-flask`
-2. Instalar los requerimientos con `pip install -r requirements.txt`
-3. Correr el proyecto con `flask run`
+3. Instalar los requerimientos con `pip install -r requirements.txt`
+4. Crear el archivo api/db/.env con la linea SQLALCHEMY_DATABASE_URI=mysql+pymysql://user:pass@emomeza.com/is2, remplazando las credenciales donde sea necesario.
+5. Correr el proyecto con `flask run`
+
+## Frontend
 
 
 REQUERIMIENTOS:
