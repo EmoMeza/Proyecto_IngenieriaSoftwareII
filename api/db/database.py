@@ -9,6 +9,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 basedir = basedir[:-3]
 app = Flask(__name__, template_folder=basedir + '/templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+#Su archivo .env en la carpeta db debe tener la siguiente linea, con sus respectivos datos:
+# SQLALCHEMY_DATABASE_URI=mysql+pymysql://usuario:contraseña@192.168.1.69/is2
 
 db = SQLAlchemy(app)
 
