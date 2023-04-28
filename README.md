@@ -9,7 +9,7 @@ El backend se encuentra en la carpeta api:
 1. Tener pip instalado
 2. Instalar flask `sudo apt install python3-flask`
 3. Instalar los requerimientos con `pip install -r requirements.txt`
-4. Crear el archivo api/db/.env con la linea SQLALCHEMY_DATABASE_URI=mysql+pymysql://user:pass@emomeza.com/is2, remplazando las credenciales donde sea necesario.
+4. Crear el archivo api/db/.env con la linea `SQLALCHEMY_DATABASE_URI=mysql+pymysql://user:pass@emomeza.com/is2`, remplazando las credenciales donde sea necesario.
 5. Correr el proyecto con `flask run`
 
 ## Frontend
