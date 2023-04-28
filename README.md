@@ -1,10 +1,12 @@
 # Proyecto_IngenieriaSoftwareII
 
-## Backend
+## Como correr el proyecto en local
+
+### Backend
 
 El backend se encuentra en la carpeta api:
 
-### Como correr el proyecto en local
+(Usar un Virtual Enviroment)
 
 1. Tener pip instalado
 2. Instalar flask `sudo apt install python3-flask`
@@ -12,8 +14,11 @@ El backend se encuentra en la carpeta api:
 4. Crear el archivo api/db/.env con la linea `SQLALCHEMY_DATABASE_URI=mysql+pymysql://user:pass@emomeza.com/is2`, remplazando las credenciales donde sea necesario.
 5. Correr el proyecto con `flask run`
 
-## Frontend
+### Frontend
 
+1. Hacer `npm install` para instalar las dependecias
+2. Correr  el frontend con `npm dev run`
+3. Hacer click en el link. 
 
 REQUERIMIENTOS:
 Ing Soft IITema: Bug Tracker
