@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./routes/App";
 import IngresarBug from "./routes/IngresarBug";
+import VerReporte from "./routes/VerReporte";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     path: "/IngresarBug",
     element: <IngresarBug />,
   },
+  {
+    path: "/VerReporte",
+    element: <VerReporte />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
