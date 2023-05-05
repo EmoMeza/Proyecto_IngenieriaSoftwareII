@@ -2,7 +2,6 @@ import Bug from "./Bug";
 import "../routes/App.css";
 import "./CustomCard.css";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import VerReporte from "./VerReporte";
 
 function CustomCard(props: { bug: Bug }) {
   let tittle = props.bug.titulo;
