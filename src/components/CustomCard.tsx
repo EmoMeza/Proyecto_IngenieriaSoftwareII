@@ -1,9 +1,14 @@
 import Bug from "./Bug";
 import "../routes/App.css";
-
 import "./CustomCard.css";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import VerReporte from "./VerReporte";
+
 function CustomCard(props: { bug: Bug }) {
   let tittle = props.bug.titulo;
+  const handleInspectBug = () => {
+    
+  };
   return (
     <div className="scroll-cards__item container-xl" aria-label="Wie - 1">
       <div className="card-header"></div>
@@ -14,7 +19,7 @@ function CustomCard(props: { bug: Bug }) {
         <hr className="tittle-separator"></hr>
         <p>{props.bug.cuerpo}</p>
         <div className="text-right">
-          <button className="btn btn-dark btn-inspect">Inspeccionar bug</button>
+          <button className="btn btn-dark btn-inspect" onClick={handleInspectBug}>Inspeccionar bug</button>
         </div>
       </div>
     </div>
