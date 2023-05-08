@@ -100,8 +100,26 @@ def get_all_reports():
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
         report_json['id_producto'] = report.id_producto
+        report_id_estado = report.id_estado
+        if database.estado.query.filter_by(id=report_id_estado).first() == None:
+            return jsonify({'message': 'el estado no se encuentra en la base de datos'}), 400
+        estado = database.estado.query.filter_by(id=report_id_estado).first()
+        report_json['estado'] = estado.nombre
         reports_json.append(report_json)
     return jsonify(reports_json), 200
+
+@report_controller.route('/products/all', methods=['GET'])
+def get_all_products():
+    products = database.producto.query.all()
+    products_json = []
+    for product in products:
+        product_json = {}
+        product_json['id'] = product.id
+        product_json['nombre'] = product.nombre
+        product_json['id_encargado'] = product.id_encargado
+        products_json.append(product_json)
+    return jsonify(products_json), 200
+        
 
 def add_estado(nombre):
     estado = database.estado(nombre)

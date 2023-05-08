@@ -5,10 +5,12 @@ import CustomCard from "./CustomCard";
 type bugardo = {
   date: string;
   description: string;
-  id: string;
+  id: number;
   id_producto: string;
-  likes: string;
+  likes: number;
+  estado:string;
   title: string;
+  id_encargado: number;
 };
 
 const getData = () => {
@@ -41,7 +43,7 @@ export default function SearchBar() {
   const users = getData();
   const [query, setQuery] = useState("");
   const items = users.map((item: bugardo) => {
-    return new Bug(item.title, item.description, item.id, item.likes);
+    return new Bug(item.id,item.title, item.description, 'placeholder',item.estado ,item.likes);
   });
 
   const filteredItems = getFilteredItems(query, items);

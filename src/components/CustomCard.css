@@ -30,6 +30,18 @@
     line-height: 1pt;
 
   }
+
+  .bug-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .like-Button {
+    font-size: 10px;
+    padding: 0.20rem 0.40rem;
+  }
+  
   .bug-state{
     background-color: rgb(187, 74, 74);
     font-size: 1.25em;
