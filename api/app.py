@@ -7,12 +7,14 @@ from flask import abort
 import db.database as database
 from controllers.report_controller import report_controller
 from controllers.user_controller import user_controller
+from controllers.product_controller import product_controller
 from flask_cors import CORS
 
 db = database.db
 app = database.app
 app.register_blueprint(report_controller)
 app.register_blueprint(user_controller)
+app.register_blueprint(product_controller)
 CORS(app)
 
 with app.app_context():

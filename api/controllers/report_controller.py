@@ -108,18 +108,87 @@ def get_all_reports():
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
-@report_controller.route('/products/all', methods=['GET'])
-def get_all_products():
-    products = database.producto.query.all()
-    products_json = []
-    for product in products:
-        product_json = {}
-        product_json['id'] = product.id
-        product_json['nombre'] = product.nombre
-        product_json['id_encargado'] = product.id_encargado
-        products_json.append(product_json)
-    return jsonify(products_json), 200
-        
+@report_controller.route('/reports/update/estado', methods=['POST'])
+def update_estado():
+    id_report = request.args.get('id_report')
+    id_estado = request.args.get('id_estado')
+    if database.reporte.query.filter_by(id=id_report).first() == None:
+        return jsonify({'message': 'The id_report is not in the database'}), 400
+    if database.estado.query.filter_by(id=id_estado).first() == None:
+        return jsonify({'message': 'The id_estado is not in the database'}), 400
+    report = database.reporte.query.get_or_404(id_report)
+    report.id_estado = id_estado
+    db.session.commit()
+    return jsonify({'message': 'Estado updated successfully.'}), 201
+
+@report_controller.route('/reports/check/estados', methods=['GET'])
+def check_estados():
+    id_report= request.args.get('id_report')
+    if database.reporte.query.filter_by(id=id_report).first() == None:
+        return jsonify({'message': 'The id_report is not in the database'}), 400
+    #return all the estados, but the id=0 and the current id_estado
+    estados = database.estado.query.filter(database.estado.id != 0).filter(database.estado.id != database.reporte.query.get_or_404(id_report).id_estado).all()
+    estados_json = []
+    for estado in estados:
+        estado_json = {}
+        estado_json['id'] = estado.id
+        estado_json['nombre'] = estado.nombre
+        estados_json.append(estado_json)
+    return jsonify(estados_json), 200
+
+@report_controller.route('/reports/add/developer/', methods=['POST'])
+def add_developer():
+    id_report = request.args.get('id_report')
+    id_developer = request.args.get('id_dev')
+    if database.reporte.query.filter_by(id=id_report).first() == None:
+        return jsonify({'message': 'The id_report is not in the database'}), 400
+    if database.desarrollador.query.filter_by(id=id_developer).first() == None:
+        return jsonify({'message': 'The id_developer is not in the database'}), 400
+    report = database.reporte.query.get_or_404(id_report)
+    report.id_developer = id_developer
+    #revisar esto
+    #revisar esto
+    #revisar esto
+    if database.desarrollador_producto.query.filter_by(id_desarrollador=id_developer).filter_by(id_producto=report.id_producto).first() == None:
+        add_desarrollador_producto(id_developer, report.id_producto)
+    #revisar esto
+    #revisar esto
+    #revisar esto
+    db.session.commit()
+    return jsonify({'message': 'Developer added successfully.'}), 201
+
+@report_controller.route('/reports/all/product/', methods=['GET'])
+def get_all_reports_from_a_specific_product():
+    id_product = request.args.get('id_product')
+    if database.producto.query.filter_by(id=id_product).first() == None:
+        return jsonify({'message': 'The id_product is not in the database'}), 400
+    reports = database.reporte.query.filter_by(id_producto=id_product).all()
+    #revisar si se quiere asi o que solamente entregue una lista vacia
+    if len(reports) == 0:
+        return jsonify({'message': 'There are no reports with that id_product'}), 400
+    reports_json = []   
+    for report in reports:
+        report_json = {}
+        report_json['id'] = report.id
+        report_json['title'] = report.titulo
+        report_json['description'] = report.descripcion
+        report_json['likes'] = report.likes
+        report_json['date'] = report.fecha
+        report_json['id_producto'] = report.id_producto
+        report_id_estado = report.id_estado
+        if database.estado.query.filter_by(id=report_id_estado).first() == None:
+            return jsonify({'message': 'el estado no se encuentra en la base de datos'}), 400
+        estado = database.estado.query.filter_by(id=report_id_estado).first()
+        report_json['estado'] = estado.nombre
+        reports_json.append(report_json)
+    return jsonify(reports_json), 200
+
+
+
+def add_desarrollador_producto(id_desarrollador, id_producto):
+    desarrollador_producto = database.desarrollador_producto(id_desarrollador, id_producto)
+    db.session.add(desarrollador_producto)
+    db.session.commit()
 
 def add_estado(nombre):
     estado = database.estado(nombre)
