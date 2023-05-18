@@ -146,14 +146,6 @@ def add_developer():
         return jsonify({'message': 'The id_developer is not in the database'}), 400
     report = database.reporte.query.get_or_404(id_report)
     report.id_developer = id_developer
-    #revisar esto
-    #revisar esto
-    #revisar esto
-    if database.desarrollador_producto.query.filter_by(id_desarrollador=id_developer).filter_by(id_producto=report.id_producto).first() == None:
-        add_desarrollador_producto(id_developer, report.id_producto)
-    #revisar esto
-    #revisar esto
-    #revisar esto
     db.session.commit()
     return jsonify({'message': 'Developer added successfully.'}), 201
 
