@@ -46,11 +46,10 @@ def add_report():
     return jsonify({'message': 'Report added successfully.'}), 201
 
 #ENDPOINT API para agregar una solicitud de reasignacion a la BD
-@report_controller.route('/reports/reasing/add', methods=['POST'])
-def add_reasing_petition():
+@report_controller.route('/reports/reasignation_petition/add', methods=['POST'])
+def add_reasingation_petition():
     data=request.json
     id_report = request.args.get('id_report')
-    print(id_report)
     id_developer = request.args.get('id_developer')
     if database.reporte.query.filter_by(id=id_report).first() == None:
         return jsonify({'message': 'The id_report is not in the database'}), 400
@@ -126,6 +125,24 @@ def get_all_reports():
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
+@report_controller.route('/reasignation_petition/get', methods=['GET'])
+def get_reasignation_petitions():
+    product_id = request.args.get('product_id')
+    if database.producto.query.filter_by(id=product_id).first == None:
+        return jsonify({'message': 'el producto no se encuentra en la base de datos'}), 400
+    reports = database.reporte.query.filter_by(id_producto=product_id).all()
+    reasignation_petition_jsons = []
+    for report in reports:
+        petitions = database.solicitud_reasignacion.query.filter_by(id_reporte=report.id).all()
+        for petition in petitions:
+            petition_json = {}
+            petition_json['id_report'] = petition.id_reporte
+            petition_json['id_developer'] = petition.id_dev
+            petition_json['date'] = petition.fecha
+            petition_json['motivo'] = petition.motivo
+            reasignation_petition_jsons.append(petition_json)
+    return jsonify(reasignation_petition_jsons), 200
+
 @report_controller.route('/reports/update/estado', methods=['POST'])
 def update_estado():
     id_report = request.args.get('id_report')
@@ -138,6 +155,16 @@ def update_estado():
     report.id_estado = id_estado
     db.session.commit()
     return jsonify({'message': 'Estado updated successfully.'}), 201
+
+@report_controller.route('/reasignation_petition/delete', methods=['DELETE'])
+def delete_reasingation_petition():
+    id_report = request.args.get('id_report')
+    id_developer = request.args.get('id_developer')
+    petition = database.solicitud_reasignacion.query.get_or_404([id_developer,id_report])
+    db.session.delete(petition)
+    db.session.commit()
+    return jsonify({'message': 'reasign petition deleted successfully'})
+    
 
 @report_controller.route('/reports/check/estados', methods=['GET'])
 def check_estados():
