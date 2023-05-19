@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 function CustomCard(props: { bug: Bug }) {
   let tittle = props.bug.titulo;
   const handleInspectBug = () => {
-    
+    window.location.href = '/VerReporte';
   };
   return (
     <div className="scroll-cards__item container-xl" aria-label="Wie - 1">
