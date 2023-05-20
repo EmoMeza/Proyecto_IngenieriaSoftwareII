@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <IngresarBug />,
   },
   {
-    path: "/VerReporte",
+    path: "/VerReporte/:id",
     element: <VerReporte />,
   }
 ]);

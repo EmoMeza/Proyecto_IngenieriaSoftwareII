@@ -5,6 +5,8 @@ import './VerReporte.css';
 import Header from '../components/Header';
 import { useForm, SubmitHandler} from 'react-hook-form'
 import { BrowserRouter as Router} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 
 type comentario = {
   contenido: string;
@@ -38,14 +40,14 @@ const GetComments = async (id_reporte: number): Promise<comentario[]> => {
   return commentList;
 };
 
-
 function VerReporte() {
+  const { id } = useParams()
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<string[]>([]);
   
   useEffect(() => {
     const fetchComments = async () => {
-      const comentariolistacomentarios = await GetComments(4);
+      const comentariolistacomentarios = await GetComments(Number(id));
       
       setComments(comentariolistacomentarios.map((item: comentario) => item.contenido));
     };
