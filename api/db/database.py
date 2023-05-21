@@ -138,3 +138,13 @@ class desarrollador_producto(db.Model):
         self.id_desarrollador = id_desarrollador
         self.id_producto = id_producto
 
+class solicitud_reasignacion(db.Model):
+    __tablename__ = 'solicitud_reasignacion'
+    id_dev = db.Column('id_dev', db.Integer, db.ForeignKey('desarrollador.id'), primary_key=True)
+    id_reporte = db.Column('id_reporte', db.Integer, db.ForeignKey('reporte.id'), primary_key=True)
+    motivo = db.Column('motivo', db.String(10000))
+    fecha = db.Column('fecha', db.DateTime, default=db.func.current_timestamp())
+    def __init__(self, id_report, id_developer, motivo):
+        self.id_reporte = id_report
+        self.id_dev=id_developer
+        self.motivo = motivo
