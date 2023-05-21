@@ -55,9 +55,23 @@ function VerReporte() {
     fetchComments();
   }, []);
 
-  const onClickHandler = () => {
+  const onClickHandler = async () => {
+  const response = await fetch("http://127.0.0.1:5000/reports/comments?id_report=" + Number(id), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    
+    body: JSON.stringify({ text: comment }),
+  });
+
+  if (response.ok) {
     setComments((comments) => [...comments, comment] as never[]);
-  };
+  } else {
+    console.error("Failed to post comment");
+  }
+};
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
