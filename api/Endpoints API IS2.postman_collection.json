@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "Update estado of Reporte",
+			"name": "[3087] Update estado of Reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -160,7 +160,7 @@
 			"response": []
 		},
 		{
-			"name": "Add dev to reporte",
+			"name": "[3091] Add dev to reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -197,6 +197,62 @@
 						{
 							"key": "id_dev",
 							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[3085] Add solicitud de reasignation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"motivo\": \"Your motivo here\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/reports/reasignacion/add/?id_report=31&id_developer=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reports",
+						"reasignacion",
+						"add",
+						""
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "31"
+						},
+						{
+							"key": "id_developer",
+							"value": "1"
 						}
 					]
 				}
@@ -296,7 +352,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all Reportes asignados de un desarrollador",
+			"name": "[3080] Get all Reportes asignados de un desarrollador",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -326,7 +382,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all possible estados",
+			"name": "[3088] Get all possible estados from a report",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -350,7 +406,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all reports no asignados from a producto",
+			"name": "[3090] Get all reports no asignados from a producto",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -374,7 +430,46 @@
 			"response": []
 		},
 		{
-			"name": "Get all productos",
+			"name": "[3114 & 3096] Get all solicitudes de rasignacion of a product/project",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reasignacion/get/all/product/?id_product=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reasignacion",
+						"get",
+						"all",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "id_product",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[3094] Get all reportes from a specific product",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -398,31 +493,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all reportes from a specific product",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"products",
-						"get",
-						"reports"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all the reportes from a dev with and the number of those who are of a specific product",
+			"name": "[3093] Get the number of all the reportes from a dev and the number of those who are from a specific product",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -457,7 +528,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all the reportes from the products asociated to the dev id",
+			"name": "[3082] Get all the reportes from the products asociated to the dev id",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -485,6 +556,65 @@
 						{
 							"key": "id_product",
 							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[3097] Get motivo de reasignacion from a report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reasignacion/get/motivo/report/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reasignacion",
+						"get",
+						"motivo",
+						"report",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[3115 & 3099] Delete peticion de reasignacion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reasignation_petition/delete?id_report=262&id_developer=3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reasignation_petition",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "262"
+						},
+						{
+							"key": "id_developer",
+							"value": "3"
 						}
 					]
 				}
