@@ -589,6 +589,32 @@
 			"response": []
 		},
 		{
+			"name": "Get info of developer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reasignacion/get/motivo/report/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reasignacion",
+						"get",
+						"motivo",
+						"report",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "[3115 & 3099] Delete peticion de reasignacion",
 			"request": {
 				"method": "DELETE",
