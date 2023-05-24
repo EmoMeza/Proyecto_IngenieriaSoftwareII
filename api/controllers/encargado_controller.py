@@ -59,15 +59,12 @@ def get_all_reasignation_petitions_from_a_specific_product():
     reasignacion_jsons = []
     for report in reports:
         petitions = database.solicitud_reasignacion.query.filter_by(id_reporte=report.id).all()
-        #also get the name of the developer and title of the report
         for petition in petitions:
             petition_json = {}
             petition_json['id_report'] = petition.id_reporte
             petition_json['id_developer'] = petition.id_dev
             petition_json['date'] = petition.fecha
             petition_json['motivo'] = petition.motivo
-            petition_json['developer_name'] = database.desarrollador.query.filter_by(id=petition.id_dev).first().nombre
-            petition_json['report_title'] = database.reporte.query.filter_by(id=petition.id_reporte).first().titulo
             reasignacion_jsons.append(petition_json)
     return jsonify(reasignacion_jsons), 200
 
