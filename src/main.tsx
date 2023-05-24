@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./routes/App";
 import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
+import Asignacion from "./routes/Asignacion";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/VerReporte",
     element: <VerReporte />,
+  },
+  {
+    path: "/Asignacion",
+    element: <Asignacion />,
   }
 ]);
 
