@@ -3,8 +3,8 @@
 		"_postman_id": "b061b9a1-c316-4a73-867e-7e20cd771b3b",
 		"name": "Endpoints API IS2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27084407",
-		"_collection_link": "https://universal-firefly-533538.postman.co/workspace/IS2~23bc7984-37fb-4ea4-b513-bff844becc54/collection/27084407-b061b9a1-c316-4a73-867e-7e20cd771b3b?action=share&creator=27084407&source=collection_link"
+		"_exporter_id": "27523090",
+		"_collection_link": "https://universal-firefly-533538.postman.co/workspace/IS2~23bc7984-37fb-4ea4-b513-bff844becc54/collection/27084407-b061b9a1-c316-4a73-867e-7e20cd771b3b?action=share&creator=27523090&source=collection_link"
 	},
 	"item": [
 		{
@@ -644,6 +644,22 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single report",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get developers of a product",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
