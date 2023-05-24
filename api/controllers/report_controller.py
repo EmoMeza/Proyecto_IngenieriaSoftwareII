@@ -151,11 +151,7 @@ def add_developer():
         return jsonify({'message': 'The id_developer is not in the database'}), 400
     report = database.reporte.query.get_or_404(id_report)
     report.id_developer = id_developer
-    #get the id_estado of the report
-    id_estado = report.id_estado
-    #if the estado is 0, change it to 1
-    if id_estado == 0:
-        report.id_estado = 1
+    report.id_estado = 1
     db.session.commit()
     return jsonify({'message': 'Developer added successfully.'}), 201
 
@@ -221,8 +217,6 @@ def add_reporte(titulo,descripcion,id_producto):
     db.session.add(reporte)
     db.session.commit()
     
-
-
 def add_comentario(descripcion, id_reporte):
     comentario = database.comentario(descripcion, id_reporte)
     db.session.add(comentario)
