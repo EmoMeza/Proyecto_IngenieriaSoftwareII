@@ -31,3 +31,22 @@ def get_all_products():
         product_json['id_encargado'] = product.id_encargado
         products_json.append(product_json)
     return jsonify(products_json), 200
+
+@product_controller.route('/products/developers/get', methods=['GET'])
+def get_product_developers():
+    id_product = request.args.get('id_product')
+    if database.producto.query.filter_by(id=id_product).first == None:
+        return jsonify({'message': 'el producto no se encuentra en la base de datos'}), 400
+    desarrollador_producto = database.desarrollador_producto.query.filter_by(id_producto=id_product).all()
+    developers_jsons = []
+    for dp in desarrollador_producto:
+        id_desarollador = dp.id_desarrollador
+        developer = database.desarrollador.query.get_or_404(id_desarollador)
+        print(id_desarollador)
+        developer_json = {}
+        developer_json['id'] = developer.id
+        developer_json['nombre'] = developer.nombre
+        developer_json['email'] = developer.email
+        developer_json['id_rol'] = developer.id_rol
+        developers_jsons.append(developer_json)
+    return jsonify(developers_jsons), 200
