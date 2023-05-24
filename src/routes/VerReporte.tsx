@@ -14,6 +14,11 @@ type comentario = {
   id: string;
 };
 
+type contenidoReporte = {
+  titulo: string;
+  descripcion: string;
+}
+
 const getCommentsdb = async (reportId:number) => {
     const fetchCommentData = async () => {
         const ret = fetch("http://127.0.0.1:5000/comments/get?id_report=" + reportId)
@@ -39,6 +44,21 @@ const GetComments = async (id_reporte: number): Promise<comentario[]> => {
 
   return commentList;
 };
+
+// const getDetails = async (reportId:number) => {
+//   const fetchDetails= async () => {
+//       const det = fetch("http://127.0.0.1:5000/reports/" + reportId)
+//       .then((response) => {
+//           return response.json();
+//       });
+
+//       return det;
+//   };
+  
+//   const comments = await fetchDetails();
+
+//   return comments;
+// };
 
 function VerReporte() {
   const { id } = useParams()
@@ -80,6 +100,9 @@ function VerReporte() {
     <div>
       <Header />
       <div className="main-container">
+      <h1 className ='titulo'>Title</h1>
+      <h2 className = 'desc-reporte'>desc reporte</h2>
+      <div className='filler' />
         {comments.map((text) => (
           <div className="comment-container">{text}</div>
         ))}
@@ -91,7 +114,7 @@ function VerReporte() {
             onChange={onChangeHandler}
             className="input-box"
           />
-          <button onClick={onClickHandler /*aca como hago para que ejecute 2 funciones*/} className="comment-button">
+          <button onClick={onClickHandler} className="comment-button">
             Submit
           </button>
         </div>
