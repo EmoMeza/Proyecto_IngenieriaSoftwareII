@@ -425,7 +425,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/dev/reportes/?id_dev=1",
+					"raw": "http://127.0.0.1:5000/dev/reportes/?id_dev=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -442,7 +442,7 @@
 					"query": [
 						{
 							"key": "id_dev",
-							"value": "1"
+							"value": "3"
 						}
 					]
 				}
