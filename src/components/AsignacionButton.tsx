@@ -18,6 +18,7 @@ const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_r
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
+
   const navigateAsignacion = () => {
     navigate("/Asignacion");
   };
@@ -35,9 +36,8 @@ const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_r
 
     if (!response.ok) {
       throw new Error(response.statusText);
-      console.log("Errorrrrr");
     } else {
-      navigateAsignacion();
+      handleClose();
     }
 
   };

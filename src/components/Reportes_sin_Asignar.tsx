@@ -33,7 +33,15 @@ const getData = () => {
   };
 
   useEffect(() => {
-    fetchUserData();
+    // Configurar la consulta periódica cada X segundos
+    const interval = setInterval(() => {
+      fetchUserData();
+    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return datos;

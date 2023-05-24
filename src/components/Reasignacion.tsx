@@ -13,6 +13,8 @@ type reporte = {
     id_developer:number;
     date:string;
     motivo:string;
+    developer_name:string;
+    report_title:string;
 }
 
 type infoDev = {
@@ -36,7 +38,15 @@ const getData = () => {
   };
 
   useEffect(() => {
-    fetchUserData();
+    // Configurar la consulta periódica cada X segundos
+    const interval = setInterval(() => {
+      fetchUserData();
+    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return datos;
@@ -44,42 +54,16 @@ const getData = () => {
 
 
 
-const getInfoDev = (id_dev:number) => {  /* 'id': developer.id, 'nombre': developer.nombre, 'email': developer.email, 'id_rol': developer.id_rol */
-  const [datos, setUsers] = useState([]);
-
-  const fetchUserData = () => {
-    fetch("http://127.0.0.1:5000/dev/info/?id_dev="+id_dev)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setUsers(data);
-      });
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  const desarollador = datos.nombre;
-  
-  return desarollador;
-};
-
 
 const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
 
   const datos=getData();
-  const datos_dev=getInfoDev(2);
 
   const reports = datos.map((reports:reporte) => {
-    
-    
-
     return {
-      titulo:<Button href="/VerReporte" variant="link">Titulo</Button>, 
-      desarollador: reports.id_developer,
-      asignacion:<ReasignacionButton id_report ={reports.id_report} id_developer={reports.id_developer} date={reports.date} motivo={reports.motivo} ></ReasignacionButton>
+      titulo:<Button href="/VerReporte" variant="link">{reports.report_title}</Button>, 
+      desarollador: reports.developer_name,
+      asignacion:<ReasignacionButton id_report ={reports.id_report} id_developer={reports.id_developer} developer_name={reports.developer_name} date={reports.date} motivo={reports.motivo} ></ReasignacionButton>
     }
   });
 
