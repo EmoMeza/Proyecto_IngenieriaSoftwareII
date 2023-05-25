@@ -79,7 +79,7 @@ class reporte(db.Model):
     titulo = db.Column('titulo', db.String(45))
     descripcion = db.Column('descripcion', db.String(10000))
     id_developer = db.Column('id_developer', db.Integer, db.ForeignKey('desarrollador.id'))
-    id_estado = db.Column('id_estado', db.Integer, db.ForeignKey('estado.id'))
+    id_estado = db.Column('id_estado', db.Integer, db.ForeignKey('estado.id'), default=0)
     id_prioridad = db.Column('id_prioridad', db.Integer, db.ForeignKey('prioridad.id'))
     likes = db.Column('likes', db.Integer, default=0)
     id_producto = db.Column('id_producto', db.Integer, db.ForeignKey('producto.id'))
