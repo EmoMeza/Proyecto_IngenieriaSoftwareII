@@ -59,6 +59,16 @@ def get_all_reports_related_to_products():
     #return the json
     return jsonify(reportes_json), 200
 
+@user_controller.route('/dev/info/', methods=['GET'])
+def get_dev_info():
+    id_dev = request.args.get('id_dev')
+    developer = database.desarrollador.query.filter_by(id=id_dev).first()
+    if developer is None:
+        return jsonify({'error': 'No existe el desarrollador'})
+    #create a json that returns the information of the developer
+    developer_json = {'id': developer.id, 'nombre': developer.nombre, 'email': developer.email, 'id_rol': developer.id_rol}
+    return jsonify(developer_json)    
+
 async def add_desarrollador(nombre, email, id_rol):
     desarrollador = database.desarrollador(nombre, email, id_rol)
     db.session.add(desarrollador)

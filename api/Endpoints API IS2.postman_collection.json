@@ -8,13 +8,13 @@
 	},
 	"item": [
 		{
-			"name": "Add Comment to Reporte",
+			"name": "Add Reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"text\":\"testeo 1\"\r\n}",
+					"raw": "{\r\n    \"title\":\"postman test\",\r\n    \"description\":\"testeo desde postman asies\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -22,7 +22,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/comments?id_report=5",
+					"raw": "http://127.0.0.1:5000/reports/add?id_product=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -33,12 +33,12 @@
 					"port": "5000",
 					"path": [
 						"reports",
-						"comments"
+						"add"
 					],
 					"query": [
 						{
-							"key": "id_report",
-							"value": "5"
+							"key": "id_product",
+							"value": "2"
 						}
 					]
 				}
@@ -46,7 +46,7 @@
 			"response": []
 		},
 		{
-			"name": "[3087] Update estado of Reporte",
+			"name": "Add Comment to Reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -122,13 +122,13 @@
 			"response": []
 		},
 		{
-			"name": "Add Reporte",
+			"name": "[3087] Update estado of Reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\":\"postman test\",\r\n    \"description\":\"testeo desde postman asies\"\r\n\r\n}",
+					"raw": "{\r\n    \"text\":\"testeo 1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,7 +136,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/add?id_product=2",
+					"raw": "http://127.0.0.1:5000/reports/comments?id_report=5",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -147,12 +147,12 @@
 					"port": "5000",
 					"path": [
 						"reports",
-						"add"
+						"comments"
 					],
 					"query": [
 						{
-							"key": "id_product",
-							"value": "2"
+							"key": "id_report",
+							"value": "5"
 						}
 					]
 				}
@@ -160,7 +160,7 @@
 			"response": []
 		},
 		{
-			"name": "[3091] Add dev to reporte",
+			"name": "[3091] Add/Update dev to reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -174,7 +174,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/add/developer/?id_report=33&id_dev=3",
+					"raw": "http://127.0.0.1:5000/reports/add/developer/?id_report=31&id_dev=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -192,7 +192,7 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "33"
+							"value": "31"
 						},
 						{
 							"key": "id_dev",
@@ -322,6 +322,14 @@
 			"response": []
 		},
 		{
+			"name": "Get Reporte",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "Get all Reportes",
 			"request": {
 				"method": "GET",
@@ -352,12 +360,72 @@
 			"response": []
 		},
 		{
+			"name": "Get developers of a product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/products/get/developers?id_product=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"products",
+						"get",
+						"developers"
+					],
+					"query": [
+						{
+							"key": "id_product",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get info of developer / revisar si borrar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dev/info/?id_dev=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dev",
+						"info",
+						""
+					],
+					"query": [
+						{
+							"key": "id_dev",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "[3080] Get all Reportes asignados de un desarrollador",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/dev/reportes/?id_dev=1",
+					"raw": "http://127.0.0.1:5000/dev/reportes/?id_dev=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -374,7 +442,7 @@
 					"query": [
 						{
 							"key": "id_dev",
-							"value": "1"
+							"value": "3"
 						}
 					]
 				}
@@ -430,7 +498,7 @@
 			"response": []
 		},
 		{
-			"name": "[3114 & 3096] Get all solicitudes de rasignacion of a product/project",
+			"name": "[3114 & 3096] Get all solicitudes de rasignacion of a product/project ademas de nombre y titulo",
 			"request": {
 				"method": "GET",
 				"header": [

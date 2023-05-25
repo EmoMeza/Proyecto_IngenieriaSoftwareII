@@ -151,6 +151,7 @@ def add_developer():
         return jsonify({'message': 'The id_developer is not in the database'}), 400
     report = database.reporte.query.get_or_404(id_report)
     report.id_developer = id_developer
+    report.id_estado = 1
     db.session.commit()
     return jsonify({'message': 'Developer added successfully.'}), 201
 
@@ -180,7 +181,21 @@ def get_all_reports_from_a_specific_product():
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
-
+@report_controller.route('/report/get', methods=['GET'])
+def get_single_report():
+    id_report = request.args.get('id_report')
+    report = database.reporte.query.get_or_404(id_report)
+    report_id_estado = report.id_estado
+    estado = database.estado.query.filter_by(id=report_id_estado).first()
+    report_json = {}
+    report_json['id'] = report.id
+    report_json['title'] = report.titulo
+    report_json['description'] = report.descripcion
+    report_json['likes'] = report.likes
+    report_json['date'] = report.fecha
+    report_json['id_producto'] = report.id_producto
+    report_json['estado'] = estado.nombre
+    return jsonify(report_json), 200
 
 def add_desarrollador_producto(id_desarrollador, id_producto):
     desarrollador_producto = database.desarrollador_producto(id_desarrollador, id_producto)
@@ -202,8 +217,6 @@ def add_reporte(titulo,descripcion,id_producto):
     db.session.add(reporte)
     db.session.commit()
     
-
-
 def add_comentario(descripcion, id_reporte):
     comentario = database.comentario(descripcion, id_reporte)
     db.session.add(comentario)

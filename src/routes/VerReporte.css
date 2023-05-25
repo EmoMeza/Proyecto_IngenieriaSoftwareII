@@ -54,3 +54,20 @@
     margin: 10px 0;
     word-break: break-all;
   }
+
+  .filler {
+    flex-grow: 1;
+  }
+
+  .titulo {
+    margin-top: 120px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .desc-reporte {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 20px;
+  }
