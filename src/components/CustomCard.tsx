@@ -5,14 +5,13 @@ import "../routes/App.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./CustomCard.css";
 import VerReporte from "../routes/VerReporte";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom"; 
 
 function CustomCard(props: { bug: Bug }) {
   let tittle = props.bug.titulo;
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate(); 
 
   const handleInspectBug = () => {
-    // Use navigate function to navigate to the "/VerReporte" route with the bug ID
     navigate(`/VerReporte/${props.bug.id}`);
   };
 
