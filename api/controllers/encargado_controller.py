@@ -41,9 +41,8 @@ def add_reasingation_petition():
     db.session.commit()
     return jsonify({'message': 'solicitud de reasignacion agregada exitosamente.'}), 201
 
-@encargado_controller.route('/reasignacion/delete', methods=['DELETE'])
+@encargado_controller.route('/reasignacion/delete/', methods=['DELETE'])
 def delete_reasingation_petition():
-    return jsonify({'message': 'solicitud de reasignacion borrada exitosamente.'}), 201
     id_report = request.args.get('id_report')
     id_dev = request.args.get('id_dev')
     print(id_dev)
