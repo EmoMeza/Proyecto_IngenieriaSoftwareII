@@ -5,14 +5,14 @@ class Bug {
   titulo: string;
   cuerpo: string;
   encargado: string;
-  estado: string;
+  estado: number;
   likes: number;
   constructor(
     id = 0,
     titulo = "vacio",
     cuerpo = "vacio",
     encargado = "vacio",
-    estado = "Abierto",
+    estado = 0,
     likes = 0
   ) {
     this.id = id;

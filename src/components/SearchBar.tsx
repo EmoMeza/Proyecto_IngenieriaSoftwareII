@@ -8,7 +8,7 @@ type bugardo = {
   id: number;
   id_producto: string;
   likes: number;
-  estado:string;
+  estado:number;
   title: string;
   id_encargado: number;
 };
