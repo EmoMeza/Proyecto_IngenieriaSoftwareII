@@ -6,24 +6,6 @@ db = database.db
 app = database.app
 
 encargado_controller = Blueprint('encargado_controller', __name__)
-# TRABAJO DUPLICADO XDD
-# @encargado_controller.route('/reasignacion/get', methods=['GET'])
-# def get_reasignacion():
-#     product_id = request.args.get('product_id')
-#     if database.producto.query.filter_by(id=product_id).first == None:
-#         return jsonify({'message': 'el producto no se encuentra en la base de datos'}), 400
-#     reports = database.reporte.query.filter_by(id_producto=product_id).all()
-#     reasignacion_jsons = []
-#     for report in reports:
-#         petitions = database.solicitud_reasignacion.query.filter_by(id_reporte=report.id).all()
-#         for petition in petitions:
-#             petition_json = {}
-#             petition_json['id_report'] = petition.id_reporte
-#             petition_json['id_developer'] = petition.id_dev
-#             petition_json['date'] = petition.fecha
-#             petition_json['motivo'] = petition.motivo
-#             reasignacion_jsons.append(petition_json)
-#     return jsonify(reasignacion_jsons), 200
 
 #ENDPOINT API para agregar una solicitud de reasignacion a la BD
 @encargado_controller.route('/reasignacion/add/', methods=['POST'])
@@ -45,7 +27,6 @@ def add_reasingation_petition():
 def delete_reasingation_petition():
     id_report = request.args.get('id_report')
     id_dev = request.args.get('id_dev')
-    print(id_dev)
     petition = database.solicitud_reasignacion.query.get_or_404([id_dev,id_report])
     db.session.delete(petition)
     db.session.commit()
