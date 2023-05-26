@@ -6,6 +6,7 @@ import App from "./routes/App";
 import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
 import Asignacion from "./routes/Asignacion";
+import Dev from "./routes/Dev"
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/Asignacion",
     element: <Asignacion />,
+  },
+  {
+    path: "/Dev",
+    element: <Dev />,
   }
 ]);
 
