@@ -2,6 +2,6 @@
 Pipfile
 Pipfile.lock
 node_modules
-api/db/__pycache__
-api/controllers/__pycache__
-api/__pycache__
+api/db/__pycache__/
+api/controllers/__pycache__/
+api/__pycache__/
