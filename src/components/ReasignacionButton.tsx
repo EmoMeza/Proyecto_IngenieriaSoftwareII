@@ -24,25 +24,6 @@ type Desarollador = {
 }
 
 
-const getMotivo = (id_report:number) => {
-  const [datos, setUsers] = useState([]);
-
-  const fetchUserData = () => {
-      fetch("http://127.0.0.1:5000/reasignacion/get/motivo/report/?id_report="+id_report)
-      .then((response) => {
-          return response.json();
-      })
-      .then((data) => {
-          setUsers(data);
-      });
-  };
-
-  useEffect(() => {
-      fetchUserData();
-  }, []);
-
-  return datos;
-};
 
 
 const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({id_report,id_developer,developer_name,date,motivo}) =>  {
@@ -53,15 +34,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
   const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {  
-   
-    const url2 = "http://127.0.0.1:5000/reasignacion/delete?id_report="+id_report+"&id_dev="+id_developer;
-    const response2 = await fetch(url2, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-
+  
     const url = "http://127.0.0.1:5000/reports/add/developer/?id_report="+id_report+"&id_dev="+data.developer;
     const response = await fetch(url, {
       method: "POST",
@@ -70,11 +43,11 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       }
     });
 
-    if (!response.ok || !response2.ok) {
+    if (!response.ok ) {
       throw new Error(response.statusText);
     }
-    if(response.ok && response2.ok){
- 
+    if(response.ok ){
+      Negar();
       handleClose();
       
     }
@@ -106,7 +79,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
     const [desarollador, setDesarolladores] = useState([]);
   
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/products/all")
+    fetch("http://127.0.0.1:5000/products/get/developers?id_product="+2)
       .then((response) => response.json())
       .then((data) => setDesarolladores(data));
   }, []);
