@@ -1,22 +1,22 @@
 
-  .scroll-cards__item {
-    --offset: 0.5em;
-    color: #000;
-   /*    position: sticky;  */ 
-    top: max(16vh, 10em);
-    padding: 2em 1.5em;
-    min-height: 19em;
-    background: #cac3d7;
-    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.1);
-    width: 120%;
-    border-style: groove;
-    border-color: rgb(128, 128, 153);
-    border-radius: 10px;
-    white-space: pre-wrap;
-    flex-shrink: 0;
-    justify-content: flex-start;
-    
-  }
+.scroll-cards__item {
+  --offset: 0.5em;
+  color: #000;
+  top: max(16vh, 10em);
+  padding: 2em 1.5em;
+  min-height: 19em;
+  background: #cac3d7;
+  box-shadow: 0 2px 40px rgba(0, 0, 0, 0.1);
+  width: 80vw; /* Set width to 80% of the viewport width */
+  margin-left: auto;
+  margin-right: auto;
+  border-style: groove;
+  border-color: rgb(128, 128, 153);
+  border-radius: 10px;
+  white-space: pre-wrap;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
   
   .titulardo{
     font-size: 2em;

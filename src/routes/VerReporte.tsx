@@ -1,4 +1,5 @@
 import Comment from '../components/Comment';
+import Bug from "../components/Bug";
 import React from 'react';
 import { useState, useEffect} from 'react';
 import './VerReporte.css';
@@ -6,6 +7,7 @@ import Header from '../components/Header';
 import { useForm, SubmitHandler} from 'react-hook-form'
 import { BrowserRouter as Router} from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import CustomCard from '../components/CustomCard';
 
 
 type comentario = {
@@ -34,8 +36,6 @@ const getCommentsdb = async (reportId:number) => {
     return comments;
 };
 
-
-
 const GetComments = async (id_reporte: number): Promise<comentario[]> => {
   const comments = await getCommentsdb(id_reporte);
   const commentList = comments.map((item: comentario) => {
@@ -44,6 +44,27 @@ const GetComments = async (id_reporte: number): Promise<comentario[]> => {
 
   return commentList;
 };
+
+const getReportedb = async (reportId: number) => {
+  const fetchReportData = async () => {
+    const ret = fetch("http://127.0.0.1:5000/report/get?id_report=" + reportId)
+      .then((response) => {
+        return response.json();
+      });
+    return ret;
+  };
+  const report = await fetchReportData();
+  return report;
+};
+
+const getReporte = async (id_reporte: number): Promise<Bug> => {
+  const report = await getReportedb(id_reporte);
+  const encargado = await fetch("http://127.0.0.1:5000/dev/info/?id_dev=" + report.id_developer)
+    .then((response) => {
+      return response.json();
+    });
+  return new Bug(report.id, report.title, report.description, encargado.nombre, report.estado, report.likes);
+}
 
 // const getDetails = async (reportId:number) => {
 //   const fetchDetails= async () => {
@@ -64,6 +85,7 @@ function VerReporte() {
   const { id } = useParams()
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<string[]>([]);
+  const [report, setReport] = useState<Bug | undefined>(undefined);
   
   useEffect(() => {
     const fetchComments = async () => {
@@ -72,6 +94,11 @@ function VerReporte() {
       setComments(comentariolistacomentarios.map((item: comentario) => item.contenido));
     };
 
+    const fetchReport = async () => {
+      const auxReport = await getReporte(Number(id));
+      setReport(auxReport);
+    }
+    fetchReport();
     fetchComments();
   }, []);
 
@@ -98,11 +125,18 @@ function VerReporte() {
 
   return (
     <div>
-      <Header />
+      <Header/>
       <div className="main-container">
-      <h1 className ='titulo'>Title</h1>
-      <h2 className = 'desc-reporte'>desc reporte</h2>
+      <div>
+        {report?(
+          <CustomCard bug={report}/>
+        ) : (
+          <p>Loading...</p>
+        )
+        }
+      </div>
       <div className='filler' />
+
         {comments.map((text) => (
           <div className="comment-container">{text}</div>
         ))}
