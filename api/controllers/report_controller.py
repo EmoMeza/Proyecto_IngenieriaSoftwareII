@@ -195,6 +195,7 @@ def get_single_report():
     report_json['date'] = report.fecha
     report_json['id_producto'] = report.id_producto
     report_json['estado'] = estado.nombre
+    report_json['id_developer'] = report.id_developer
     return jsonify(report_json), 200
 
 def add_desarrollador_producto(id_desarrollador, id_producto):
