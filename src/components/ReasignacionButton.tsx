@@ -16,25 +16,14 @@ type FormValues = {
   comentario: string;
 };
 
-const getMotivo = (id_report:number) => {
-  const [datos, setUsers] = useState([]);
+type Desarollador = {
+  email:string;
+  id:number;
+  id_rol: number;
+  nombre: string;
+}
 
-  const fetchUserData = () => {
-      fetch("http://127.0.0.1:5000/reasignacion/get/motivo/report/?id_report="+id_report)
-      .then((response) => {
-          return response.json();
-      })
-      .then((data) => {
-          setUsers(data);
-      });
-  };
 
-  useEffect(() => {
-      fetchUserData();
-  }, []);
-
-  return datos;
-};
 
 
 const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({id_report,id_developer,developer_name,date,motivo}) =>  {
@@ -45,7 +34,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
   const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {  
-   
+  
     const url = "http://127.0.0.1:5000/reports/add/developer/?id_report="+id_report+"&id_dev="+data.developer;
     const response = await fetch(url, {
       method: "POST",
@@ -54,20 +43,13 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       }
     });
 
-    const url2 = "http://127.0.0.1:5000/reasignation/delete?id_report="+id_report+"&id_developer="+id_developer;
-    const response2 = await fetch(url2, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-
-    if (!response.ok) {
+    if (!response.ok ) {
       throw new Error(response.statusText);
-    } else {
-      if (response2.ok) {
-        handleClose();
-      }
+    }
+    if(response.ok ){
+      Negar();
+      handleClose();
+      
     }
 
   };
@@ -75,7 +57,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
 
   const Negar = async () => {
-    const url = "http://127.0.0.1:5000/reasignation/delete?id_report="+id_report+"&id_developer="+id_developer;
+    const url = "http://127.0.0.1:5000/reasignacion/delete/?id_report="+id_report+"&id_dev="+id_developer;
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
@@ -83,8 +65,37 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       }
       
     });
-
+    
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    } else {
+      if (response.ok) {
+        handleClose();
+      }
+    }
   }
+
+  const getDevelopers = () => {
+    const [desarollador, setDesarolladores] = useState([]);
+  
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/products/get/developers?id_product="+2)
+      .then((response) => response.json())
+      .then((data) => setDesarolladores(data));
+  }, []);
+
+  const desarolladores = desarollador.map((item: Desarollador) =>{
+    return {
+      nombre:item.nombre, id_desarollador:item.id, id_rol:item.id_rol, email:item.email
+    }
+  });
+
+  return desarolladores;
+  };
+
+  const developers=getDevelopers();
+
+
   
   return (
     <>
@@ -117,12 +128,13 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">
-                  <Form.Select {...register("developer")}>
-                    <option>developer</option>
-                    <option value="1">juan</option>
-                    <option value="2">pedro</option>
-                    <option value="3">pablo</option>
-                  </Form.Select>
+                <Form.Select {...register("developer")}>
+                  {developers.map((developer) => (
+                    <option value={developer.id_desarollador}>
+                      {developer.nombre}
+                    </option>
+                  ))}
+                </Form.Select>
                 </Form.Group>
                 <div className="d-grid gap-2">
                   <Button variant="primary"   type="submit">

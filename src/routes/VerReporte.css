@@ -7,12 +7,12 @@
   } */
   
   .main-container {
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    margin-top: -50px;
+    margin-top: 80px;
   }
   
   .comment-flexbox {
@@ -25,11 +25,13 @@
     margin: 12px 0;
     font-size: 1rem;
     font-weight: 500;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .input-box {
     height: 75px;
-    width: 465px;
+    width: 785px;
     background-color: #ffffff;
   }
   
@@ -43,11 +45,12 @@
     border-radius: 5px;
     border-style: none;
     cursor: pointer;
+    align-self: flex-end;
   }
   
   .comment-container{
-    height: 75px;
-    width: 465px;
+    height: 70px;
+    width: 765px;
     background-color: #ffffff;
     color: black;
     border-radius: 5px;
@@ -71,3 +74,10 @@
     color: white;
     margin-bottom: 20px;
   }
+
+  .comment-section {
+    align-items: flex-start;
+    height: 250px; 
+    /*overflow: auto;*/
+  }
+  
