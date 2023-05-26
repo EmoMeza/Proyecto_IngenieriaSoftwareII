@@ -54,7 +54,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
   const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {  
    
-    const url2 = "http://127.0.0.1:5000/reasignation/delete?id_report="+id_report+"&id_developer="+id_developer;
+    const url2 = "http://127.0.0.1:5000/reasignacion/delete?id_report="+id_report+"&id_dev="+id_developer;
     const response2 = await fetch(url2, {
       method: "DELETE",
       headers: {
@@ -84,7 +84,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
 
   const Negar = async () => {
-    const url = "http://127.0.0.1:5000/reasignation/delete/?id_report="+id_report+"&id_developer="+id_developer;
+    const url = "http://127.0.0.1:5000/reasignacion/delete/?id_report="+id_report+"&id_dev="+id_developer;
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
@@ -92,6 +92,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       }
       
     });
+    
     if (!response.ok) {
       throw new Error(response.statusText);
     } else {
