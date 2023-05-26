@@ -67,31 +67,18 @@ const getReporte = async (id_reporte: number): Promise<Bug> => {
   return new Bug(report.id, report.title, report.description, encargado.nombre, report.estado, report.likes);
 }
 
-// const getDetails = async (reportId:number) => {
-//   const fetchDetails= async () => {
-//       const det = fetch("http://127.0.0.1:5000/reports/" + reportId)
-//       .then((response) => {
-//           return response.json();
-//       });
-
-//       return det;
-//   };
-
-//   const comments = await fetchDetails();
-
-//   return comments;
-// };
-
 function VerReporte() {
   const { id } = useParams();
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<string[]>([]);
   const [report, setReport] = useState<Bug | undefined>(undefined);
+  const [detcomment, setDetcomment] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchComments = async () => {
       const comentariolistacomentarios = await GetComments(Number(id));
       setComments(comentariolistacomentarios.map((item: comentario) => item.contenido).reverse());
+      setDetcomment(comentariolistacomentarios.map((item: comentario) => item.date).reverse())
     };
 
     const fetchReport = async () => {
@@ -104,7 +91,7 @@ function VerReporte() {
 
   const onClickHandler = async () => {
     if (comment.trim() === '') {
-      return; // Ignore empty comments
+      return;
     }
 
     const response = await fetch("http://127.0.0.1:5000/reports/comments?id_report=" + Number(id), {
@@ -117,7 +104,7 @@ function VerReporte() {
 
     if (response.ok) {
       setComments((comments) => [comment, ...comments] as never[]);
-      setComment(''); // Clear the comment input
+      setComment('');
     } else {
       console.error("Failed to post comment");
     }
@@ -156,7 +143,9 @@ function VerReporte() {
 
           {comments.map((text, index) => (
             <div className="comment-container" key={index}>
-              <h4 className="comment-text"><strong>Comment {index + 1}</strong></h4>
+              <h4 className="comment-text">
+                <strong>Anónimo, {detcomment[index]}</strong>
+              </h4>
               <div className="comment-content">{text}</div>
             </div>
           ))}
