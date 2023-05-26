@@ -230,7 +230,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/reasignacion/add/?id_report=31&id_developer=1",
+					"raw": "http://127.0.0.1:5000/reasignacion/add/?id_report=31&id_developer=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -240,7 +240,6 @@
 					],
 					"port": "5000",
 					"path": [
-						"reports",
 						"reasignacion",
 						"add",
 						""
@@ -563,7 +562,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports",
+					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -576,6 +575,12 @@
 						"products",
 						"get",
 						"reports"
+					],
+					"query": [
+						{
+							"key": "id_product",
+							"value": "2"
+						}
 					]
 				}
 			},
@@ -683,7 +688,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reasignacion/delete/?id_report=4&id_dev=2",
+					"raw": "http://127.0.0.1:5000/reasignacion/delete/?id_report=31&id_dev=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -700,7 +705,7 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "4"
+							"value": "31"
 						},
 						{
 							"key": "id_dev",
