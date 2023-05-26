@@ -45,9 +45,9 @@ const GetComments = async (id_reporte: number): Promise<comentario[]> => {
   return commentList;
 };
 
-// const getDetails = async (reportId:number) => {
+// const getDetailsbd = async (reportId:number) => {
 //   const fetchDetails= async () => {
-//       const det = fetch("http://127.0.0.1:5000/reports/" + reportId)
+//       const det = fetch("http://127.0.0.1:5000/report/get?id_report=" + reportId)
 //       .then((response) => {
 //           return response.json();
 //       });
@@ -55,42 +55,53 @@ const GetComments = async (id_reporte: number): Promise<comentario[]> => {
 //       return det;
 //   };
   
-//   const comments = await fetchDetails();
+//   const alldetails = await fetchDetails();
 
-//   return comments;
+//   return alldetails;
+// };
+
+// const GetDetails = async (id_reporte: number): Promise<comentario[]> => {
+//   const alldetails = await getCommentsdb(id_reporte);
+//   const details = alldetails.map((item: comentario) => {
+//     return new Comment(item.contenido, item.date, item.id);
+//   });
+
+//   return commentList;
 // };
 
 function VerReporte() {
-  const { id } = useParams()
+  const { id } = useParams();
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<string[]>([]);
-  
+
   useEffect(() => {
     const fetchComments = async () => {
       const comentariolistacomentarios = await GetComments(Number(id));
-      
-      setComments(comentariolistacomentarios.map((item: comentario) => item.contenido));
+      setComments(comentariolistacomentarios.map((item: comentario) => item.contenido).reverse());
     };
-
     fetchComments();
   }, []);
 
   const onClickHandler = async () => {
-  const response = await fetch("http://127.0.0.1:5000/reports/comments?id_report=" + Number(id), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    
-    body: JSON.stringify({ text: comment }),
-  });
+    if (comment.trim() === '') {
+      return; // Ignore empty comments
+    }
 
-  if (response.ok) {
-    setComments((comments) => [...comments, comment] as never[]);
-  } else {
-    console.error("Failed to post comment");
-  }
-};
+    const response = await fetch("http://127.0.0.1:5000/reports/comments?id_report=" + Number(id), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: comment }),
+    });
+
+    if (response.ok) {
+      setComments((comments) => [comment, ...comments] as never[]);
+      setComment(''); // Clear the comment input
+    } else {
+      console.error("Failed to post comment");
+    }
+  };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -100,12 +111,9 @@ function VerReporte() {
     <div>
       <Header />
       <div className="main-container">
-      <h1 className ='titulo'>Title</h1>
-      <h2 className = 'desc-reporte'>desc reporte</h2>
-      <div className='filler' />
-        {comments.map((text) => (
-          <div className="comment-container">{text}</div>
-        ))}
+        <h1 className='titulo'>Title</h1>
+        <h2 className='desc-reporte'>desc reporte</h2>
+        <div className='filler' />
 
         <div className="comment-flexbox">
           <h3 className="comment-text">comment</h3>
@@ -117,6 +125,14 @@ function VerReporte() {
           <button onClick={onClickHandler} className="comment-button">
             Submit
           </button>
+        </div>
+
+        <div className="comment-section">
+          {comments.map((text, index) => (
+            <div className="comment-container" key={index}>
+              {text}
+            </div>
+          ))}
         </div>
       </div>
     </div>
