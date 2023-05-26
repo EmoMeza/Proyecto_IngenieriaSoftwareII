@@ -16,6 +16,14 @@ type FormValues = {
   comentario: string;
 };
 
+type Desarollador = {
+  email:string;
+  id:number;
+  id_rol: number;
+  nombre: string;
+}
+
+
 const getMotivo = (id_report:number) => {
   const [datos, setUsers] = useState([]);
 
@@ -46,14 +54,6 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
   const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {  
    
-    const url = "http://127.0.0.1:5000/reports/add/developer/?id_report="+id_report+"&id_dev="+data.developer;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-
     const url2 = "http://127.0.0.1:5000/reasignation/delete?id_report="+id_report+"&id_developer="+id_developer;
     const response2 = await fetch(url2, {
       method: "DELETE",
@@ -62,12 +62,21 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       }
     });
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    } else {
-      if (response2.ok) {
-        handleClose();
+    const url = "http://127.0.0.1:5000/reports/add/developer/?id_report="+id_report+"&id_dev="+data.developer;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       }
+    });
+
+    if (!response.ok || !response2.ok) {
+      throw new Error(response.statusText);
+    }
+    if(response.ok && response2.ok){
+ 
+      handleClose();
+      
     }
 
   };
@@ -75,7 +84,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
 
   const Negar = async () => {
-    const url = "http://127.0.0.1:5000/reasignation/delete?id_report="+id_report+"&id_developer="+id_developer;
+    const url = "http://127.0.0.1:5000/reasignation/delete/?id_report="+id_report+"&id_developer="+id_developer;
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
@@ -83,8 +92,36 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       }
       
     });
-
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    } else {
+      if (response.ok) {
+        handleClose();
+      }
+    }
   }
+
+  const getDevelopers = () => {
+    const [desarollador, setDesarolladores] = useState([]);
+  
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => response.json())
+      .then((data) => setDesarolladores(data));
+  }, []);
+
+  const desarolladores = desarollador.map((item: Desarollador) =>{
+    return {
+      nombre:item.nombre, id_desarollador:item.id, id_rol:item.id_rol, email:item.email
+    }
+  });
+
+  return desarolladores;
+  };
+
+  const developers=getDevelopers();
+
+
   
   return (
     <>
@@ -117,12 +154,13 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
 
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group className="mb-3">
-                  <Form.Select {...register("developer")}>
-                    <option>developer</option>
-                    <option value="1">juan</option>
-                    <option value="2">pedro</option>
-                    <option value="3">pablo</option>
-                  </Form.Select>
+                <Form.Select {...register("developer")}>
+                  {developers.map((developer) => (
+                    <option value={developer.id_desarollador}>
+                      {developer.nombre}
+                    </option>
+                  ))}
+                </Form.Select>
                 </Form.Group>
                 <div className="d-grid gap-2">
                   <Button variant="primary"   type="submit">
