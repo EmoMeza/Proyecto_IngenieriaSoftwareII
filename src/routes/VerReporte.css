@@ -7,7 +7,7 @@
   } */
   
   .main-container {
-    height: 85vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -76,6 +76,7 @@
   }
 
   .comment-section {
+    align-items: flex-start;
     height: 250px; 
     /*overflow: auto;*/
   }

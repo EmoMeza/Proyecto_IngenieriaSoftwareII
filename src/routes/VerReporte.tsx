@@ -1,11 +1,11 @@
 import Comment from '../components/Comment';
 import Bug from "../components/Bug";
 import React from 'react';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import './VerReporte.css';
 import Header from '../components/Header';
-import { useForm, SubmitHandler} from 'react-hook-form'
-import { BrowserRouter as Router} from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import CustomCard from '../components/CustomCard';
 
@@ -21,19 +21,19 @@ type contenidoReporte = {
   descripcion: string;
 }
 
-const getCommentsdb = async (reportId:number) => {
-    const fetchCommentData = async () => {
-        const ret = fetch("http://127.0.0.1:5000/comments/get?id_report=" + reportId)
-        .then((response) => {
-            return response.json();
-        });
+const getCommentsdb = async (reportId: number) => {
+  const fetchCommentData = async () => {
+    const ret = fetch("http://127.0.0.1:5000/comments/get?id_report=" + reportId)
+      .then((response) => {
+        return response.json();
+      });
 
-        return ret;
-    };
-    
-    const comments = await fetchCommentData();
+    return ret;
+  };
 
-    return comments;
+  const comments = await fetchCommentData();
+
+  return comments;
 };
 
 
@@ -76,7 +76,7 @@ const getReporte = async (id_reporte: number): Promise<Bug> => {
 
 //       return det;
 //   };
-  
+
 //   const comments = await fetchDetails();
 
 //   return comments;
@@ -87,7 +87,7 @@ function VerReporte() {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<string[]>([]);
   const [report, setReport] = useState<Bug | undefined>(undefined);
-  
+
   useEffect(() => {
     const fetchComments = async () => {
       const comentariolistacomentarios = await GetComments(Number(id));
@@ -129,35 +129,31 @@ function VerReporte() {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <div className="main-container">
-      <div>
-        {report?(
-          <CustomCard bug={report}/>
-        ) : (
-          <p>Loading...</p>
-        )
-        }
-      </div>
-      <div className='filler' />
-
-        {comments.map((text) => (
-          <div className="comment-container">{text}</div>
-        ))}
-
-        <div className="comment-flexbox">
-          <h3 className="comment-text">comment</h3>
-          <textarea
-            value={comment}
-            onChange={onChangeHandler}
-            className="input-box"
-          />
-          <button onClick={onClickHandler} className="comment-button">
-            Submit
-          </button>
+        <div>
+          {report ? (
+            <CustomCard bug={report} />
+          ) : (
+            <p>Loading...</p>
+          )
+          }
         </div>
 
         <div className="comment-section">
+
+          <div className="comment-flexbox">
+            <h3 className="comment-text">comment</h3>
+            <textarea
+              value={comment}
+              onChange={onChangeHandler}
+              className="input-box"
+            />
+            <button onClick={onClickHandler} className="comment-button">
+              Submit
+            </button>
+          </div>
+
           {comments.map((text, index) => (
             <div className="comment-container" key={index}>
               <h4 className="comment-text"><strong>Comment {index + 1}</strong></h4>
