@@ -10,7 +10,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
 
     <div className="header">
-      <Navbar fixed='top' collapseOnSelect expand="md" bg="dark" variant="dark">
+      <Navbar fixed='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">Monster-Inc</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
