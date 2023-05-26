@@ -78,19 +78,19 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
   const getDevelopers = () => {
     const [desarollador, setDesarolladores] = useState([]);
   
-  useEffect(() => {
-    fetch("http://127.0.0.1:5000/products/get/developers?id_product="+2)
-      .then((response) => response.json())
-      .then((data) => setDesarolladores(data));
-  }, []);
+    useEffect(() => {
+      fetch("http://127.0.0.1:5000/products/get/developers?id_product="+2)
+        .then((response) => response.json())
+        .then((data) => setDesarolladores(data));
+    }, []);
 
-  const desarolladores = desarollador.map((item: Desarollador) =>{
-    return {
-      nombre:item.nombre, id_desarollador:item.id, id_rol:item.id_rol, email:item.email
-    }
-  });
+    const desarolladores = desarollador.map((item: Desarollador) =>{
+      return {
+        nombre:item.nombre, id_desarollador:item.id, id_rol:item.id_rol, email:item.email
+      }
+    });
 
-  return desarolladores;
+    return desarolladores;
   };
 
   const developers=getDevelopers();

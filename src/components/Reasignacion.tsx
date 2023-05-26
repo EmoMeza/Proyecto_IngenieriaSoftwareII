@@ -61,7 +61,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
 
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href="/VerReporte" variant="link">{reports.report_title}</Button>, 
+      titulo:<Button href={"/VerReporte/"+reports.id_report}  variant="link">{reports.report_title}</Button>, 
       desarollador: reports.developer_name,
       asignacion:<ReasignacionButton id_report ={reports.id_report} id_developer={reports.id_developer} developer_name={reports.developer_name} date={reports.date} motivo={reports.motivo} ></ReasignacionButton>
     }
@@ -97,6 +97,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
               <Card.Title className="text-black">
                 Reasignacion de Reportes
               </Card.Title>
+              
               <MDBTable scrollY>
                 <MDBTableHead columns={data.columns} />
                 <MDBTableBody rows={data.rows} />

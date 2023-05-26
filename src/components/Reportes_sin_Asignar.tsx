@@ -19,23 +19,26 @@ type reporte = {
   id_producto: number;
 }
 
-const getData = () => {
-  const [datos, setUsers] = useState([]);
 
-  const fetchUserData = () => {
+const id_product=2;
+
+const getProducts = ()=> {
+  const [datos, setDatos] = useState([]);
+
+  const fetchData = () => {
     fetch("http://127.0.0.1:5000/products/get/reports?id_product=2")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        setUsers(data);
+        setDatos(data);
       });
   };
 
   useEffect(() => {
     // Configurar la consulta periódica cada X segundos
     const interval = setInterval(() => {
-      fetchUserData();
+      fetchData();
     }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
 
     // Limpiar el intervalo cuando el componente se desmonte
@@ -45,22 +48,50 @@ const getData = () => {
   }, []);
 
   return datos;
-};
+}
 
+const getData = () => {
+  const [datos, setDatos] = useState([]);
 
-const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> = (props) => {
+  const fetchData = () => {
+    fetch("http://127.0.0.1:5000/products/get/reports?id_product="+id_product)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setDatos(data);
+      });
+  };
 
-  const datos=getData();
-  
+  useEffect(() => {
+    // Configurar la consulta periódica cada X segundos
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href="/VerReporte" variant="link">{reports.titulo}</Button>, 
+      titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.titulo}</Button>, 
       likes:reports.likes,
       fecha:reports.fecha,
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>
     }
   });
 
+
+  return reports;
+};
+
+
+const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> = (props) => {
+
+  const reports=getData();
 
   const data = {
     columns: [
@@ -88,6 +119,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
     rows: reports
   };
   
+
 
   return (
     <Container>
