@@ -325,7 +325,28 @@
 			"name": "Get Reporte",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/report/get?id_report=26",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"report",
+						"get"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "26"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -662,7 +683,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reasignation_petition/delete?id_report=262&id_developer=3",
+					"raw": "http://127.0.0.1:5000/reasignacion/delete/?id_report=4&id_dev=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -672,17 +693,18 @@
 					],
 					"port": "5000",
 					"path": [
-						"reasignation_petition",
-						"delete"
+						"reasignacion",
+						"delete",
+						""
 					],
 					"query": [
 						{
 							"key": "id_report",
-							"value": "262"
+							"value": "4"
 						},
 						{
-							"key": "id_developer",
-							"value": "3"
+							"key": "id_dev",
+							"value": "2"
 						}
 					]
 				}
