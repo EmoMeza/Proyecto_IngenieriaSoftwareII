@@ -45,7 +45,6 @@ def add_reasingation_petition():
 def delete_reasingation_petition():
     id_report = request.args.get('id_report')
     id_dev = request.args.get('id_dev')
-    print(id_dev)
     petition = database.solicitud_reasignacion.query.get_or_404([id_dev,id_report])
     db.session.delete(petition)
     db.session.commit()
