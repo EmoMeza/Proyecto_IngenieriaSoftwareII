@@ -35,7 +35,6 @@ const getCommentsdb = async (reportId:number) => {
 };
 
 
-
 const GetComments = async (id_reporte: number): Promise<comentario[]> => {
   const comments = await getCommentsdb(id_reporte);
   const commentList = comments.map((item: comentario) => {
@@ -44,30 +43,6 @@ const GetComments = async (id_reporte: number): Promise<comentario[]> => {
 
   return commentList;
 };
-
-// const getDetailsbd = async (reportId:number) => {
-//   const fetchDetails= async () => {
-//       const det = fetch("http://127.0.0.1:5000/report/get?id_report=" + reportId)
-//       .then((response) => {
-//           return response.json();
-//       });
-
-//       return det;
-//   };
-  
-//   const alldetails = await fetchDetails();
-
-//   return alldetails;
-// };
-
-// const GetDetails = async (id_reporte: number): Promise<comentario[]> => {
-//   const alldetails = await getCommentsdb(id_reporte);
-//   const details = alldetails.map((item: comentario) => {
-//     return new Comment(item.contenido, item.date, item.id);
-//   });
-
-//   return commentList;
-// };
 
 function VerReporte() {
   const { id } = useParams();
@@ -130,7 +105,8 @@ function VerReporte() {
         <div className="comment-section">
           {comments.map((text, index) => (
             <div className="comment-container" key={index}>
-              {text}
+              <h4 className="comment-text"><strong>Comment {index + 1}</strong></h4>
+              <div className="comment-content">{text}</div>
             </div>
           ))}
         </div>
