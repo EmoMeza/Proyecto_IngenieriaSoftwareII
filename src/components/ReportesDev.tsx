@@ -18,16 +18,36 @@ type reporte = {
   id_producto: number;
 }
 
+// Tengo que hacer que esta wea sea async
+
 const getData = () => {
-  const [datos, setUsers] = useState([]);
+  const [datosReporte, setDatosReporte] = useState([]);
+  const [datosProducto, setDatosProductos] = useState([]);
+  const [datosEstado, setDatosEstados] = useState([]);
 
   const fetchUserData = () => {
-    fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=2")
+    fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=5")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        setUsers(data);
+        setDatosReporte(data);
+      });
+
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setDatosProductos(data);
+      });
+
+    fetch("http://127.0.0.1:5000/reports/estados/all")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setDatosEstados(data);
       });
   };
 
@@ -43,21 +63,25 @@ const getData = () => {
     };
   }, []);
 
-  return datos;
+  return [datosReporte, datosProducto, datosEstado];
 };
 
 
 const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
 
-  const datos=getData();
-  
-  const reports = datos.map((reports:reporte) => {
+  const [datosReporte, datosProducto, datosEstado] = getData();
+
+  const reports = datosReporte.map((reports:reporte) => {
     return {
       titulo:<Button href="/VerReporte" variant="link">{reports.titulo}</Button>, 
+      estado:datosEstado[reports.id_estado].nombre.toUpperCase(),
       likes:reports.likes,
-      fecha:reports.fecha
+      fecha:reports.fecha,
+      producto:datosProducto[reports.id_producto].nombre
     }
   });
+
+
 
 
   const data = {
@@ -68,6 +92,11 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
         sort: 'asc'
       },
       {
+        label: 'Estado',
+        field: 'estado',
+        sort: 'asc'
+      },
+      {
         label: 'Likes',
         field: 'likes',
         sort: 'asc'
@@ -75,6 +104,11 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
       {
         label: 'Fecha',
         field: 'fecha',
+        sort: 'asc'
+      },
+      {
+        label: 'Producto',
+        field: 'producto',
         sort: 'asc'
       }
     ],

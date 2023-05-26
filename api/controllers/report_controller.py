@@ -141,6 +141,18 @@ def check_estados():
         estados_json.append(estado_json)
     return jsonify(estados_json), 200
 
+@report_controller.route('/reports/estados/all', methods=['GET'])
+def all_estados():
+    #return all the estados
+    estados = database.estado.query.all()
+    estados_json = []
+    for estado in estados:
+        estado_json = {}
+        estado_json['id'] = estado.id
+        estado_json['nombre'] = estado.nombre
+        estados_json.append(estado_json)
+    return jsonify(estados_json), 200
+
 @report_controller.route('/reports/add/developer/', methods=['POST'])
 def add_developer():
     id_report = request.args.get('id_report')
