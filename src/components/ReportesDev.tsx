@@ -73,7 +73,7 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
 
   const reports = datosReporte.map((reports:reporte) => {
     return {
-      titulo:<Button href="/VerReporte" variant="link">{reports.titulo}</Button>, 
+      titulo:<Button href={"/VerReporte/" + reports.id} variant="link">{reports.titulo}</Button>, 
       estado:datosEstado[reports.id_estado].nombre.toUpperCase(),
       likes:reports.likes,
       fecha:reports.fecha,
