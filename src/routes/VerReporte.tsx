@@ -77,8 +77,8 @@ function VerReporte() {
   useEffect(() => {
     const fetchComments = async () => {
       const comentariolistacomentarios = await GetComments(Number(id));
-      setComments(comentariolistacomentarios.map((item: comentario) => item.contenido).reverse());
-      setDetcomment(comentariolistacomentarios.map((item: comentario) => item.date).reverse())
+      setComments(comentariolistacomentarios.map((item: comentario) => item.contenido));
+      setDetcomment(comentariolistacomentarios.map((item: comentario) => item.date))
     };
 
     const fetchReport = async () => {
@@ -128,9 +128,18 @@ function VerReporte() {
         </div>
 
         <div className="comment-section">
-
+          {comments.map((text, index) => (
+            <div className="comment-container" key={index}>
+              <strong>Anónimo, {detcomment[index]}</strong>
+              <div className='comment-container2'>
+                <h4 className="comment-text">
+                </h4>
+                <div className="comment-content">{text}</div>
+              </div>
+            </div>
+          ))}
           <div className="comment-flexbox">
-            <h3 className="comment-text">comment</h3>
+            <h1 className="comment-text">Deja tu comentario</h1>
             <textarea
               value={comment}
               onChange={onChangeHandler}
@@ -141,14 +150,7 @@ function VerReporte() {
             </button>
           </div>
 
-          {comments.map((text, index) => (
-            <div className="comment-container" key={index}>
-              <h4 className="comment-text">
-                <strong>Anónimo, {detcomment[index]}</strong>
-              </h4>
-              <div className="comment-content">{text}</div>
-            </div>
-          ))}
+
         </div>
       </div>
     </div>

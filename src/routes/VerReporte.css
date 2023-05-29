@@ -49,11 +49,19 @@
   }
   
   .comment-container{
+    height: 120px;
+    width: 765px;
+    background-color: #17223b;
+    color: rgb(255, 255, 255);
+    margin: 10px 0;
+    word-break: break-all;
+  }
+  
+  .comment-container2{
     height: 70px;
     width: 765px;
     background-color: #ffffff;
     color: black;
-    border-radius: 5px;
     margin: 10px 0;
     word-break: break-all;
   }
