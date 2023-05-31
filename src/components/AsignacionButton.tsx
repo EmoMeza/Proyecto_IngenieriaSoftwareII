@@ -51,7 +51,7 @@ const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_r
     const [desarollador, setDesarolladores] = useState([]);
   
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/products/all")
+    fetch("http://127.0.0.1:5000/products/get/developers?id_product="+2)
       .then((response) => response.json())
       .then((data) => setDesarolladores(data));
   }, []);
