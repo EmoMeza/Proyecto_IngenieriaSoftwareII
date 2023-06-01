@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Card,Container,Button} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-
+import SolicitudButton from './SolicitudButton';
 interface IReportesDev {
     
 }
@@ -25,31 +25,26 @@ const getData = () => {
   const [datosProducto, setDatosProductos] = useState([]);
   const [datosEstado, setDatosEstados] = useState([]);
 
-  const fetchUserData = () => {
-    fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=5")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setDatosReporte(data);
-      });
+  const fetchUserData = async () => {
+    try {
+      const [response1, response2, response3] = await Promise.all([
+        fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=5"),
+        fetch("http://127.0.0.1:5000/products/all"),
+        fetch("http://127.0.0.1:5000/reports/estados/all")
+      ]);
 
-    fetch("http://127.0.0.1:5000/products/all")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setDatosProductos(data);
-      });
+      const data1 = await response1.json();
+      const data2 = await response2.json();
+      const data3 = await response3.json();
 
-    fetch("http://127.0.0.1:5000/reports/estados/all")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setDatosEstados(data);
-      });
+      setDatosReporte(data1);
+      setDatosProductos(data2);
+      setDatosEstados(data3);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+
 
   useEffect(() => {
     // Configurar la consulta periódica cada X segundos
@@ -68,19 +63,21 @@ const getData = () => {
 
 
 const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
-
   const [datosReporte, datosProducto, datosEstado] = getData();
 
-  const reports = datosReporte.map((reports:reporte) => {
-    return {
-      titulo:<Button href={"/VerReporte/" + reports.id} variant="link">{reports.titulo}</Button>, 
-      estado:datosEstado[reports.id_estado].nombre.toUpperCase(),
-      likes:reports.likes,
-      fecha:reports.fecha,
-      producto:datosProducto[reports.id_producto].nombre
-    }
-  });
+  const reports = datosReporte.map((report) => {
+    const estadoNombre = datosEstado[report.id_estado]?.nombre || "";
+    const productoNombre = datosProducto[report.id_producto]?.nombre || ""; 
 
+    return {
+      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.titulo}</Button>,
+      estado: estadoNombre.toUpperCase(),
+      likes: report.likes,
+      fecha: report.fecha,
+      producto: productoNombre,
+      solicitud:<SolicitudButton id_report={report.id} id_dev={5}></SolicitudButton>
+    };
+  });
 
 
 
@@ -109,6 +106,11 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
       {
         label: 'Producto',
         field: 'producto',
+        sort: 'asc'
+      },
+      {
+        label: 'Solicitud de Reasignar',
+        field: 'solictud',
         sort: 'asc'
       }
     ],
