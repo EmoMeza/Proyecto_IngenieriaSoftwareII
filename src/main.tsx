@@ -7,6 +7,7 @@ import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
 import Asignacion from "./routes/Asignacion";
 import Dev from "./routes/Dev"
+import ListaDesarrolladores from "./routes/ListaDesarrolladores"
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/Dev",
     element: <Dev />,
+  },
+  {
+    path: "/ListaDesarrolladores",
+    element: <ListaDesarrolladores/>,
   }
 ]);
 
