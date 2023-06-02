@@ -60,8 +60,7 @@ export default function ListaDeBugsPorDesarrollador(props: { id_product: string,
         likes: item.likes,
         fecha: item.fecha,
         asignacion: item.id_producto,
-        estado: EstadoBug(item.id_estado),
-        tomarBug: <TomarBugButton id_report ={item.id}  ></TomarBugButton>};
+        estado: EstadoBug(item.id_estado)};
     
     }
   );
@@ -90,12 +89,6 @@ export default function ListaDeBugsPorDesarrollador(props: { id_product: string,
         {
           label: 'Estado',
           field: 'estado',
-          sort: 'asc'
-          }
-          ,
-        {
-          label: 'Tomar Bug',
-          field: 'tomarBug',
           sort: 'asc'
           }
     ],
