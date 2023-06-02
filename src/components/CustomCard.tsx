@@ -29,17 +29,18 @@ function CustomCard(props: { bug: Bug }) {
         <h1 className="space-taker"></h1>
         <hr className="tittle-separator"></hr>
         <p>{props.bug.cuerpo}</p>
-        <div className="text-right">
-          <button
-            className="btn btn-dark btn-inspect"
-            onClick={handleInspectBug}
-          >
-            Inspeccionar bug
-          </button>
-        </div>
       </div>
     </div>
   );
 }
 
 export default CustomCard;
+
+/*<div className="text-right">
+          <button
+            className="btn btn-dark btn-inspect"
+            onClick={handleInspectBug}
+          >
+            Inspeccionar bug
+          </button>
+        </div>*/
