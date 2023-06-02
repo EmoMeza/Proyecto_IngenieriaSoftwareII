@@ -2,8 +2,10 @@ import * as React from 'react';
 import { useState,useEffect } from 'react';
 import  { Card,Button,Modal,Form } from 'react-bootstrap';
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export interface IReasignacionButtonProps {
+  id_producto:number;
   id_report: number;
   id_developer : number;
   developer_name:string;
@@ -26,7 +28,7 @@ type Desarollador = {
 
 
 
-const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({id_report,id_developer,developer_name,date,motivo}) =>  {
+const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({id_producto,id_report,id_developer,developer_name,date,motivo}) =>  {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -48,12 +50,9 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
     }
     if(response.ok ){
       Negar();
-      handleClose();
-      
     }
 
   };
-
 
 
   const Negar = async () => {
@@ -70,6 +69,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
       throw new Error(response.statusText);
     } else {
       if (response.ok) {
+        window.location.reload();
         handleClose();
       }
     }
@@ -79,7 +79,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
     const [desarollador, setDesarolladores] = useState([]);
   
     useEffect(() => {
-      fetch("http://127.0.0.1:5000/products/get/developers?id_product="+2)
+      fetch("http://127.0.0.1:5000/products/get/developers?id_product="+id_producto)
         .then((response) => response.json())
         .then((data) => setDesarolladores(data));
     }, []);
@@ -130,7 +130,7 @@ const ReasignacionButton: React.FunctionComponent<IReasignacionButtonProps> = ({
                 <Form.Group className="mb-3">
                 <Form.Select {...register("developer")}>
                   {developers.map((developer) => (
-                    <option value={developer.id_desarollador}>
+                    <option key={developer.id_desarollador} value={developer.id_desarollador}>
                       {developer.nombre}
                     </option>
                   ))}

@@ -22,11 +22,6 @@ const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_r
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const navigate = useNavigate();
-
-  const navigateAsignacion = () => {
-    navigate("/Asignacion");
-  };
 
   const { register, handleSubmit,formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {  
@@ -42,6 +37,7 @@ const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_r
     if (!response.ok) {
       throw new Error(response.statusText);
     } else {
+      window.location.reload();
       handleClose();
     }
 
@@ -85,7 +81,7 @@ const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_r
               
               <Form.Select {...register("developer")}>
               {developers.map((developer) => (
-                <option value={developer.id_desarollador}>
+                <option key={developer.id_desarollador} value={developer.id_desarollador}>
                   {developer.nombre}
                 </option>
               ))}

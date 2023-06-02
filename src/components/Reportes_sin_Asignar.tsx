@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Card,Container,Button} from 'react-bootstrap';
+import {Stack,Card,Container,Button} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
@@ -19,39 +19,25 @@ type reporte = {
   id_producto: number;
 }
 
-
-const id_product=2;
-
-const getProducts = ()=> {
-  const [datos, setDatos] = useState([]);
-
-  const fetchData = () => {
-    fetch("http://127.0.0.1:5000/products/get/reports?id_product=2")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setDatos(data);
-      });
-  };
-
-  useEffect(() => {
-    // Configurar la consulta periódica cada X segundos
-    const interval = setInterval(() => {
-      fetchData();
-    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
-
-    // Limpiar el intervalo cuando el componente se desmonte
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  return datos;
+type producto = {
+  nombre: string;
+  id: number;
+  id_encargado: number;
 }
 
-const getData = () => {
+
+
+const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> = (props) => {
+
+  const [ id_product, setId_product] = useState(2);
   const [datos, setDatos] = useState([]);
+
+
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setId_product(parseInt(event.target.value,10));
+  };
+
+  
 
   const fetchData = () => {
     fetch("http://127.0.0.1:5000/products/get/reports?id_product="+id_product)
@@ -64,17 +50,9 @@ const getData = () => {
   };
 
   useEffect(() => {
-    // Configurar la consulta periódica cada X segundos
-    const interval = setInterval(() => {
-      fetchData();
-    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
-
-    // Limpiar el intervalo cuando el componente se desmonte
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
+    return fetchData();
+  }, [id_product]);
+  
   const reports = datos.map((reports:reporte) => {
     return {
       titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.titulo}</Button>, 
@@ -84,19 +62,11 @@ const getData = () => {
     }
   });
 
-
-  return reports;
-};
-
-
-const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> = (props) => {
-
-  const reports=getData();
-
   const data = {
+
     columns: [
       {
-        label: 'Titulo',
+        label: 'Titulo',  
         field: 'titulo',
         sort: 'asc'
       },
@@ -119,15 +89,48 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
     rows: reports
   };
   
+  const getProducts = () => {
+    const [products, setProducts] = useState([]);
+  
+    useEffect(() => {
+      fetch("http://127.0.0.1:5000/products/all")
+        .then((response) => response.json())
+        .then((data) => setProducts(data));
+    }, []);
 
+    const productos = products.filter((producto:producto) => producto.id_encargado === 2).map((item: producto) =>{
+      return {
+        nombre:item.nombre, id:item.id
+        }
+      });
+
+    return productos;
+  };
+
+  const products=getProducts();
 
   return (
     <Container>
           <Card>
             <Card.Body>
-              <Card.Title className="text-black">
-                Reportes Sin Asignar
-              </Card.Title>
+
+            <Stack direction="horizontal" gap={3}>
+                <div >
+                <Card.Title className="text-black">
+                  Reportes sin Asignar
+                </Card.Title> 
+                </div>
+                <div >
+                  <select name="Producto" onChange={selectChange} >
+                    {products.map((product) => (
+                      <option key={product.id} value={product.id}>
+                        {product.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </Stack>
+
               <MDBTable scrollY>
                 <MDBTableHead columns={data.columns} />
                 <MDBTableBody rows={data.rows} />
@@ -140,3 +143,5 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 };
 
 export default Reportes_sin_Asignar;
+
+
