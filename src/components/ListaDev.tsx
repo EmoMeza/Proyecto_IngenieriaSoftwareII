@@ -124,7 +124,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
           <Card>
             <Card.Body>
               <Card.Title className="text-black">
-                Desarolladores
+                Desarrolladores
               </Card.Title>
               <MDBTable scrollY>
                 <MDBTableHead columns={data.columns} />

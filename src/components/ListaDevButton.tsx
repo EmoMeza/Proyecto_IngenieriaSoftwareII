@@ -26,6 +26,12 @@ type reporte = {
   id_producto: number;
 }
 
+type producto = {
+  nombre: string;
+  id: number;
+  id_encargado: number;
+}
+
 const getData = (id_dev: number) => {
   const [datos, setUsers] = useState([]);
 
@@ -53,6 +59,24 @@ const getData = (id_dev: number) => {
 
   return datos;
 };
+/**
+const getProducts = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  const productos = products.filter((producto:producto) => producto.id_encargado === 2).map((item: producto) =>{
+    return {
+      nombre:item.nombre, id:item.id
+      }
+    });
+
+  return productos;
+};
 
 
 const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({id_dev, id_producto})  =>   {
@@ -74,7 +98,41 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({id_dev, 
       reasignacion: <AsignacionButton id_report ={reports.id}></AsignacionButton>
     }
   });
+**/
 
+const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev, id_producto }) => {
+  const [show, setShow] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  const getProductIds = () => {
+    return products
+      .filter((producto: producto) => producto.id_encargado === 2)
+      .map((item: producto) => item.id);
+  };
+
+  const productIds = getProductIds();
+  const datos = getData(id_dev);
+
+  const reports = datos
+    .filter((report) => productIds.includes(report.id_producto))
+    .map((report: reporte) => {
+      return {
+        titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.titulo}</Button>,
+        likes: report.likes,
+        fecha: report.fecha,
+        producto: report.id_producto,
+        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>
+      };
+    });
 
   const data = {
     columns: [
@@ -91,6 +149,11 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({id_dev, 
       {
         label: 'Fecha',
         field: 'fecha',
+        sort: 'asc'
+      },
+      {
+        label: 'Producto',
+        field: 'producto',
         sort: 'asc'
       },
       {

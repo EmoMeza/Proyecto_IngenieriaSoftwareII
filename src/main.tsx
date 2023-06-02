@@ -8,6 +8,7 @@ import VerReporte from "./routes/VerReporte";
 import Asignacion from "./routes/Asignacion";
 import Dev from "./routes/Dev"
 import ListaDesarrolladores from "./routes/ListaDesarrolladores"
+import MenuReasignacion from "./routes/MenuReasignacion";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/ListaDesarrolladores",
     element: <ListaDesarrolladores/>,
+  },
+  {
+    path: "/MenuReasignacion",
+    element: <MenuReasignacion/>,
   }
 ]);
 

@@ -18,9 +18,11 @@ type reporte = {
   id_producto: number;
 }
 
-// Tengo que hacer que esta wea sea async
+const id_dev = 3;
 
 const getData = () => {
+  
+
   const [datosReporte, setDatosReporte] = useState([]);
   const [datosProducto, setDatosProductos] = useState([]);
   const [datosEstado, setDatosEstados] = useState([]);
@@ -28,7 +30,7 @@ const getData = () => {
   const fetchUserData = async () => {
     try {
       const [response1, response2, response3] = await Promise.all([
-        fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=5"),
+        fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=" + id_dev),
         fetch("http://127.0.0.1:5000/products/all"),
         fetch("http://127.0.0.1:5000/reports/estados/all")
       ]);
@@ -75,7 +77,7 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
       likes: report.likes,
       fecha: report.fecha,
       producto: productoNombre,
-      solicitud:<SolicitudButton id_report={report.id} id_dev={5}></SolicitudButton>
+      solicitud:<SolicitudButton id_report={report.id} id_dev={id_dev}></SolicitudButton>
     };
   });
 
