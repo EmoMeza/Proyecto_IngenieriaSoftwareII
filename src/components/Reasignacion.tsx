@@ -68,7 +68,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
         sort: 'asc'
       },
       {
-        label: 'Desarollador Asignado',
+        label: 'Desarrollador Asignado',
         field: 'desarollador',
         sort: 'asc'
       },
