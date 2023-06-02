@@ -62,7 +62,6 @@ function Form(): JSX.Element {
 
   return (
     <div style={{ display: "flex" }}>
-      
       <br />
       <form onSubmit={handleSubmit(onSubmit)} className="form-react">
         <div className="form-title">

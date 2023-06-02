@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.css";
-import {Card,Container,Button} from 'react-bootstrap';
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import TomarBugButton from "../components/TomarBugButton"
-import "../routes/App.css"
-import LikeButton from "./LikeButton";
-type reporte = {
-  date: Date;
-  description:string;
-  estado:string;
+import Bug from "./Bug";
+import CustomCard from "./CustomCard";
+
+type bugardo = {
+  date: string;
+  description: string;
   id: number;
-  id_producto: number;
+  id_producto: string;
   likes: number;
+  estado:string;
   title: string;
-}
+  id_encargado: number;
+};
+
 const getData = () => {
   const [users, setUsers] = useState([]);
 
@@ -33,65 +32,29 @@ const getData = () => {
   return users;
 };
 
-const getFilteredItems = (query: string, items: reporte[]) => {
+const getFilteredItems = (query: string, items: Bug[]) => {
   query = query.toLowerCase();
   if (!query) {
     return items;
   }
-  return items.filter((bug: reporte) => bug.title.toLowerCase().includes(query));
+  return items.filter((bug: Bug) => bug.titulo.toLowerCase().includes(query));
 };
 export default function SearchBar() {
   const users = getData();
   const [query, setQuery] = useState("");
-  const filteredItems = getFilteredItems(query, users);
-  const reports = filteredItems.map((report:reporte) => {
-    return {
-      titulo: report.title, 
-      likes:report.likes,
-      fecha:report.date,
-      estado: report.estado,
-      like:<LikeButton id={report.id}/>
-    }
+  const items = users.map((item: bugardo) => {
+    return new Bug(item.id,item.title, item.description, 'placeholder',item.estado ,item.likes);
   });
-  const data = {
-    columns: [
-      {
-        label: 'Titulo',
-        field: 'titulo',
-        sort: 'asc'
-      },
-      {
-        label: 'Likes',
-        field: 'likes',
-        sort: 'asc'
-      },
-      {
-        label: 'Fecha',
-        field: 'fecha',
-        sort: 'asc'
-      },
-      {
-        label: 'Estado',
-        field: 'estado',
-        sort: 'asc'
-        },
-      {
-        label: ' ',
-        field: 'like',
-        sort: 'asc'
-        }
-    ],
-    rows: reports
-  };
- 
+
+  const filteredItems = getFilteredItems(query, items);
   return (
-    <div className="search-container">
+    <div className="container-xl">
       <h2 className="space-taker"></h2>
       <h2 className="space-taker"></h2>
       <label></label>
       <input
-        id="custom-search-bar"
-        className="form-control form-control-s"
+        id="search-bar"
+        className="form-control form-control-lg"
         type="search"
         aria-label="search"
         placeholder="Busca tu bug"
@@ -99,20 +62,10 @@ export default function SearchBar() {
       />
 
       <h5 className="space-taker"></h5>
-      <ul>
-        <Container className="table-search-container">
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-black">
-                Reportes
-              </Card.Title>
-              <MDBTable scrollY>
-                <MDBTableHead columns={data.columns} />
-                <MDBTableBody rows={data.rows} />
-              </MDBTable>
-            </Card.Body>
-          </Card>
-        </Container>
+      <ul className="mx-auto">
+        {filteredItems.map((value) => (
+          <CustomCard bug={value}></CustomCard>
+        ))}
       </ul>
     </div>
   );

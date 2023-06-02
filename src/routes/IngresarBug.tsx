@@ -7,17 +7,13 @@ type Props = {};
 
 const IngresarBug = (props: Props) => {
   return (
-    <div id="form-bug">
+    <div>
       <Header />
-      <div>
-        <h2 className="space-taker"></h2>
-        <h2 className="space-taker"></h2>
-        <h2 className="space-taker"></h2>
-        
-      </div>
-      <div>
+      <h2 className="space-taker"></h2>
+      <h2 className="space-taker"></h2>
+      <h2 className="space-taker"></h2>
+      <h2> Ingresa tu duda o inquetud </h2>
       <Form></Form>
-      </div>
     </div>
   );
 };
