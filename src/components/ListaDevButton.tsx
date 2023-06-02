@@ -68,7 +68,7 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({id_dev, 
   .filter((report) => report.id_producto === id_producto)
   .map((reports:reporte) => {
     return {
-      titulo:<Button href="/VerReporte" variant="link">{reports.titulo}</Button>, 
+      titulo:<Button href={"/VerReporte/" + reports.id} variant="link">{reports.titulo}</Button>, 
       likes:reports.likes,
       fecha:reports.fecha,
       reasignacion: <AsignacionButton id_report ={reports.id}></AsignacionButton>
