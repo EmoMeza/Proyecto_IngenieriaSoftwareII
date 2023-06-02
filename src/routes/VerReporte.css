@@ -18,6 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    align-self: flex-end;
   }
   
   .comment-text{
@@ -44,7 +45,7 @@
     border-radius: 5px;
     border-style: none;
     cursor: pointer;
-    align-self: flex-end;
+    /*align-self: flex-end;*/
   }
   
   .comment-container{
