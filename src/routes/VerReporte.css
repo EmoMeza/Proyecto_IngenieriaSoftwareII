@@ -7,29 +7,31 @@
   } */
   
   .main-container {
-    height: 100vh;
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    margin-top: -50px;
+    margin-top: 30px;
   }
   
   .comment-flexbox {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    align-self: flex-end;
   }
   
   .comment-text{
     margin: 12px 0;
     font-size: 1rem;
     font-weight: 500;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .input-box {
     height: 75px;
-    width: 465px;
+    width: 785px;
     background-color: #ffffff;
   }
   
@@ -43,14 +45,23 @@
     border-radius: 5px;
     border-style: none;
     cursor: pointer;
+    /*align-self: flex-end;*/
   }
   
   .comment-container{
-    height: 75px;
-    width: 465px;
+    height: 120px;
+    width: 765px;
+    background-color: #17223b;
+    color: rgb(255, 255, 255);
+    margin: 10px 0;
+    word-break: break-all;
+  }
+  
+  .comment-container2{
+    height: 70px;
+    width: 765px;
     background-color: #ffffff;
     color: black;
-    border-radius: 5px;
     margin: 10px 0;
     word-break: break-all;
   }
@@ -71,3 +82,10 @@
     color: white;
     margin-bottom: 20px;
   }
+
+  .comment-section {
+    align-items: flex-start;
+    height: 250px; 
+    /*overflow: auto;*/
+  }
+  

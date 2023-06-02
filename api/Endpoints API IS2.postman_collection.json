@@ -136,7 +136,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/comments?id_report=5",
+					"raw": "http://127.0.0.1:5000/reports/update/estado?id_report=31&id_estado=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -147,12 +147,17 @@
 					"port": "5000",
 					"path": [
 						"reports",
-						"comments"
+						"update",
+						"estado"
 					],
 					"query": [
 						{
 							"key": "id_report",
-							"value": "5"
+							"value": "31"
+						},
+						{
+							"key": "id_estado",
+							"value": "1"
 						}
 					]
 				}
@@ -174,7 +179,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/add/developer/?id_report=31&id_dev=3",
+					"raw": "http://127.0.0.1:5000/reports/add/developer/?id_report=31&id_developer=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -195,8 +200,8 @@
 							"value": "31"
 						},
 						{
-							"key": "id_dev",
-							"value": "3"
+							"key": "id_developer",
+							"value": "2"
 						}
 					]
 				}
@@ -230,7 +235,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/reasignacion/add/?id_report=31&id_developer=1",
+					"raw": "http://127.0.0.1:5000/reasignacion/add/?id_report=31&id_developer=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -240,7 +245,6 @@
 					],
 					"port": "5000",
 					"path": [
-						"reports",
 						"reasignacion",
 						"add",
 						""
@@ -325,7 +329,28 @@
 			"name": "Get Reporte",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/report/get?id_report=26",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"report",
+						"get"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "26"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -479,7 +504,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports",
+					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -492,6 +517,12 @@
 						"products",
 						"get",
 						"reports"
+					],
+					"query": [
+						{
+							"key": "id_product",
+							"value": "1"
+						}
 					]
 				}
 			},
@@ -510,7 +541,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reasignacion/get/all/product/?id_product=1",
+					"raw": "http://127.0.0.1:5000/reasignacion/get/all/product/?id_product=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -529,7 +560,7 @@
 					"query": [
 						{
 							"key": "id_product",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -542,7 +573,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports",
+					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -555,6 +586,12 @@
 						"products",
 						"get",
 						"reports"
+					],
+					"query": [
+						{
+							"key": "id_product",
+							"value": "2"
+						}
 					]
 				}
 			},
@@ -636,7 +673,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reasignacion/get/motivo/report/",
+					"raw": "http://127.0.0.1:5000/reasignacion/get/motivo/report/?id_report=31",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -651,6 +688,12 @@
 						"motivo",
 						"report",
 						""
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "31"
+						}
 					]
 				}
 			},
@@ -662,7 +705,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reasignation_petition/delete?id_report=262&id_developer=3",
+					"raw": "http://127.0.0.1:5000/reasignacion/delete/?id_report=31&id_dev=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -672,17 +715,18 @@
 					],
 					"port": "5000",
 					"path": [
-						"reasignation_petition",
-						"delete"
+						"reasignacion",
+						"delete",
+						""
 					],
 					"query": [
 						{
 							"key": "id_report",
-							"value": "262"
+							"value": "31"
 						},
 						{
-							"key": "id_developer",
-							"value": "3"
+							"key": "id_dev",
+							"value": "2"
 						}
 					]
 				}

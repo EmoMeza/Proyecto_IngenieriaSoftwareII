@@ -5,9 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./routes/App";
 import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
+import VerReporteDev from "./routes/VerReporteDev";
 import Asignacion from "./routes/Asignacion";
 import ReportesPorProducto from "./routes/ReportesPorProducto";
-import JsonViewer from "./routes/JsonViewer";
+import Dev from "./routes/Dev"
+import ListaDesarrolladores from "./routes/ListaDesarrolladores"
+import MenuReasignacion from "./routes/MenuReasignacion";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,10 @@ const router = createBrowserRouter([
     element: <VerReporte />,
   },
   {
+    path: "/VerReporteDev/:id",
+    element: <VerReporteDev />,
+  },
+  {
     path: "/Asignacion",
     element: <Asignacion />,
   },
@@ -34,6 +41,18 @@ const router = createBrowserRouter([
   {
     path: "/JsonViewer",
     element: <JsonViewer></JsonViewer>
+  },
+  {
+    path: "/Dev",
+    element: <Dev />,
+  },
+  {
+    path: "/ListaDesarrolladores",
+    element: <ListaDesarrolladores/>,
+  },
+  {
+    path: "/MenuReasignacion",
+    element: <MenuReasignacion/>,
   }
 ]);
 
