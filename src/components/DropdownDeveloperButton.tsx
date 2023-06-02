@@ -1,37 +1,47 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import {useState, useEffect} from 'react';
+
+type Product = {
+  id: number,
+  id_encargado: number,
+  nombre: string
+}
+
+const getProducts = () => {
+  const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  fetch("http://127.0.0.1:5000/products/all")
+    .then((response) => response.json())
+    .then((data) => setProducts(data));
+}, []);
+return products;
+};
 
 type DropdownDeveloperButtonProps = {
   id_dev: string;
-  onIdDevChange: (newIdDev: string) => void;
+  nombre: string;
+  onIdDevChange: (id_dev: number, nombre: string) => void;
 };
-
 const DropdownDeveloperButton: React.FC<DropdownDeveloperButtonProps> = ({
   id_dev,
+  nombre,
   onIdDevChange,
 }) => {
-  const handleDropdownItemClick = (newIdDev: string) => {
-    onIdDevChange(newIdDev);
+  const handleDropdownItemClick = (product: Product) => {
+    onIdDevChange(product.id, product.nombre);
   };
-
+  const products = getProducts();
   return (
-    <DropdownButton size="lg" id="dropdown-button-dark" variant= "secondary"title="Desarrollador">
-      <Dropdown.Item href={"#id_developer="+id_dev} onClick={() => handleDropdownItemClick('1')}>
-        {id_dev} - Action
-      </Dropdown.Item>
-      <Dropdown.Item href={"#id_developer="+id_dev} onClick={() => handleDropdownItemClick('2')}>
-        {id_dev} - Another action
-      </Dropdown.Item>
-      <Dropdown.Item href={"#id_developer="+id_dev} onClick={() => handleDropdownItemClick('3')}>
-        {id_dev} - Something else
-      </Dropdown.Item>
-      <Dropdown.Item href={"#id_developer="+id_dev} onClick={() => handleDropdownItemClick('4')}>
-        {id_dev} - Something else
-      </Dropdown.Item>
-      <Dropdown.Item href={"#id_developer="+id_dev} onClick={() => handleDropdownItemClick('5')}>
-        {id_dev} - Something else
-      </Dropdown.Item>
+    <DropdownButton size="lg" id="dropdown-button-dark" variant= "secondary"title="Producto">
+       {products.map((value: Product) => (
+           <Dropdown.Item href={"#" + value.nombre} onClick={() => handleDropdownItemClick(value)}>
+           {value.nombre}
+         </Dropdown.Item>
+        ))}
+     
     </DropdownButton>
   );
 };
