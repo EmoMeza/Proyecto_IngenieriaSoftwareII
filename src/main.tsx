@@ -7,6 +7,7 @@ import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
 import VerReporteDev from "./routes/VerReporteDev";
 import Asignacion from "./routes/Asignacion";
+import ReportesPorProducto from "./routes/ReportesPorProducto";
 import Dev from "./routes/Dev"
 import ListaDesarrolladores from "./routes/ListaDesarrolladores"
 import MenuReasignacion from "./routes/MenuReasignacion";
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
   {
     path: "/Asignacion",
     element: <Asignacion />,
+  },
+  {
+  path: "/ReportesPorProducto",
+  element: <ReportesPorProducto />
+  },
+  {
+    path: "/JsonViewer",
+    element: <JsonViewer></JsonViewer>
   },
   {
     path: "/Dev",

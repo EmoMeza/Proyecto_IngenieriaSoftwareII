@@ -1,10 +1,10 @@
 import React from 'react';
 import Bug from "./Bug";
 
-const LikeButton = (props: { bug: Bug }) => {
+const LikeButton = (props: { id: number }) => {
   const addLike = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/reports/like?id_report=${props.bug.id}`, {
+      const response = await fetch(`http://127.0.0.1:5000/reports/like?id_report=${props.id}`, {
         method: 'POST',
       });
       const data = await response.json();
