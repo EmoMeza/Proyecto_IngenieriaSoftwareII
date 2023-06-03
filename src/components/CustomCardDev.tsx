@@ -95,12 +95,6 @@ function CustomCardDev(props: { bug: Bug }) {
         <hr className="tittle-separator"></hr>
         <p>{props.bug.cuerpo}</p>
         <div className="text-right">
-          <button
-            className="btn btn-dark btn-inspect"
-          // onClick={handleInspectBug}
-          >
-            Inspeccionar bug
-          </button>
         </div>
       </div>
     </div>

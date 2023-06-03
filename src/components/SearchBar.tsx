@@ -45,10 +45,10 @@ export default function SearchBar() {
   const filteredItems = getFilteredItems(query, users);
   const reports = filteredItems.map((report:reporte) => {
     return {
-      titulo: report.title, 
-      likes:report.likes,
+      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>, 
       fecha:report.date,
-      estado: report.estado,
+      estado: report.estado.toUpperCase(),
+      likes:report.likes,
       like:<LikeButton id={report.id}/>
     }
   });
@@ -59,11 +59,7 @@ export default function SearchBar() {
         field: 'titulo',
         sort: 'asc'
       },
-      {
-        label: 'Likes',
-        field: 'likes',
-        sort: 'asc'
-      },
+
       {
         label: 'Fecha',
         field: 'fecha',
@@ -74,8 +70,13 @@ export default function SearchBar() {
         field: 'estado',
         sort: 'asc'
         },
+        {
+          label: 'Likes',
+          field: 'likes',
+          sort: 'asc'
+        },
       {
-        label: ' ',
+        label: '',
         field: 'like',
         sort: 'asc'
         }
@@ -87,7 +88,6 @@ export default function SearchBar() {
     <div className="search-container">
       <h2 className="space-taker"></h2>
       <h2 className="space-taker"></h2>
-      <label></label>
       <input
         id="custom-search-bar"
         className="form-control form-control-s"
