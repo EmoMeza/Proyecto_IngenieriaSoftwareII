@@ -13,10 +13,9 @@ type reporte = {
   id_prioridad: number;
   id_producto: number;
   likes:number;
-  titulo:string;
-
- 
+  titulo:string; 
 }
+
 const EstadoBug = (id: number) =>{
   if (id == 0){
     return "No Asignado";
@@ -30,16 +29,13 @@ const EstadoBug = (id: number) =>{
   else if (id==3){
     return "Cerrado";
   }
-
 } 
 
-
-
-export default function ListaDeBugsPorDesarrollador(props: { id_product: string, nombre_producto: string }) {
+export default function ListaReportesProductoDev(props: { id_product: string, nombre_producto: string }) {
   const [users, setUsers] = useState<reporte[]>([]);
 
   const fetchUserData = () => {
-    fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=5" )
+    fetch("http://127.0.0.1:5000/dev/all-reportes-related-to-products/?id_product=$" + props.id_product + "&id_dev=5" )
       .then((response) => {
         return response.json();
       })
@@ -55,10 +51,10 @@ export default function ListaDeBugsPorDesarrollador(props: { id_product: string,
   const items = users.filter((report) => report.id_producto.toString() === props.id_product)
   .map((item:reporte) => {
  
-      return {titulo: item.titulo,
+      return {
+        titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.titulo}</Button>,
         likes: item.likes,
         fecha: item.fecha,
-        asignacion: item.id_producto,
         estado: EstadoBug(item.id_estado)};
     
     }
@@ -81,15 +77,10 @@ export default function ListaDeBugsPorDesarrollador(props: { id_product: string,
         sort: 'asc'
       },
       {
-        label: 'Asignacion',
-        field: 'asignacion',
+        label: 'Estado',
+        field: 'estado',
         sort: 'asc'
-        },
-        {
-          label: 'Estado',
-          field: 'estado',
-          sort: 'asc'
-          }
+      }
     ],
     rows: items
   };
