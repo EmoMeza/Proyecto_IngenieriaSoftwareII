@@ -6,13 +6,13 @@ import Header from "../components/Header";
 function App() {
   return (
     <body className="body-listado">
-      <Header></Header>
-      <br />
-      <br />
-      <br />
-      <div className="container-xl">
-        <SearchBar></SearchBar>
+      <div>
+        <Header></Header>
+       </div>
+      <div className="Content">
+      <SearchBar></SearchBar>
       </div>
+      
     </body>
   );
 }

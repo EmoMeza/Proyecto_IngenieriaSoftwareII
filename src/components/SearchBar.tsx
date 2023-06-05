@@ -1,18 +1,26 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import {Card,Container,Button} from 'react-bootstrap';
+import { Card, Container, Button } from 'react-bootstrap';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import "../routes/App.css"
+import "./SearchBar.css"
 import LikeButton from "./LikeButton";
 type reporte = {
   date: Date;
-  description:string;
-  estado:string;
+  description: string;
+  estado: string;
   id: number;
   id_producto: number;
   likes: number;
   title: string;
 }
+
+type producto = {
+  nombre: string;
+  id: number;
+  id_encargado: number;
+}
+
 const getData = () => {
   const [users, setUsers] = useState([]);
 
@@ -41,17 +49,24 @@ const getFilteredItems = (query: string, items: reporte[]) => {
 };
 export default function SearchBar() {
   const users = getData();
+  const [id_product, setId_product] = useState(1);
   const [query, setQuery] = useState("");
   const filteredItems = getFilteredItems(query, users);
-  const reports = filteredItems.map((report:reporte) => {
+  const reports = filteredItems.map((report: reporte) => {
     return {
-      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>, 
-      fecha:report.date,
+      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
+      fecha: report.date,
       estado: report.estado.toUpperCase(),
-      likes:report.likes,
-      like:<LikeButton id={report.id}/>
+      likes: report.likes,
+      like: <LikeButton id={report.id} />,
+      id_producto: report.id_producto
     }
   });
+
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setId_product(parseInt(event.target.value, 10));
+  };
+
   const data = {
     columns: [
       {
@@ -69,46 +84,83 @@ export default function SearchBar() {
         label: 'Estado',
         field: 'estado',
         sort: 'asc'
-        },
-        {
-          label: 'Likes',
-          field: 'likes',
-          sort: 'asc'
-        },
+      },
+      {
+        label: 'Likes',
+        field: 'likes',
+        sort: 'asc'
+      },
       {
         label: '',
         field: 'like',
         sort: 'asc'
-        }
+      }
     ],
     rows: reports
   };
- 
+
+  const getProducts = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+      fetch("http://127.0.0.1:5000/products/all")
+        .then((response) => response.json())
+        .then((data) => setProducts(data));
+    }, []);
+
+    const productos = products.filter((producto: producto) => producto.id_encargado === 2).map((item: producto) => {
+      return {
+        nombre: item.nombre, id: item.id
+      }
+    });
+
+    return productos;
+  };
+
+  const products = getProducts();
+
+
   return (
     <div className="search-container">
-      <h2 className="space-taker"></h2>
-      <h2 className="space-taker"></h2>
+      <div style={{ marginBottom: '20px' }}>
+        <select name="Producto" onChange={selectChange} >
+          {products.map((product) => (
+            <option key={product.id} value={product.id}>
+              {product.nombre}
+            </option>
+          ))}
+        </select>
+      </div>
       <input
         id="custom-search-bar"
         className="form-control form-control-s"
         type="search"
         aria-label="search"
         placeholder="Busca tu bug"
+        style={{ marginBottom: '20px' }}
         onChange={(e) => setQuery(e.target.value)}
       />
-
-      <h5 className="space-taker"></h5>
       <ul>
         <Container className="table-search-container">
           <Card>
             <Card.Body>
-              <Card.Title className="text-black">
-                Reportes
-              </Card.Title>
-              <MDBTable scrollY>
-                <MDBTableHead columns={data.columns} />
-                <MDBTableBody rows={data.rows} />
-              </MDBTable>
+              <Card.Title className="text-black">Reportes</Card.Title>
+              <div style={{ maxHeight: '55vh', overflowY: 'scroll' }}>
+                <MDBTable>
+                  <MDBTableHead columns={data.columns} />
+                  <MDBTableBody>
+                    {data.rows.filter((row) => row.id_producto === id_product).map((row, index) => (
+                      <tr key={index} data-custom="hidden data">
+                        <td>{row.titulo}</td>
+                        <td>{row.fecha}</td>
+                        <td>{row.estado}</td>
+                        <td>{row.likes}</td>
+                        <td>{row.like}</td>
+                      </tr>
+                    ))}
+                  </MDBTableBody>
+                </MDBTable>
+              </div>
             </Card.Body>
           </Card>
         </Container>

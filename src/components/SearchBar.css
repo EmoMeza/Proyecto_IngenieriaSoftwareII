@@ -1,4 +1,4 @@
-.header {
+.search-container {
   display:block;
   box-sizing: border-box;
   position: relative;
@@ -6,7 +6,6 @@
   left: 0;
   width: 100%;
   z-index: auto;
-  margin-bottom: 100px;
-  padding-bottom: 200;
+  margin-bottom: 0px;
   line-height: 21px;
 }
