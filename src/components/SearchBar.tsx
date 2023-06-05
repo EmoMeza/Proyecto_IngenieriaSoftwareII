@@ -108,7 +108,8 @@ export default function SearchBar() {
         .then((data) => setProducts(data));
     }, []);
 
-    const productos = products.filter((producto: producto) => producto.id_encargado === 2).map((item: producto) => {
+    //const productos = products.filter((producto: producto) => producto.id_encargado === 2).map((item: producto) => { version de linea anterior con filtro
+    const productos = products.map((item: producto) => {
       return {
         nombre: item.nombre, id: item.id
       }
@@ -118,7 +119,6 @@ export default function SearchBar() {
   };
 
   const products = getProducts();
-
 
   return (
     <div className="search-container">
