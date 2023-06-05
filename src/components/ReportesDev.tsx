@@ -18,7 +18,7 @@ type reporte = {
   id_producto: number;
 }
 
-const id_dev = 3;
+const id_dev = 5;
 
 const getData = () => {
   
@@ -72,7 +72,7 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
     const productoNombre = datosProducto[report.id_producto]?.nombre || ""; 
 
     return {
-      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.titulo}</Button>,
+      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.titulo}</Button>,
       estado: estadoNombre.toUpperCase(),
       likes: report.likes,
       fecha: report.fecha,

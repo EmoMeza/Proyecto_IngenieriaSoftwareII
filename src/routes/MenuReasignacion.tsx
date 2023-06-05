@@ -1,7 +1,7 @@
 import React from "react";
 import Reasignacion from "../components/Reasignacion";
 import ListaDev from "../components/ListaDev";
-import Header from "../components/Header";
+import HeaderEncargado from "../components/HeaderEncargado";
 
 type Props = {};
 
@@ -11,7 +11,7 @@ type Props = {};
 const MenuReasignacion = (props: Props) => {
     return (
       <div>
-        <Header></Header>
+        <HeaderEncargado></HeaderEncargado>
         <ListaDev></ListaDev>
         <br />
         <Reasignacion></Reasignacion>

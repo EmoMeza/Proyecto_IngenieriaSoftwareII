@@ -53,9 +53,9 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
 
       return {
         titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.titulo}</Button>,
+        estado: EstadoBug(item.id_estado).toUpperCase(),
         likes: item.likes,
-        fecha: item.fecha,
-        estado: EstadoBug(item.id_estado)
+        fecha: item.fecha,    
       };
 
     }
@@ -68,6 +68,11 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
         sort: 'asc'
       },
       {
+        label: 'Estado',
+        field: 'estado',
+        sort: 'asc'
+      },
+      {
         label: 'Likes',
         field: 'likes',
         sort: 'asc'
@@ -77,11 +82,6 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
         field: 'fecha',
         sort: 'asc'
       },
-      {
-        label: 'Estado',
-        field: 'estado',
-        sort: 'asc'
-      }
     ],
     rows: items
   };
