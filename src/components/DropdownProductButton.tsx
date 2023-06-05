@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
 type Product = {
   id: number,
@@ -12,12 +12,12 @@ type Product = {
 const getProducts = () => {
   const [products, setProducts] = useState([]);
 
-useEffect(() => {
-  fetch("http://127.0.0.1:5000/products/all")
-    .then((response) => response.json())
-    .then((data) => setProducts(data));
-}, []);
-return products;
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+  return products;
 };
 
 type DropdownProductButtonProps = {
@@ -30,18 +30,25 @@ const DropdownProductButton: React.FC<DropdownProductButtonProps> = ({
   nombre,
   onIdDevChange,
 }) => {
+  const [selectedOption, setSelectedOption] = useState<string|null>(null);
   const handleDropdownItemClick = (product: Product) => {
+    setSelectedOption(product.nombre);
     onIdDevChange(product.id, product.nombre);
   };
   const products = getProducts();
   return (
-    <DropdownButton size="lg" id="dropdown-button-dark" variant= "secondary"title="Producto">
-       {products.map((value: Product) => (
-           <Dropdown.Item href={"#" + value.nombre} onClick={() => handleDropdownItemClick(value)}>
-           {value.nombre}
-         </Dropdown.Item>
-        ))}
-     
+    <DropdownButton
+      size="lg"
+      id="dropdown-button-dark"
+      variant="secondary" 
+      title={selectedOption ? selectedOption: "Producto"}
+      >
+      {products.map((value: Product) => (
+        <Dropdown.Item href={"#" + value.nombre} onClick={() => handleDropdownItemClick(value)}>
+          {value.nombre}
+        </Dropdown.Item>
+      ))}
+
     </DropdownButton>
   );
 };
