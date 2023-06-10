@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { Card, Container, Button } from 'react-bootstrap';
+import { Col ,Card, Container, Button, Row } from 'react-bootstrap';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import "../routes/App.css"
 import "./SearchBar.css"
@@ -63,10 +63,9 @@ export default function SearchBar() {
     }
   });
 
-  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setId_product(parseInt(event.target.value, 10));
-  };
-
+ 
+  
+ 
   const data = {
     columns: [
       {
@@ -120,16 +119,28 @@ export default function SearchBar() {
 
   const products = getProducts();
 
+
+  
   return (
     <div className="search-container">
       <div style={{ marginBottom: '20px' }}>
-        <select name="Producto" onChange={selectChange} >
+        <Row>
           {products.map((product) => (
-            <option key={product.id} value={product.id}>
-              {product.nombre}
-            </option>
-          ))}
-        </select>
+            <Col  >
+              <Card > 
+                
+                <Card.Body>
+                  <Button variant="primary" size="lg" onClick={() => {
+                    setId_product(product.id)
+                }}>
+                    {product.nombre}
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))} 
+        </Row>
+      
       </div>
       <input
         id="custom-search-bar"
