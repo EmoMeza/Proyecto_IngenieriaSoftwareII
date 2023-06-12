@@ -3,11 +3,11 @@ import Bug from "../components/Bug";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './VerReporte.css';
-import Header from '../components/Header';
+import HeaderDev from '../components/HeaderDev';
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import CustomCard from '../components/CustomCard';
+import CustomCardDev from '../components/CustomCardDev';
 
 
 type comentario = {
@@ -116,17 +116,16 @@ function VerReporte() {
 
   return (
     <div>
-      <Header />
+      <HeaderDev/>
       <div className="main-container">
         <div>
           {report ? (
-            <CustomCard bug={report} />
+            <CustomCardDev bug={report} />
           ) : (
             <p>Loading...</p>
           )
           }
         </div>
-
         <div className="comment-section">
           {comments.map((text, index) => (
             <div className="comment-container" key={index}>
@@ -149,8 +148,6 @@ function VerReporte() {
               Submit
             </button>
           </div>
-
-
         </div>
       </div>
     </div>

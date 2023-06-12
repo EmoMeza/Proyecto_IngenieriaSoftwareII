@@ -71,3 +71,22 @@
     -ms-transform: translate(0,  88%);
     transform: translate( 0%, 88%);
     }
+    
+    .bug-state {
+      background-color: #cac3d7;
+      color: #333;
+      font-size: 1rem;
+      padding: 8px;
+      border: 1px solid #cac3d7;
+      border-radius: 4px;
+    }
+    .bug-state-select {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .bug-state-select option {
+      position: relative;
+      z-index: 2;
+    }
+    

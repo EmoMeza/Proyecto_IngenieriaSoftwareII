@@ -29,6 +29,8 @@ function CustomCard(props: { bug: Bug }) {
         <h1 className="space-taker"></h1>
         <hr className="tittle-separator"></hr>
         <p>{props.bug.cuerpo}</p>
+        <div className="text-right">
+        </div>
       </div>
     </div>
   );

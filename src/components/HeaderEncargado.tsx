@@ -16,11 +16,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/IngresarBug">Ingresar Bug</Nav.Link>
+              <Nav.Link href="/Asignacion">Reportes sin asignar</Nav.Link>
+              <Nav.Link href="/MenuReasignacion">Solicitudes de reasignacion</Nav.Link>
               <Nav.Link href="/">Acerca de Nosotros</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="#link">Cliente</Nav.Link>
+              <Nav.Link href="#link">Encargado emomeza@udec.cl</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

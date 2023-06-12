@@ -26,7 +26,7 @@ type producto = {
 
 const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
 
-  const [id_product, setId_product] = useState<number>(2);
+  const [id_product, setId_product] = useState<number>(1);
   const [datos, setUsers] = useState([]);
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -68,7 +68,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
         sort: 'asc'
       },
       {
-        label: 'Desarollador Asignado',
+        label: 'Desarrollador Asignado',
         field: 'desarollador',
         sort: 'asc'
       },

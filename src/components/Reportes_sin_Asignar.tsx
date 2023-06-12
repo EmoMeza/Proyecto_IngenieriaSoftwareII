@@ -29,7 +29,7 @@ type producto = {
 
 const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> = (props) => {
 
-  const [ id_product, setId_product] = useState(2);
+  const [ id_product, setId_product] = useState(1);
   const [datos, setDatos] = useState([]);
 
 
