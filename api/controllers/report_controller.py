@@ -126,6 +126,19 @@ def update_estado():
     db.session.commit()
     return jsonify({'message': 'Estado updated successfully.'}), 201
 
+@report_controller.route('/reports/update/prioridad', methods=['POST'])
+def update_prioridad():
+    id_report = request.args.get('id_report')
+    id_prioridad = request.args.get('id_prioridad')
+    if database.reporte.query.filter_by(id=id_report).first() == None:
+        return jsonify({'message': 'The id_report is not in the database'}), 400
+    if database.prioridad.query.filter_by(id=id_prioridad).first() == None:
+        return jsonify({'message': 'The id_estado is not in the database'}), 400
+    report = database.reporte.query.get_or_404(id_report)
+    report.id_prioridad = id_prioridad
+    db.session.commit()
+    return jsonify({'message': 'Estado updated successfully.'}), 201
+
     
 
 @report_controller.route('/reports/check/estados', methods=['GET'])
