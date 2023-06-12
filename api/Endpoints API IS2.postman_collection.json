@@ -529,19 +529,12 @@
 			"response": []
 		},
 		{
-			"name": "[3114 & 3096] Get all solicitudes de rasignacion of a product/project ademas de nombre y titulo",
+			"name": "[3093] Get the number of all the reportes from a dev and the number of those who are from a specific product",
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "",
-						"value": "",
-						"type": "text",
-						"disabled": true
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reasignacion/get/all/product/?id_product=2",
+					"raw": "http://127.0.0.1:5000/dev/all/report-product/?id_dev=3&id_product=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -551,16 +544,19 @@
 					],
 					"port": "5000",
 					"path": [
-						"reasignacion",
-						"get",
+						"dev",
 						"all",
-						"product",
+						"report-product",
 						""
 					],
 					"query": [
 						{
+							"key": "id_dev",
+							"value": "3"
+						},
+						{
 							"key": "id_product",
-							"value": "2"
+							"value": "1"
 						}
 					]
 				}
@@ -598,12 +594,12 @@
 			"response": []
 		},
 		{
-			"name": "[3093] Get the number of all the reportes from a dev and the number of those who are from a specific product",
+			"name": "[3082] Get all the reportes from the products asociated to the dev id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/dev/all/report-product/?id_dev=3&id_product=1",
+					"raw": "http://127.0.0.1:5000/dev/all-reportes-related-to-products/?id_dev=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -614,18 +610,13 @@
 					"port": "5000",
 					"path": [
 						"dev",
-						"all",
-						"report-product",
+						"all-reportes-related-to-products",
 						""
 					],
 					"query": [
 						{
 							"key": "id_dev",
-							"value": "3"
-						},
-						{
-							"key": "id_product",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -633,12 +624,19 @@
 			"response": []
 		},
 		{
-			"name": "[3082] Get all the reportes from the products asociated to the dev id",
+			"name": "[3114 & 3096] Get all solicitudes de rasignacion of a product/project ademas de nombre y titulo",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:5000/dev/all/report-product/?id_dev=3&id_product=1",
+					"raw": "http://127.0.0.1:5000/reasignacion/get/all/product/?id_product=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -648,19 +646,16 @@
 					],
 					"port": "5000",
 					"path": [
-						"dev",
+						"reasignacion",
+						"get",
 						"all",
-						"report-product",
+						"product",
 						""
 					],
 					"query": [
 						{
-							"key": "id_dev",
-							"value": "3"
-						},
-						{
 							"key": "id_product",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}

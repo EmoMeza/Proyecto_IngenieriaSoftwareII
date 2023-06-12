@@ -37,3 +37,12 @@ function CustomCard(props: { bug: Bug }) {
 }
 
 export default CustomCard;
+
+/*<div className="text-right">
+          <button
+            className="btn btn-dark btn-inspect"
+            onClick={handleInspectBug}
+          >
+            Inspeccionar bug
+          </button>
+        </div>*/
