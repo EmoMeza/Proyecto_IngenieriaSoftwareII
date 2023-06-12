@@ -17,7 +17,8 @@ def get_reportes_from_dev():
     #if the estado from reporte is equal to 3, then the reporte is closed and should not be shown
     reportes = [reporte for reporte in reportes if reporte.id_estado != 3]
     #create a json with the information of the reportes
-    reportes = [{'id': reporte.id, 'titulo': reporte.titulo, 'descripcion': reporte.descripcion, 'likes': reporte.likes, 'fecha': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto} for reporte in reportes]
+    
+    reportes = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reportes]
     #return the json
     return jsonify(reportes)
 
@@ -55,7 +56,7 @@ def get_all_reports_related_to_products():
     #get all the reports where the id_producto is in the id_productos list
     reportes = database.reporte.query.filter(database.reporte.id_producto.in_(id_productos)).all()
     #create a json with the information of the reportes
-    reportes_json = [{'id': reporte.id, 'titulo': reporte.titulo, 'descripcion': reporte.descripcion, 'likes': reporte.likes, 'fecha': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto} for reporte in reportes]
+    reportes_json = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reportes]
     #return the json
     return jsonify(reportes_json), 200
 

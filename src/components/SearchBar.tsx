@@ -9,7 +9,7 @@ import LikeButton from "./LikeButton";
 type reporte = {
   date: Date;
   description: string;
-  estado: string;
+  id_estado: number;
   id: number;
   id_producto: number;
   likes: number;
@@ -21,6 +21,15 @@ type producto = {
   id: number;
   id_encargado: number;
 }
+
+interface Estado {
+  id: number;
+  nombre: string;
+}
+
+type EstadoDictionary = Record<number, string>;
+
+
 
 const getData = () => {
   const [users, setUsers] = useState([]);
@@ -41,6 +50,28 @@ const getData = () => {
   return users;
 };
 
+const getEstados = (): EstadoDictionary => {
+  const [estados, setEstados] = useState<EstadoDictionary>({});
+
+  const fetchEstados = () => {
+    fetch("http://127.0.0.1:5000/reports/estados/all")
+      .then((response) => response.json())
+      .then((data: Estado[]) => {
+        const estadosDictionary: EstadoDictionary = {};
+        data.forEach((estado) => {
+          estadosDictionary[estado.id] = estado.nombre;
+        });
+        setEstados(estadosDictionary);
+      });
+  };
+
+  useEffect(() => {
+    fetchEstados();
+  }, []);
+
+  return estados;
+};
+
 const getFilteredItems = (query: string, items: reporte[]) => {
   query = query.toLowerCase();
   if (!query) {
@@ -51,6 +82,7 @@ const getFilteredItems = (query: string, items: reporte[]) => {
 
 export default function SearchBar() {
   const users = getData();
+  const estados = getEstados();
   const [id_product, setId_product] = useState(1);
   const [query, setQuery] = useState("");
   const filteredItems = getFilteredItems(query, users);
@@ -101,7 +133,7 @@ export default function SearchBar() {
         style={{ marginBottom: '20px' }}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <ReportTable Items={filteredItems} id_product={id_product} />
+      <ReportTable Items={filteredItems} id_product={id_product} estados = {estados} />
     </div>
   );
 }

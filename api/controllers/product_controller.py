@@ -15,9 +15,9 @@ def get_reports():
     #check all the reports where the id_product is the same as the id_product in the request
     reports = database.reporte.query.filter_by(id_producto=id_product).all()
     #now get all the reports where the estado is 0 
-    reports = [report for report in reports if report.id_estado == 0]
+    reports = [reporte for reporte in reports if reporte.id_estado == 0]
     #create a json with the information of the reports'
-    reports_json = [{'id': report.id, 'titulo': report.titulo, 'descripcion': report.descripcion, 'likes': report.likes, 'fecha': report.fecha, 'id_estado': report.id_estado, 'id_prioridad': report.id_prioridad, 'id_producto': report.id_producto} for report in reports]    
+    reports_json = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reports]    
     return jsonify(reports_json), 200    
 
 @product_controller.route('/products/all', methods=['GET'])

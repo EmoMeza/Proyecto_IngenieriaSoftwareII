@@ -88,6 +88,10 @@ def get_report():
         report_json['description'] = report.descripcion
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
+        report_json['id_producto'] = report.id_producto
+        report_json['id_prioridad'] = report.id_prioridad
+        report_json['id_estado'] = report.id_estado
+        report_json['id_developer'] = report.id_developer
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
@@ -103,11 +107,9 @@ def get_all_reports():
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
         report_json['id_producto'] = report.id_producto
-        report_id_estado = report.id_estado
-        if database.estado.query.filter_by(id=report_id_estado).first() == None:
-            return jsonify({'message': 'el estado no se encuentra en la base de datos'}), 400
-        estado = database.estado.query.filter_by(id=report_id_estado).first()
-        report_json['estado'] = estado.nombre
+        report_json['id_prioridad'] = report.id_prioridad
+        report_json['id_estado'] = report.id_estado
+        report_json['id_developer'] = report.id_developer
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
@@ -185,11 +187,9 @@ def get_all_reports_from_a_specific_product():
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
         report_json['id_producto'] = report.id_producto
-        report_id_estado = report.id_estado
-        if database.estado.query.filter_by(id=report_id_estado).first() == None:
-            return jsonify({'message': 'el estado no se encuentra en la base de datos'}), 400
-        estado = database.estado.query.filter_by(id=report_id_estado).first()
-        report_json['estado'] = estado.nombre
+        report_json['id_prioridad'] = report.id_prioridad
+        report_json['id_estado'] = report.id_estado
+        report_json['id_developer'] = report.id_developer
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
@@ -197,8 +197,6 @@ def get_all_reports_from_a_specific_product():
 def get_single_report():
     id_report = request.args.get('id_report')
     report = database.reporte.query.get_or_404(id_report)
-    report_id_estado = report.id_estado
-    estado = database.estado.query.filter_by(id=report_id_estado).first()
     report_json = {}
     report_json['id'] = report.id
     report_json['title'] = report.titulo
@@ -206,7 +204,8 @@ def get_single_report():
     report_json['likes'] = report.likes
     report_json['date'] = report.fecha
     report_json['id_producto'] = report.id_producto
-    report_json['estado'] = estado.nombre
+    report_json['id_prioridad'] = report.id_prioridad
+    report_json['id_estado'] = report.id_estado
     report_json['id_developer'] = report.id_developer
     return jsonify(report_json), 200
 

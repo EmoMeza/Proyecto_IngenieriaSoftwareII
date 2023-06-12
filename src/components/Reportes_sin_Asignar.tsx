@@ -55,9 +55,9 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
   
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.titulo}</Button>, 
+      titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.title}</Button>, 
       likes:reports.likes,
-      fecha:reports.fecha,
+      fecha:reports.date,
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>
     }
   });

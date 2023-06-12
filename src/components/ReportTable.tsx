@@ -9,26 +9,29 @@ import LikeButton from "./LikeButton";
 type reporte = {
   date: Date;
   description: string;
-  estado: string;
+  id_estado: number;
   id: number;
   id_producto: number;
   likes: number;
   title: string;
 }
 
+type EstadoDictionary = { [id: number]: string };
+
 interface ReportTableProps {
   Items: reporte[]
   id_product: number;
+  estados: EstadoDictionary;
 }
 
 
-export default function ReportTable({ Items, id_product }: ReportTableProps) {
+export default function ReportTable({ Items, id_product, estados}: ReportTableProps) {
   
   const reports = Items.map((report: reporte) => {
     return {
       titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
       fecha: report.date,
-      estado: report.estado.toUpperCase(),
+      estado: report.id_estado,
       likes: report.likes,
       like: <LikeButton id_bug={report.id} />,
       id_producto: report.id_producto
@@ -85,7 +88,7 @@ export default function ReportTable({ Items, id_product }: ReportTableProps) {
                       <tr key={index} data-custom="hidden data">
                         <td>{row.titulo}</td>
                         <td>{row.fecha}</td>
-                        <td>{row.estado}</td>
+                        <td>{estados[row.estado]}</td>
                         <td>{row.likes}</td>
                         <td>{row.like}</td>
                       </tr>

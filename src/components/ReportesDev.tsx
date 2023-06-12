@@ -72,10 +72,10 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
     const productoNombre = datosProducto[report.id_producto]?.nombre || ""; 
 
     return {
-      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.titulo}</Button>,
+      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
       estado: estadoNombre.toUpperCase(),
       likes: report.likes,
-      fecha: report.fecha,
+      fecha: report.date,
       producto: productoNombre,
       solicitud:<SolicitudButton id_report={report.id} id_dev={id_dev}></SolicitudButton>
     };
