@@ -55,7 +55,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
   
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.titulo}</Button>, 
+      titulo:<Button href={"/VerReporteDev/"+reports.id} variant="link">{reports.titulo}</Button>, 
       likes:reports.likes,
       fecha:reports.fecha,
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>
@@ -111,14 +111,15 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   return (
     <Container>
-          <Card>
+
+          <Card style={{ width: '40rem', height: '40rem'}}>
             <Card.Body>
 
             <Stack direction="horizontal" gap={3}>
                 <div >
                 <Card.Title className="text-black">
-                  Reportes sin Asignar
-                </Card.Title> 
+                  Reportes sin Asignar de :
+                </Card.Title>   
                 </div>
                 <div >
                   <select name="Producto" onChange={selectChange} >
@@ -131,9 +132,16 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
                 </div>
               </Stack>
 
+            <div style={{ width: '38rem', height: '36rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+              </div>
+
+    
               <MDBTable scrollY>
-                <MDBTableHead columns={data.columns} />
-                <MDBTableBody rows={data.rows} />
+                
               </MDBTable>
             </Card.Body>
           </Card>

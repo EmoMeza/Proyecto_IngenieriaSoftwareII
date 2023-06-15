@@ -103,12 +103,12 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
 
   return (
     <Container>
-          <Card>
+          <Card style={{ width: '40rem', height: '18rem'}}>
             <Card.Body>
               <Stack direction="horizontal" gap={3}>
                 <div >
                   <Card.Title className="text-black" >
-                    Solicitud de reasignacion
+                    Solicitud de reasignacion de :
                   </Card.Title>
                 </div>
                 <div >

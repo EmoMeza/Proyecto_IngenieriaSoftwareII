@@ -54,7 +54,7 @@ export default function SearchBar() {
   const filteredItems = getFilteredItems(query, users);
   const reports = filteredItems.map((report: reporte) => {
     return {
-      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
+      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
       fecha: report.date,
       estado: report.estado.toUpperCase(),
       likes: report.likes,
@@ -123,13 +123,16 @@ export default function SearchBar() {
   
   return (
     <div className="search-container">
-      <div style={{ marginBottom: '20px' }}>
-        <Row>
+      <Col>
+      <h1 className="titulo">
+        Productos
+      </h1>
+      <div style={{ marginBottom: '25px' }}>
+        <Row  md={4}>
           {products.map((product) => (
-            <Col  >
-              <Card > 
-                
-                <Card.Body>
+            <Col >
+              <Card >
+                <Card.Body className="body-card">
                   <Button variant="primary" size="lg" onClick={() => {
                     setId_product(product.id)
                 }}>
@@ -142,22 +145,25 @@ export default function SearchBar() {
         </Row>
       
       </div>
-      <input
-        id="custom-search-bar"
-        className="form-control form-control-s"
-        type="search"
-        aria-label="search"
-        placeholder="Busca tu bug"
-        style={{ marginBottom: '20px' }}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+      <Row >
+        <input
+          id="custom-search-bar"
+          className="form-control form-control-s"
+          type="search"
+          aria-label="search"
+          placeholder="Busca tu bug"
+          style={{ marginBottom: '20px'}}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </Row>
+     
       <ul>
         <Container className="table-search-container">
           <Card>
             <Card.Body>
-              <Card.Title className="text-black">Reportes</Card.Title>
-              <div style={{ maxHeight: '55vh', overflowY: 'scroll' }}>
-                <MDBTable>
+              <Card.Title className="text-black">Reportes de {products.at(id_product-1)?.nombre}</Card.Title> 
+              <div style={{ width: '78rem', height: '30rem', overflowY: 'scroll' }}>
+                <MDBTable className="tabla">
                   <MDBTableHead columns={data.columns} />
                   <MDBTableBody>
                     {data.rows.filter((row) => row.id_producto === id_product).map((row, index) => (
@@ -176,6 +182,9 @@ export default function SearchBar() {
           </Card>
         </Container>
       </ul>
+      </Col>
+      
+      
     </div>
   );
 }
