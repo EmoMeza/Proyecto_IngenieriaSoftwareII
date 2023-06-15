@@ -6,6 +6,7 @@ import App from "./routes/App";
 import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
 import VerReporteDev from "./routes/VerReporteDev";
+import VerReporteEnv from "./routes/VerReporteEnc";
 import Asignacion from "./routes/Asignacion";
 import Dev from "./routes/Dev"
 import ListaDesarrolladores from "./routes/ListaDesarrolladores"
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/VerReporteDev/:id",
     element: <VerReporteDev />,
+  },
+  {
+    path: "/VerReporteEnv/:id",
+    element: <VerReporteEnv />,
   },
   {
     path: "/Asignacion",

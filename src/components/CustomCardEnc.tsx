@@ -19,8 +19,7 @@ function CustomCardEnv(props: { bug: Bug }) {
   const handleBugStateChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newBugState = e.target.value;
     setBugState(newBugState);
-    const idEstado = mapBugStateToId(newBugState);
-    const url = `http://127.0.0.1:5000/reports/update/estado?id_estado=${idEstado}&id_report=${props.bug.id}`;
+    const url = `http://127.0.0.1:5000/reports/update/estado?id_prioridad=${parseInt(e.target.value,10)}&id_report=${props.bug.id}`;
     try {
       const response = await fetch(url, { method: "POST" });
       if (response.ok) {
@@ -32,18 +31,6 @@ function CustomCardEnv(props: { bug: Bug }) {
     }
   };
 
-  const mapBugStateToId = (bugState: string): number => {
-    switch (bugState) {
-      case "pendiente":
-        return 1;
-      case "en proceso":
-        return 2;
-      case "cerrado":
-        return 3;
-      default:
-        return 0;
-    }
-  };
 
   return (
     <div className="scroll-cards__item container-xl" aria-label="Wie - 1">
@@ -52,7 +39,20 @@ function CustomCardEnv(props: { bug: Bug }) {
         <div className="bug-info-container">
           <div className="bug-state">
             
-            
+            <select name="Producto" onChange={handleBugStateChange} >
+                    
+              <option key={1} value={1}>
+                Alta
+              </option>
+              <option key={2} value={2}>
+                Media
+              </option>
+              <option key={3} value={3}>
+                Baja
+              </option>
+              
+                    
+              </select>
             
           </div>
           <LikeButton bug={props.bug}></LikeButton>
