@@ -161,10 +161,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
                 </MDBTable>
               </div>
 
-    
-              <MDBTable scrollY>
-                
-              </MDBTable>
+  
             </Card.Body>
           </Card>
     </Container>

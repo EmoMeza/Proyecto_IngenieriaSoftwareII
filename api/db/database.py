@@ -80,7 +80,7 @@ class reporte(db.Model):
     descripcion = db.Column('descripcion', db.String(10000))
     id_developer = db.Column('id_developer', db.Integer, db.ForeignKey('desarrollador.id'))
     id_estado = db.Column('id_estado', db.Integer, db.ForeignKey('estado.id'), default=0)
-    id_prioridad = db.Column('id_prioridad', db.Integer, db.ForeignKey('prioridad.id'))
+    id_prioridad = db.Column('id_prioridad', db.Integer, db.ForeignKey('prioridad.id'), default=0)
     likes = db.Column('likes', db.Integer, default=0)
     id_producto = db.Column('id_producto', db.Integer, db.ForeignKey('producto.id'))
     fecha = db.Column('fecha', db.DateTime, default=db.func.current_timestamp())

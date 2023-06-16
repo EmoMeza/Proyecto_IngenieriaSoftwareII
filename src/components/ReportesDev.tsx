@@ -26,7 +26,6 @@ const getData = () => {
   const [datosReporte, setDatosReporte] = useState([]);
   const [datosProducto, setDatosProductos] = useState([]);
   const [datosEstado, setDatosEstados] = useState([]);
-  const [actualizar, setActualizar] = useState(1);
 
   const fetchUserData = async () => {
     try {
@@ -53,7 +52,7 @@ const getData = () => {
     return () => {
       fetchUserData();
     };
-  }, [actualizar]);
+  }, []);
 
   return [datosReporte, datosProducto, datosEstado];
 };
