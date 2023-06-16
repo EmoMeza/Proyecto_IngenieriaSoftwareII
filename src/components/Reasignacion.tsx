@@ -55,6 +55,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
     return {
       titulo:<Button href={"/VerReporte/"+reports.id_report}  variant="link">{reports.report_title}</Button>, 
       desarollador: reports.developer_name,
+      
       asignacion:<ReasignacionButton id_producto={id_product} id_report ={reports.id_report} id_developer={reports.id_developer} developer_name={reports.developer_name} date={reports.date} motivo={reports.motivo} ></ReasignacionButton>
     }
   });
@@ -70,6 +71,11 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
       {
         label: 'Desarrollador Asignado',
         field: 'desarollador',
+        sort: 'asc'
+      },
+      {
+        label: 'Prioridad',
+        field: 'prioridad',
         sort: 'asc'
       },
       {

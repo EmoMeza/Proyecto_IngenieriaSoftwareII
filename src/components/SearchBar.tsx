@@ -21,6 +21,13 @@ type producto = {
   id_encargado: number;
 }
 
+interface Estado {
+  id: number;
+  nombre: string;
+}
+
+type EstadoDictionary = Record<number, string>;
+
 const getData = () => {
   const [users, setUsers] = useState([]);
 

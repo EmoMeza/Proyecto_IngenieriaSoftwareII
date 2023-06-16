@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {Stack,Card,Container,Button} from 'react-bootstrap';
+import {Stack,Card,Container,Button, Dropdown} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
+import DropdownPrioridad from './DropdownPrioridad';
 
 interface IReportes_sin_AsignarProps {
     
@@ -53,12 +54,27 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
     return fetchData();
   }, [id_product]);
   
+
+  const nombreP = (id_prioridad:number) => {
+    switch (id_prioridad) {
+      case 1:
+        return "Alta";
+      case 2:
+        return "Media";
+      case 3:
+        return "Baja";
+      default:
+        return "Sin Prioridad";
+    }
+  }
+
   const reports = datos.map((reports:reporte) => {
     return {
       titulo:<Button href={"/VerReporteEnv/"+reports.id} variant="link">{reports.titulo}</Button>, 
       likes:reports.likes,
-      fecha:reports.fecha,
-      asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>
+      prioridad:nombreP(reports.id_prioridad),
+      asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
+      prioridad_a: <DropdownPrioridad id_report={reports.id}></DropdownPrioridad>
     }
   });
 
@@ -76,13 +92,19 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
         sort: 'asc'
       },
       {
-        label: 'Fecha',
-        field: 'fecha',
+        label: 'Prioridad',
+        field: 'prioridad',
         sort: 'asc'
       },
       {
         label: 'Asignacion',
         field: 'asignacion',
+        sort: 'asc'
+        }
+        ,
+      {
+        label: 'Asignacion de ',
+        field: 'prioridad_a',
         sort: 'asc'
         }
     ],
@@ -112,7 +134,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
   return (
     <Container>
 
-          <Card style={{ width: '40rem', height: '40rem'}}>
+          <Card style={{ width: '47rem', height: '40rem'}}>
             <Card.Body>
 
             <Stack direction="horizontal" gap={3}>
@@ -132,7 +154,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
                 </div>
               </Stack>
 
-            <div style={{ width: '38rem', height: '36rem', overflowY: 'scroll' }}>
+            <div style={{ width: '45rem', height: '36rem', overflowY: 'scroll' }}>
                 <MDBTable >
                   <MDBTableHead  columns={data.columns} />
                   <MDBTableBody rows={data.rows } />
