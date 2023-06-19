@@ -20,6 +20,17 @@ def get_reports():
     reports_json = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reports]    
     return jsonify(reports_json), 200    
 
+@product_controller.route('/products/get/all_reports', methods=['GET'])
+def get_all_reports():
+    id_product = request.args.get('id_product')
+    if database.producto.query.filter_by(id=id_product).first() == None:
+        return jsonify({'message': 'The id_product is not in the database'}), 400
+    #check all the reports where the id_product is the same as the id_product in the request
+    reports = database.reporte.query.filter_by(id_producto=id_product).all()
+    #create a json with the information of the reports'
+    reports_json = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reports]    
+    return jsonify(reports_json), 200    
+
 @product_controller.route('/products/all', methods=['GET'])
 def get_all_products():
     products = database.producto.query.all()
