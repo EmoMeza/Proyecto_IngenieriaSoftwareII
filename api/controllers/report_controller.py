@@ -222,6 +222,18 @@ def get_single_report():
     report_json['id_developer'] = report.id_developer
     return jsonify(report_json), 200
 
+@report_controller.route('/reports/prioridad/all', methods=['GET'])
+def all_prioridad():
+    #return all the estados
+    prioridades = database.prioridad.query.all()
+    prioridades_json = []
+    for prioridad in prioridades:
+        prioridad_json = {}
+        prioridad_json['id'] = prioridad.id
+        prioridad_json['nombre'] = prioridad.nombre
+        prioridades_json.append(prioridad_json)
+    return jsonify(prioridades_json), 200
+
 def add_desarrollador_producto(id_desarrollador, id_producto):
     desarrollador_producto = database.desarrollador_producto(id_desarrollador, id_producto)
     db.session.add(desarrollador_producto)
