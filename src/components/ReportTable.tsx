@@ -76,7 +76,7 @@ export default function ReportTable({ Items, id_product, estados}: ReportTablePr
 
   return (
       <ul>
-        <Container className="table-search-container">
+        <Container className="search-container">
           <Card>
             <Card.Body>
               <Card.Title className="text-black">Reportes</Card.Title>

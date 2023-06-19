@@ -59,7 +59,7 @@ function Form(): JSX.Element {
   };
 
 
-
+//PROBLEMA VALUE ESTA HARDCODEADO A 1 CUANDO DEBERIA SER EL VALOR DEL ELEMENTO QUE APARECE EN EL DROPDOWN
   return (
     <div style={{ display: "flex" }}>
       <br />
@@ -71,7 +71,7 @@ function Form(): JSX.Element {
         </div>
         <div className="form-product">
       <label>Producto</label>
-      <select {...register("id_product")}>
+      <select {...register("id_product", { value: 1})}>
         {products.map((product) => (
           <option key={product.id} value={product.id}>
             {product.nombre}

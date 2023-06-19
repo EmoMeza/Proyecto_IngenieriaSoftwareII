@@ -3,8 +3,9 @@ import { Card, Container } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import ListaDevButton from './ListaDevButton';
+import "./ReportTable.css"
 
-interface IListaDevProps {}
+interface IListaDevProps { }
 
 type Dev = {
   id: number;
@@ -144,7 +145,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
   };
 
   return (
-    <Container>
+    <Container className='search-container'>
       <Card>
         <Card.Body>
           <Card.Title className="text-black">Desarrolladores</Card.Title>
@@ -157,10 +158,13 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
               ))}
             </select>
           </div>
-          <MDBTable scrollY>
-            <MDBTableHead columns={data.columns} />
-            <MDBTableBody rows={data.rows} />
-          </MDBTable>
+          //hay que ajustar maxHeight para un valor decente
+          <div style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
+            <MDBTable>
+              <MDBTableHead columns={data.columns} />
+              <MDBTableBody rows={data.rows} />
+            </MDBTable>
+          </div>
         </Card.Body>
       </Card>
     </Container>

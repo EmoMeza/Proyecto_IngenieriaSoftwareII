@@ -4,6 +4,7 @@ import Bug from "../components/Bug";
 import CustomCard from "../components/CustomCard";
 import { Card, Container, Button } from 'react-bootstrap';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import "./ReportTable.css"
 
 type reporte = {
   descripcion: string;
@@ -86,20 +87,20 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
     rows: items
   };
   return (
-    <ul >
+    <Container className="search-container">
       <Card className="table-bugs-productos">
         <Card.Body>
           <Card.Title className="text-black">
             Reportes de {props.nombre_producto}
           </Card.Title>
           <div style={{ maxHeight: '55vh', overflowY: 'scroll' }}>
-            <MDBTable className="table table-xl">
+            <MDBTable>
               <MDBTableHead columns={data.columns} />
               <MDBTableBody rows={data.rows} />
             </MDBTable>
           </div>
         </Card.Body>
       </Card>
-    </ul>
+    </Container>
   );
 }

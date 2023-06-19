@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Header from "../components/Header";
 import "./App.css"
+import "../components/ReportTable.css"
 import ListaReportesProductoDev from "../components/ListaReportesProductoDev";
 
 
