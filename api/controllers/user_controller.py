@@ -22,6 +22,23 @@ def get_reportes_from_dev():
     #return the json
     return jsonify(reportes)
 
+@user_controller.route('/user/liked/', methods=['GET'])
+def get_likes_from_user():
+    id_user = request.args.get('id_user')
+    developer = database.desarrollador.query.filter_by(id=id_user).first()
+    if developer is None:
+        return jsonify({'error': 'No existe el usuario'})
+    #get all the where in the table reporte the id_dev is the same as the id_dev in the request
+    likes = database.like.query.filter_by(id_desarrollador=id_user).all()
+    reportes = []
+    for like in likes:
+        id_reporte = like.id_reporte
+        report = database.reporte.query.get_or_404(id_reporte)
+        reportes.append(report)
+    reportes = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reportes]
+    #return the json
+    return jsonify(reportes)
+
 @user_controller.route('/dev/all/report-product/', methods=['GET'])
 def get_all_reports_and_products():
     id_dev = request.args.get('id_dev')
