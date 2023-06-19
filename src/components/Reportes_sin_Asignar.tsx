@@ -11,7 +11,7 @@ interface IReportes_sin_AsignarProps {
 
 type reporte = {
   id: number;
-  titulo:string;
+  title:string;
   descripcion:string;
   likes:number;
   fecha:string;
@@ -52,7 +52,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   useEffect(() => {
     return fetchData();
-  }, [id_product]);
+  }, [id_product,datos]);
   
 
   const nombreP = (id_prioridad:number) => {
@@ -70,12 +70,12 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href={"/VerReporteEnv/"+reports.id} variant="link">{reports.titulo}</Button>, 
+      titulo:<Button  href={"/VerReporteEnv/"+reports.id} variant="link">{reports.title}</Button>, 
       likes:reports.likes,
       prioridad:nombreP(reports.id_prioridad),
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
       prioridad_a: <DropdownPrioridad id_report={reports.id}></DropdownPrioridad>
-    }
+    } 
   });
 
   const data = {

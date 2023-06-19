@@ -63,7 +63,7 @@ export default function SearchBar() {
     return {
       titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
       fecha: report.date,
-      estado: report.estado.toUpperCase(),
+      estado: report.estado,
       likes: report.likes,
       like: <LikeButton id={report.id} />,
       id_producto: report.id_producto

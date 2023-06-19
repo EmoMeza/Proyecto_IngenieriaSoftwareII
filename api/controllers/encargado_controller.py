@@ -49,7 +49,9 @@ def get_all_reasignation_petitions_from_a_specific_product():
             petition_json['date'] = petition.fecha
             petition_json['motivo'] = petition.motivo
             petition_json['developer_name'] = database.desarrollador.query.filter_by(id=petition.id_dev).first().nombre
-            petition_json['report_title'] = database.reporte.query.filter_by(id=petition.id_reporte).first().titulo
+            report = database.reporte.query.filter_by(id=petition.id_reporte).first()
+            petition_json['report_title'] = report.titulo
+            petition_json['id_prioridad'] = report.id_prioridad
             reasignacion_jsons.append(petition_json)
     return jsonify(reasignacion_jsons), 200
 

@@ -84,7 +84,7 @@
 			"response": []
 		},
 		{
-			"name": "Add Like count to Reporte",
+			"name": "Add Like to Reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -98,7 +98,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/like?id_report=1",
+					"raw": "http://127.0.0.1:5000/reports/like?id_report=4&id_user=6",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -114,7 +114,11 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "1"
+							"value": "4"
+						},
+						{
+							"key": "id_user",
+							"value": "6"
 						}
 					]
 				}
@@ -264,6 +268,40 @@
 			"response": []
 		},
 		{
+			"name": "Actualizar nivel de prioridad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reports/update/prioridad?id_report=4&id_prioridad=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reports",
+						"update",
+						"prioridad"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "4"
+						},
+						{
+							"key": "id_prioridad",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get \"x\" Amount of Reportes in \"y\" Product",
 			"request": {
 				"method": "GET",
@@ -302,7 +340,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/comments/get?id_report=1",
+					"raw": "http://127.0.0.1:5000/comments/get?id_report=4",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -318,7 +356,7 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "1"
+							"value": "4"
 						}
 					]
 				}
@@ -691,6 +729,22 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all prioridades",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get all liked reports",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		},

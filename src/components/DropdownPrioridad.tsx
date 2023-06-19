@@ -29,7 +29,7 @@ const DropdownPrioridad: React.FC<DropdownPrioridadProps> = ({id_report}) => {
       size="md"
       id="dropdown-button-dark"
       variant="success" 
-      title={"Prioridada a asignar"}
+      title={"Prioridad"}
       >
         <Dropdown.Item onClick={() => handleDropdownItemClick(1,id_report)}>
           Alta
