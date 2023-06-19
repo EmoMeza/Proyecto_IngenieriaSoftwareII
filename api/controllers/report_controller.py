@@ -25,7 +25,12 @@ def add_comment():
 def add_like():
 
     id_report = request.args.get('id_report')
+    id_user = request.args.get('id_user')
     report = database.reporte.query.get_or_404(id_report)
+    user = database.desarrollador.query.get_or_404(id_user)
+    if database.like.query.filter_by(id_desarrollador=id_user, id_reporte=id_report).first() != None:
+        return jsonify({'message': 'The like is already in the database'}), 400
+    add_like(id_user, id_report)
     report.add_likes(1)
     db.session.commit()
     return jsonify({'message': 'like added successfully.'}), 201
@@ -257,4 +262,9 @@ def add_reporte(titulo,descripcion,id_producto):
 def add_comentario(descripcion, id_reporte):
     comentario = database.comentario(descripcion, id_reporte)
     db.session.add(comentario)
+    db.session.commit()
+    
+def add_like(id_user, id_reporte):
+    like = database.like(id_user,id_reporte)
+    db.session.add(like)
     db.session.commit()
