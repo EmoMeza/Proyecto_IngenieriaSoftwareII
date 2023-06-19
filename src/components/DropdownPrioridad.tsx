@@ -9,9 +9,8 @@ type DropdownPrioridadProps = {
  id_report:number
 };
 const DropdownPrioridad: React.FC<DropdownPrioridadProps> = ({id_report}) => {
-  
   const handleDropdownItemClick = async (id_prioridad:number,id_report:number) => {
-    const url = `http://127.0.0.1:5000/reports/update/estado?id_prioridad=${id_prioridad}&id_report=${id_report}`;
+    const url = `http://127.0.0.1:5000/reports/update/prioridad?id_report=${id_report}&id_prioridad=${id_prioridad}`;
     try {
       const response = await fetch(url, { method: "POST" });
       if (response.ok) {
@@ -34,10 +33,10 @@ const DropdownPrioridad: React.FC<DropdownPrioridadProps> = ({id_report}) => {
         <Dropdown.Item onClick={() => handleDropdownItemClick(1,id_report)}>
           Alta
         </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleDropdownItemClick(1,id_report)}>
+        <Dropdown.Item onClick={() => handleDropdownItemClick(2,id_report)}>
           Media
         </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleDropdownItemClick(1,id_report)}>
+        <Dropdown.Item onClick={() => handleDropdownItemClick(3,id_report)}>
           Baja
         </Dropdown.Item>
 

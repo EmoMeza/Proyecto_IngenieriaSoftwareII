@@ -32,7 +32,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const [ id_product, setId_product] = useState(1);
   const [datos, setDatos] = useState([]);
-
+  // const [data, setData] = useState({});
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setId_product(parseInt(event.target.value,10));
@@ -52,7 +52,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   useEffect(() => {
     return fetchData();
-  }, [id_product,datos]);
+  }, [id_product]);
   
 
   const nombreP = (id_prioridad:number) => {
@@ -74,11 +74,11 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
       likes:reports.likes,
       prioridad:nombreP(reports.id_prioridad),
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
-      prioridad_a: <DropdownPrioridad id_report={reports.id}></DropdownPrioridad>
+      prioridad_a: <DropdownPrioridad  id_report={reports.id}></DropdownPrioridad>
     } 
   });
 
-  const data = {
+  const data={
 
     columns: [
       {

@@ -17,7 +17,7 @@ type FormValues = {
 
 type reporte = {
   id: number;
-  titulo:string;
+  title:string;
   descripcion:string;
   likes:number;
   fecha:string;
@@ -85,7 +85,7 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
     .filter((report :reporte) => report.id_producto == (id_producto))
     .map((report: reporte) => {
       return {
-        titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.titulo}</Button>,
+        titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
         likes: report.likes,
         fecha: report.fecha,
         producto: report.id_producto,
