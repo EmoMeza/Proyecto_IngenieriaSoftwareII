@@ -25,7 +25,12 @@ def add_comment():
 def add_like():
 
     id_report = request.args.get('id_report')
+    id_user = request.args.get('id_user')
     report = database.reporte.query.get_or_404(id_report)
+    user = database.desarrollador.query.get_or_404(id_user)
+    if database.like.query.filter_by(id_desarrollador=id_user, id_reporte=id_report).first() != None:
+        return jsonify({'message': 'The like is already in the database'}), 400
+    add_like(id_user, id_report)
     report.add_likes(1)
     db.session.commit()
     return jsonify({'message': 'like added successfully.'}), 201
@@ -222,6 +227,18 @@ def get_single_report():
     report_json['id_developer'] = report.id_developer
     return jsonify(report_json), 200
 
+@report_controller.route('/reports/prioridad/all', methods=['GET'])
+def all_prioridad():
+    #return all the estados
+    prioridades = database.prioridad.query.all()
+    prioridades_json = []
+    for prioridad in prioridades:
+        prioridad_json = {}
+        prioridad_json['id'] = prioridad.id
+        prioridad_json['nombre'] = prioridad.nombre
+        prioridades_json.append(prioridad_json)
+    return jsonify(prioridades_json), 200
+
 def add_desarrollador_producto(id_desarrollador, id_producto):
     desarrollador_producto = database.desarrollador_producto(id_desarrollador, id_producto)
     db.session.add(desarrollador_producto)
@@ -245,4 +262,9 @@ def add_reporte(titulo,descripcion,id_producto):
 def add_comentario(descripcion, id_reporte):
     comentario = database.comentario(descripcion, id_reporte)
     db.session.add(comentario)
+    db.session.commit()
+    
+def add_like(id_user, id_reporte):
+    like = database.like(id_user,id_reporte)
+    db.session.add(like)
     db.session.commit()

@@ -11,6 +11,7 @@ import Dev from "./routes/Dev"
 import ListaDesarrolladores from "./routes/ListaDesarrolladores"
 import MenuReasignacion from "./routes/MenuReasignacion";
 import ListaRPDev from "./routes/ListaRPDev";
+import { Container } from "react-bootstrap";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/ListaRPDev",
-    element: <ListaRPDev/>,
+    element: <Container className="search-container"><ListaRPDev/></Container>,
   }
 ]);
 

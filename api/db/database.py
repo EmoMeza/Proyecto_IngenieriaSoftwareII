@@ -135,3 +135,11 @@ class solicitud_reasignacion(db.Model):
         self.id_reporte = id_report
         self.id_dev=id_developer
         self.motivo = motivo
+        
+class like(db.Model):
+    __tablename__ = 'like'
+    id_desarrollador = db.Column('id_desarrollador', db.Integer, db.ForeignKey('desarrollador.id'), primary_key=True)
+    id_reporte = db.Column('id_reporte', db.Integer, db.ForeignKey('reporte.id'), primary_key=True)
+    def __init__(self, id_desarrollador,id_reporte):
+        self.id_desarrollador = id_desarrollador
+        self.id_reporte = id_reporte
