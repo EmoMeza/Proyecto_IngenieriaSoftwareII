@@ -61,7 +61,7 @@ export default function SearchBar() {
   const filteredItems = getFilteredItems(query, users);
   const reports = filteredItems.map((report: reporte) => {
     return {
-      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
+      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
       fecha: report.date,
       estado: report.estado,
       likes: report.likes,

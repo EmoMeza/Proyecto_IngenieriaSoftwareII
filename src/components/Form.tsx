@@ -39,13 +39,13 @@ function Form(): JSX.Element {
  
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const id_producto = data.id_product;
-    const url = "http://127.0.0.1:5000/reports/add?id_product=" + id_producto;
+    const url = "http://127.0.0.1:5000/reports/add?id_product=" +id_producto;
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({title:data.title,description:data.description}),
     });
 
     if (!response.ok) {
