@@ -7,6 +7,8 @@ import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
 import VerReporteDev from "./routes/VerReporteDev";
 import Asignacion from "./routes/Asignacion";
+import MisLikes from "./routes/MisLikes";
+import MisReportes from "./routes/MisReportes";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
   {
     path: "/Asignacion",
     element: <Asignacion />,
+  },
+  {
+    path: "/MisLikes",
+    element: <MisLikes />,
+  },
+  {
+    path: "/MisReportes",
+    element: <MisReportes />,
   }
 ]);
 
