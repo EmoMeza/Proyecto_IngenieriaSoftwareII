@@ -84,10 +84,12 @@ class reporte(db.Model):
     likes = db.Column('likes', db.Integer, default=0)
     id_producto = db.Column('id_producto', db.Integer, db.ForeignKey('producto.id'))
     fecha = db.Column('fecha', db.DateTime, default=db.func.current_timestamp())
-    def __init__(self, titulo, descripcion, id_producto):
+    id_cliente = db.Column('id_cliente', db.Integer, db.ForeignKey('desarrollador.id'))
+    def __init__(self, titulo, descripcion, id_producto, id_cliente):
         self.titulo = titulo
         self.descripcion = descripcion
         self.id_producto = id_producto
+        self.id_cliente = id_cliente
     def add_estado(self, id_estado):
         self.id_estado = id_estado
     def add_prioridad(self, id_prioridad):
