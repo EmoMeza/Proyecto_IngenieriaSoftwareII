@@ -3,6 +3,7 @@ import { Card, Container, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 interface IMisReportesProps { }
 
@@ -22,7 +23,7 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
     const [reports, setReports] = useState<reporte[]>([]);
 
     const fetchData = () => {
-        fetch(`http://127.0.0.1:5000/products/get/my_reports`)
+        fetch(`http://127.0.0.1:5000/user/reports/?id_user=2`)
             .then((response) => response.json())
             .then((data) => {
                 setReports(data);
@@ -75,14 +76,19 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
     };
 
     return (
-        <Container>
+        <Container className="search-container">
+            <Header />
             <Card>
                 <Card.Body>
-                    <Card.Title className="text-black">Mis Reportes</Card.Title>
-                    <MDBTable scrollY>
-                        <MDBTableHead columns={data.columns} />
-                        <MDBTableBody rows={data.rows} />
-                    </MDBTable>
+                    <Card.Title className="text-black">
+                        Mis Reportes
+                    </Card.Title>
+                    <div style={{ maxHeight: '33vh', overflowY: 'scroll' }}>
+                        <MDBTable>
+                            <MDBTableHead columns={data.columns} />
+                            <MDBTableBody rows={data.rows} />
+                        </MDBTable>
+                    </div>
                 </Card.Body>
             </Card>
         </Container>

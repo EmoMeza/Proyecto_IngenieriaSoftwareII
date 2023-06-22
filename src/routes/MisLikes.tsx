@@ -3,15 +3,16 @@ import { Card, Container, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 interface IMislikesProps { }
 
 type reporte = {
     id: number;
-    titulo: string;
-    descripcion: string;
+    title: string;
+    description: string;
     likes: number;
-    fecha: string;
+    date: string;
     id_estado: number;
     id_prioridad: number;
     id_producto: number;
@@ -22,7 +23,7 @@ const Mislikes: React.FunctionComponent<IMislikesProps> = (props) => {
     const [reports, setReports] = useState<reporte[]>([]);
 
     const fetchData = () => {
-        fetch(`http://127.0.0.1:5000/products/get/liked_reports`)
+        fetch(`http://127.0.0.1:5000/user/liked/?id_user=2`)
             .then((response) => response.json())
             .then((data) => {
                 setReports(data);
@@ -46,11 +47,11 @@ const Mislikes: React.FunctionComponent<IMislikesProps> = (props) => {
     const rows = reports.map((report: reporte) => ({
         titulo: (
             <Button variant="link" onClick={() => handleInspectBug(report.id)}>
-                {report.titulo}
+                {report.title}
             </Button>
         ),
         likes: report.likes,
-        fecha: report.fecha
+        fecha: report.date
     }));
 
     const data = {
@@ -75,14 +76,19 @@ const Mislikes: React.FunctionComponent<IMislikesProps> = (props) => {
     };
 
     return (
-        <Container>
+        <Container className="search-container">
+            <Header />
             <Card>
                 <Card.Body>
-                    <Card.Title className="text-black">Mis Likes</Card.Title>
-                    <MDBTable scrollY>
-                        <MDBTableHead columns={data.columns} />
-                        <MDBTableBody rows={data.rows} />
-                    </MDBTable>
+                    <Card.Title className="text-black">
+                        Mis Likes
+                    </Card.Title>
+                    <div style={{ maxHeight: '33vh', overflowY: 'scroll' }}>
+                        <MDBTable>
+                            <MDBTableHead columns={data.columns} />
+                            <MDBTableBody rows={data.rows} />
+                        </MDBTable>
+                    </div>
                 </Card.Body>
             </Card>
         </Container>
