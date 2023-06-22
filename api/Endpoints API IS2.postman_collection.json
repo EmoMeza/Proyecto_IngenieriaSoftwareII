@@ -84,7 +84,7 @@
 			"response": []
 		},
 		{
-			"name": "Add Like count to Reporte",
+			"name": "Add Like to Reporte",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -98,7 +98,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/like?id_report=1",
+					"raw": "http://127.0.0.1:5000/reports/like?id_report=4&id_user=6",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -114,7 +114,11 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "1"
+							"value": "4"
+						},
+						{
+							"key": "id_user",
+							"value": "6"
 						}
 					]
 				}
@@ -264,6 +268,40 @@
 			"response": []
 		},
 		{
+			"name": "Actualizar nivel de prioridad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reports/update/prioridad?id_report=4&id_prioridad=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reports",
+						"update",
+						"prioridad"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "4"
+						},
+						{
+							"key": "id_prioridad",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get \"x\" Amount of Reportes in \"y\" Product",
 			"request": {
 				"method": "GET",
@@ -302,7 +340,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/comments/get?id_report=1",
+					"raw": "http://127.0.0.1:5000/comments/get?id_report=4",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -318,7 +356,7 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "1"
+							"value": "4"
 						}
 					]
 				}
@@ -529,6 +567,101 @@
 			"response": []
 		},
 		{
+			"name": "[3093] Get the number of all the reportes from a dev and the number of those who are from a specific product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dev/all/report-product/?id_dev=3&id_product=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dev",
+						"all",
+						"report-product",
+						""
+					],
+					"query": [
+						{
+							"key": "id_dev",
+							"value": "3"
+						},
+						{
+							"key": "id_product",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[3094] Get all reportes from a specific product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"products",
+						"get",
+						"reports"
+					],
+					"query": [
+						{
+							"key": "id_product",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[3082] Get all the reportes from the products asociated to the dev id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/dev/all-reportes-related-to-products/?id_dev=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"dev",
+						"all-reportes-related-to-products",
+						""
+					],
+					"query": [
+						{
+							"key": "id_dev",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "[3114 & 3096] Get all solicitudes de rasignacion of a product/project ademas de nombre y titulo",
 			"request": {
 				"method": "GET",
@@ -568,106 +701,6 @@
 			"response": []
 		},
 		{
-			"name": "[3094] Get all reportes from a specific product",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=2",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"products",
-						"get",
-						"reports"
-					],
-					"query": [
-						{
-							"key": "id_product",
-							"value": "2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "[3093] Get the number of all the reportes from a dev and the number of those who are from a specific product",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:5000/dev/all/report-product/?id_dev=3&id_product=1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"dev",
-						"all",
-						"report-product",
-						""
-					],
-					"query": [
-						{
-							"key": "id_dev",
-							"value": "3"
-						},
-						{
-							"key": "id_product",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "[3082] Get all the reportes from the products asociated to the dev id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:5000/dev/all/report-product/?id_dev=3&id_product=1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"dev",
-						"all",
-						"report-product",
-						""
-					],
-					"query": [
-						{
-							"key": "id_dev",
-							"value": "3"
-						},
-						{
-							"key": "id_product",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "[3097] Get motivo de reasignacion from a report",
 			"request": {
 				"method": "GET",
@@ -696,6 +729,22 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all prioridades",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get all liked reports",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		},

@@ -80,7 +80,7 @@ class reporte(db.Model):
     descripcion = db.Column('descripcion', db.String(10000))
     id_developer = db.Column('id_developer', db.Integer, db.ForeignKey('desarrollador.id'))
     id_estado = db.Column('id_estado', db.Integer, db.ForeignKey('estado.id'), default=0)
-    id_prioridad = db.Column('id_prioridad', db.Integer, db.ForeignKey('prioridad.id'))
+    id_prioridad = db.Column('id_prioridad', db.Integer, db.ForeignKey('prioridad.id'), default=0)
     likes = db.Column('likes', db.Integer, default=0)
     id_producto = db.Column('id_producto', db.Integer, db.ForeignKey('producto.id'))
     fecha = db.Column('fecha', db.DateTime, default=db.func.current_timestamp())
@@ -135,3 +135,11 @@ class solicitud_reasignacion(db.Model):
         self.id_reporte = id_report
         self.id_dev=id_developer
         self.motivo = motivo
+        
+class like(db.Model):
+    __tablename__ = 'like'
+    id_desarrollador = db.Column('id_desarrollador', db.Integer, db.ForeignKey('desarrollador.id'), primary_key=True)
+    id_reporte = db.Column('id_reporte', db.Integer, db.ForeignKey('reporte.id'), primary_key=True)
+    def __init__(self, id_desarrollador,id_reporte):
+        self.id_desarrollador = id_desarrollador
+        self.id_reporte = id_reporte

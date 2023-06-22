@@ -25,7 +25,12 @@ def add_comment():
 def add_like():
 
     id_report = request.args.get('id_report')
+    id_user = request.args.get('id_user')
     report = database.reporte.query.get_or_404(id_report)
+    user = database.desarrollador.query.get_or_404(id_user)
+    if database.like.query.filter_by(id_desarrollador=id_user, id_reporte=id_report).first() != None:
+        return jsonify({'message': 'The like is already in the database'}), 400
+    add_like(id_user, id_report)
     report.add_likes(1)
     db.session.commit()
     return jsonify({'message': 'like added successfully.'}), 201
@@ -88,6 +93,10 @@ def get_report():
         report_json['description'] = report.descripcion
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
+        report_json['id_producto'] = report.id_producto
+        report_json['id_prioridad'] = report.id_prioridad
+        report_json['id_estado'] = report.id_estado
+        report_json['id_developer'] = report.id_developer
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
@@ -103,11 +112,9 @@ def get_all_reports():
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
         report_json['id_producto'] = report.id_producto
-        report_id_estado = report.id_estado
-        if database.estado.query.filter_by(id=report_id_estado).first() == None:
-            return jsonify({'message': 'el estado no se encuentra en la base de datos'}), 400
-        estado = database.estado.query.filter_by(id=report_id_estado).first()
-        report_json['estado'] = estado.nombre
+        report_json['id_prioridad'] = report.id_prioridad
+        report_json['id_estado'] = report.id_estado
+        report_json['id_developer'] = report.id_developer
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
@@ -124,6 +131,19 @@ def update_estado():
     db.session.commit()
     return jsonify({'message': 'Estado updated successfully.'}), 201
 
+@report_controller.route('/reports/update/prioridad', methods=['POST'])
+def update_prioridad():
+    id_report = request.args.get('id_report')
+    id_prioridad = request.args.get('id_prioridad')
+    if database.reporte.query.filter_by(id=id_report).first() == None:
+        return jsonify({'message': 'The id_report is not in the database'}), 400
+    if database.prioridad.query.filter_by(id=id_prioridad).first() == None:
+        return jsonify({'message': 'The id_estado is not in the database'}), 400
+    report = database.reporte.query.get_or_404(id_report)
+    report.id_prioridad = id_prioridad
+    db.session.commit()
+    return jsonify({'message': 'Estado updated successfully.'}), 201
+
     
 
 @report_controller.route('/reports/check/estados', methods=['GET'])
@@ -133,6 +153,18 @@ def check_estados():
         return jsonify({'message': 'The id_report is not in the database'}), 400
     #return all the estados, but the id=0 and the current id_estado
     estados = database.estado.query.filter(database.estado.id != 0).filter(database.estado.id != database.reporte.query.get_or_404(id_report).id_estado).all()
+    estados_json = []
+    for estado in estados:
+        estado_json = {}
+        estado_json['id'] = estado.id
+        estado_json['nombre'] = estado.nombre
+        estados_json.append(estado_json)
+    return jsonify(estados_json), 200
+
+@report_controller.route('/reports/estados/all', methods=['GET'])
+def all_estados():
+    #return all the estados
+    estados = database.estado.query.all()
     estados_json = []
     for estado in estados:
         estado_json = {}
@@ -173,11 +205,9 @@ def get_all_reports_from_a_specific_product():
         report_json['likes'] = report.likes
         report_json['date'] = report.fecha
         report_json['id_producto'] = report.id_producto
-        report_id_estado = report.id_estado
-        if database.estado.query.filter_by(id=report_id_estado).first() == None:
-            return jsonify({'message': 'el estado no se encuentra en la base de datos'}), 400
-        estado = database.estado.query.filter_by(id=report_id_estado).first()
-        report_json['estado'] = estado.nombre
+        report_json['id_prioridad'] = report.id_prioridad
+        report_json['id_estado'] = report.id_estado
+        report_json['id_developer'] = report.id_developer
         reports_json.append(report_json)
     return jsonify(reports_json), 200
 
@@ -185,8 +215,6 @@ def get_all_reports_from_a_specific_product():
 def get_single_report():
     id_report = request.args.get('id_report')
     report = database.reporte.query.get_or_404(id_report)
-    report_id_estado = report.id_estado
-    estado = database.estado.query.filter_by(id=report_id_estado).first()
     report_json = {}
     report_json['id'] = report.id
     report_json['title'] = report.titulo
@@ -194,9 +222,22 @@ def get_single_report():
     report_json['likes'] = report.likes
     report_json['date'] = report.fecha
     report_json['id_producto'] = report.id_producto
-    report_json['estado'] = estado.nombre
+    report_json['id_prioridad'] = report.id_prioridad
+    report_json['id_estado'] = report.id_estado
     report_json['id_developer'] = report.id_developer
     return jsonify(report_json), 200
+
+@report_controller.route('/reports/prioridad/all', methods=['GET'])
+def all_prioridad():
+    #return all the estados
+    prioridades = database.prioridad.query.all()
+    prioridades_json = []
+    for prioridad in prioridades:
+        prioridad_json = {}
+        prioridad_json['id'] = prioridad.id
+        prioridad_json['nombre'] = prioridad.nombre
+        prioridades_json.append(prioridad_json)
+    return jsonify(prioridades_json), 200
 
 def add_desarrollador_producto(id_desarrollador, id_producto):
     desarrollador_producto = database.desarrollador_producto(id_desarrollador, id_producto)
@@ -221,4 +262,9 @@ def add_reporte(titulo,descripcion,id_producto):
 def add_comentario(descripcion, id_reporte):
     comentario = database.comentario(descripcion, id_reporte)
     db.session.add(comentario)
+    db.session.commit()
+    
+def add_like(id_user, id_reporte):
+    like = database.like(id_user,id_reporte)
+    db.session.add(like)
     db.session.commit()

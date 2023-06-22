@@ -9,6 +9,11 @@ import VerReporteDev from "./routes/VerReporteDev";
 import Asignacion from "./routes/Asignacion";
 import MisLikes from "./routes/MisLikes";
 import MisReportes from "./routes/MisReportes";
+import Dev from "./routes/Dev"
+import ListaDesarrolladores from "./routes/ListaDesarrolladores"
+import MenuReasignacion from "./routes/MenuReasignacion";
+import ListaRPDev from "./routes/ListaRPDev";
+import { Container } from "react-bootstrap";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +44,22 @@ const router = createBrowserRouter([
   {
     path: "/MisReportes",
     element: <MisReportes />,
+  },
+  {
+    path: "/Dev",
+    element: <Dev />,
+  },
+  {
+    path: "/ListaDesarrolladores",
+    element: <ListaDesarrolladores />,
+  },
+  {
+    path: "/MenuReasignacion",
+    element: <MenuReasignacion />,
+  },
+  {
+    path: "/ListaRPDev",
+    element: <Container className="search-container"><ListaRPDev /></Container>,
   }
 ]);
 
