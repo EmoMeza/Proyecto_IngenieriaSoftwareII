@@ -6,12 +6,16 @@ import App from "./routes/App";
 import IngresarBug from "./routes/IngresarBug";
 import VerReporte from "./routes/VerReporte";
 import VerReporteDev from "./routes/VerReporteDev";
+import VerReporteEnv from "./routes/VerReporteEnc";
 import Asignacion from "./routes/Asignacion";
+import MisLikes from "./routes/MisLikes";
+import MisReportes from "./routes/MisReportes";
 import Dev from "./routes/Dev"
 import ListaDesarrolladores from "./routes/ListaDesarrolladores"
 import MenuReasignacion from "./routes/MenuReasignacion";
 import ListaRPDev from "./routes/ListaRPDev";
 import { Container } from "react-bootstrap";
+import Reportes from "./routes/Reportes";
 
 const router = createBrowserRouter([
   {
@@ -32,8 +36,20 @@ const router = createBrowserRouter([
     element: <VerReporteDev />,
   },
   {
+    path: "/VerReporteEnv/:id",
+    element: <VerReporteEnv />,
+  },
+  {
     path: "/Asignacion",
     element: <Asignacion />,
+  },
+  {
+    path: "/MisLikes",
+    element: <MisLikes />,
+  },
+  {
+    path: "/MisReportes",
+    element: <MisReportes />,
   },
   {
     path: "/Dev",
@@ -41,15 +57,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/ListaDesarrolladores",
-    element: <ListaDesarrolladores/>,
+    element: <ListaDesarrolladores />,
   },
   {
     path: "/MenuReasignacion",
-    element: <MenuReasignacion/>,
+    element: <MenuReasignacion />,
   },
   {
     path: "/ListaRPDev",
-    element: <Container className="search-container"><ListaRPDev/></Container>,
+    element: <ListaRPDev/>,
+  },
+  {
+    path: "/Reportes",
+    element: <Reportes/>,
   }
 ]);
 

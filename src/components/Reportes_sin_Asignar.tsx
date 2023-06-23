@@ -1,16 +1,21 @@
 import * as React from 'react';
-import {Stack,Card,Container,Button} from 'react-bootstrap';
+import {Stack,Card,Container,Button, Dropdown} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
+<<<<<<< HEAD
 import "./Prioridades.css";
+=======
+import DropdownPrioridad from './DropdownPrioridad';
+
+>>>>>>> main
 interface IReportes_sin_AsignarProps {
     
 }
 
 type reporte = {
   id: number;
-  titulo:string;
+  title:string;
   descripcion:string;
   likes:number;
   fecha:string;
@@ -56,8 +61,12 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const [ id_product, setId_product] = useState(1);
   const [datos, setDatos] = useState([]);
+<<<<<<< HEAD
   const prioridades = getPrioridades();
 
+=======
+  // const [data, setData] = useState({});
+>>>>>>> main
 
   const getPrioridadNombre =(id:number) =>{
     const  prio = prioridades.find((item: prioridad) => item.id === id);
@@ -96,17 +105,36 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
     return fetchData();
   }, [id_product]);
   
+
+  const nombreP = (id_prioridad:number) => {
+    switch (id_prioridad) {
+      case 1:
+        return "Alta";
+      case 2:
+        return "Media";
+      case 3:
+        return "Baja";
+      default:
+        return "Sin Prioridad";
+    }
+  }
+
   const reports = datos.map((reports:reporte) => {
     return {
+<<<<<<< HEAD
       titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.title}</Button>, 
       prioridad: getPrioridadNombre(reports.id_prioridad),
+=======
+      titulo:<Button  href={"/VerReporteEnv/"+reports.id} variant="link">{reports.title}</Button>, 
+>>>>>>> main
       likes:reports.likes,
-      fecha:reports.date,
-      asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>
-    }
+      prioridad:nombreP(reports.id_prioridad),
+      asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
+      prioridad_a: <DropdownPrioridad  id_report={reports.id}></DropdownPrioridad>
+    } 
   });
 
-  const data = {
+  const data={
 
     columns: [
       {
@@ -126,13 +154,19 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
         sort: 'asc'
       },
       {
-        label: 'Fecha',
-        field: 'fecha',
+        label: 'Prioridad',
+        field: 'prioridad',
         sort: 'asc'
       },
       {
         label: 'Asignacion',
         field: 'asignacion',
+        sort: 'asc'
+        }
+        ,
+      {
+        label: 'Asignacion de ',
+        field: 'prioridad_a',
         sort: 'asc'
         }
     ],
@@ -161,14 +195,15 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   return (
     <Container>
-          <Card>
+
+          <Card style={{ width: '47rem', height: '40rem'}}>
             <Card.Body>
 
             <Stack direction="horizontal" gap={3}>
                 <div >
                 <Card.Title className="text-black">
-                  Reportes sin Asignar
-                </Card.Title> 
+                  Reportes sin Asignar de :
+                </Card.Title>   
                 </div>
                 <div >
                   <select name="Producto" onChange={selectChange} >
@@ -181,10 +216,14 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
                 </div>
               </Stack>
 
-              <MDBTable scrollY>
-                <MDBTableHead columns={data.columns} />
-                <MDBTableBody rows={data.rows} />
-              </MDBTable>
+            <div style={{ width: '45rem', height: '36rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+              </div>
+
+  
             </Card.Body>
           </Card>
     </Container>

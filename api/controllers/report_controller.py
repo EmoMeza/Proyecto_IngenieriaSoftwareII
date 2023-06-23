@@ -40,13 +40,14 @@ def add_like():
 def add_report():
     data=request.json
     id_product = request.args.get('id_product')
+    id_cliente = request.args.get('id_cliente')
     if database.producto.query.filter_by(id=id_product).first() == None:
         return jsonify({'message': 'The id_product is not in the database'}), 400
     if data['title'] == None:
         return jsonify({'message': 'Report not added. Title is needed'}), 400
     if data['description'] == None:
         return jsonify({'message': 'Report not added. Description is needed'}), 400
-    add_reporte(data['title'], data['description'], id_product)
+    add_reporte(data['title'], data['description'], id_product, id_cliente)
     db.session.commit()
     return jsonify({'message': 'Report added successfully.'}), 201
 
@@ -254,8 +255,8 @@ def add_producto(nombre):
     db.session.add(producto)
     db.session.commit()
 
-def add_reporte(titulo,descripcion,id_producto):
-    reporte = database.reporte(titulo, descripcion, id_producto)
+def add_reporte(titulo,descripcion,id_producto,id_cliente):
+    reporte = database.reporte(titulo, descripcion, id_producto,id_cliente)
     db.session.add(reporte)
     db.session.commit()
     

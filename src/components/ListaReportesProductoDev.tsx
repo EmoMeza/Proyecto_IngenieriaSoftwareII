@@ -102,10 +102,10 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
 
       return {
         titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.title}</Button>,
-        prioridad: getPrioridadNombre(item.id_prioridad),
+        titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.title}</Button>,
         estado: EstadoBug(item.id_estado).toUpperCase(),
-        likes: item.likes,
-        fecha: item.date,  
+        likes: item.likes, 
+        fecha: item.date,    
       };
 
     }
@@ -142,20 +142,21 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
     rows: items
   };
   return (
-    <Container className="search-container">
-      <Card className="table-bugs-productos">
-        <Card.Body>
-          <Card.Title className="text-black">
-            Reportes de {props.nombre_producto}
-          </Card.Title>
-          <div style={{ maxHeight: '55vh', overflowY: 'scroll' }}>
-            <MDBTable>
-              <MDBTableHead columns={data.columns} />
-              <MDBTableBody rows={data.rows} />
-            </MDBTable>
-          </div>
-        </Card.Body>
-      </Card>
+    <Container>
+          <Card >
+            <Card.Body >
+              <Card.Title className="text-black">
+                Reportes de {props.nombre_producto}
+              </Card.Title>
+              <div style={{ width: '75rem', height: '36rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+              </div>
+              
+            </Card.Body>
+          </Card>
     </Container>
   );
 }

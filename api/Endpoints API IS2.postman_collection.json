@@ -3,8 +3,8 @@
 		"_postman_id": "b061b9a1-c316-4a73-867e-7e20cd771b3b",
 		"name": "Endpoints API IS2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27084407",
-		"_collection_link": "https://universal-firefly-533538.postman.co/workspace/IS2~23bc7984-37fb-4ea4-b513-bff844becc54/collection/27084407-b061b9a1-c316-4a73-867e-7e20cd771b3b?action=share&creator=27084407&source=collection_link"
+		"_exporter_id": "27523090",
+		"_collection_link": "https://universal-firefly-533538.postman.co/workspace/IS2~23bc7984-37fb-4ea4-b513-bff844becc54/collection/27084407-b061b9a1-c316-4a73-867e-7e20cd771b3b?action=share&creator=27523090&source=collection_link"
 	},
 	"item": [
 		{
@@ -14,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\":\"postman test\",\r\n    \"description\":\"testeo desde postman asies\"\r\n\r\n}",
+					"raw": "{\r\n    \"title\":\"postman asd\",\r\n    \"description\":\"tesdsteo desde postman asdasies\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -22,7 +22,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/add?id_product=2",
+					"raw": "http://127.0.0.1:5000/reports/add?id_product=2&id_cliente=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -38,6 +38,10 @@
 					"query": [
 						{
 							"key": "id_product",
+							"value": "2"
+						},
+						{
+							"key": "id_cliente",
 							"value": "2"
 						}
 					]
@@ -98,7 +102,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/like?id_report=4&id_user=6",
+					"raw": "http://127.0.0.1:5000/reports/like?id_report=26&id_user=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -114,11 +118,11 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "4"
+							"value": "26"
 						},
 						{
 							"key": "id_user",
-							"value": "6"
+							"value": "2"
 						}
 					]
 				}
@@ -183,7 +187,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/add/developer/?id_report=31&id_developer=2",
+					"raw": "http://127.0.0.1:5000/reports/add/developer/?id_report=36&id_dev=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -201,11 +205,11 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "31"
+							"value": "36"
 						},
 						{
-							"key": "id_developer",
-							"value": "2"
+							"key": "id_dev",
+							"value": "1"
 						}
 					]
 				}
@@ -273,7 +277,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/update/prioridad?id_report=4&id_prioridad=4",
+					"raw": "http://127.0.0.1:5000/reports/update/prioridad?id_report=26&id_prioridad=2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -290,11 +294,11 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "4"
+							"value": "26"
 						},
 						{
 							"key": "id_prioridad",
-							"value": "4"
+							"value": "2"
 						}
 					]
 				}
@@ -369,7 +373,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/report/get?id_report=26",
+					"raw": "http://127.0.0.1:5000/report/get?id_report=4",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -385,7 +389,7 @@
 					"query": [
 						{
 							"key": "id_report",
-							"value": "26"
+							"value": "4"
 						}
 					]
 				}
@@ -518,7 +522,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/reports/check/estados",
+					"raw": "http://127.0.0.1:5000/reports/check/estados?id_report=4",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -531,6 +535,12 @@
 						"reports",
 						"check",
 						"estados"
+					],
+					"query": [
+						{
+							"key": "id_report",
+							"value": "4"
+						}
 					]
 				}
 			},
@@ -542,7 +552,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=1",
+					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -559,7 +569,7 @@
 					"query": [
 						{
 							"key": "id_product",
-							"value": "1"
+							"value": "3"
 						}
 					]
 				}
@@ -607,7 +617,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/products/get/reports?id_product=2",
+					"raw": "http://127.0.0.1:5000/products/get/all_reports?id_product=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -619,12 +629,12 @@
 					"path": [
 						"products",
 						"get",
-						"reports"
+						"all_reports"
 					],
 					"query": [
 						{
 							"key": "id_product",
-							"value": "2"
+							"value": "3"
 						}
 					]
 				}
@@ -637,7 +647,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/dev/all-reportes-related-to-products/?id_dev=2",
+					"raw": "http://127.0.0.1:5000/dev/all-reportes-related-to-products/?id_dev=3",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -654,7 +664,7 @@
 					"query": [
 						{
 							"key": "id_dev",
-							"value": "2"
+							"value": "3"
 						}
 					]
 				}
@@ -736,7 +746,23 @@
 			"name": "Get all prioridades",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reports/prioridad/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reports",
+						"prioridad",
+						"all"
+					]
+				}
 			},
 			"response": []
 		},
@@ -744,7 +770,59 @@
 			"name": "get all liked reports",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/liked/?id_user=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"liked",
+						""
+					],
+					"query": [
+						{
+							"key": "id_user",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all reports made by user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/reports/?id_user=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"reports",
+						""
+					],
+					"query": [
+						{
+							"key": "id_user",
+							"value": "2"
+						}
+					]
+				}
 			},
 			"response": []
 		},

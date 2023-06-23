@@ -10,10 +10,10 @@ interface IReportesDev {
 
 type reporte = {
   id: number;
-  titulo: string;
-  descripcion: string;
-  likes: number;
-  fecha: string;
+  title:string;
+  descripcion:string;
+  likes:number;
+  date:string;
   id_estado: number;
   id_prioridad: number;
   id_producto: number;
@@ -55,14 +55,8 @@ const getData = () => {
 
 
   useEffect(() => {
-    // Configurar la consulta periódica cada X segundos
-    const interval = setInterval(() => {
-      fetchUserData();
-    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
-
-    // Limpiar el intervalo cuando el componente se desmonte
     return () => {
-      clearInterval(interval);
+      fetchUserData();
     };
   }, []);
 
@@ -118,13 +112,13 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
     const productoNombre = datosProducto[report.id_producto]?.nombre || "";
 
     return {
-      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.titulo}</Button>,
-      prioridad: getPrioridadNombre(report.id_prioridad)  ,
+      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
+      prioridad: getPrioridadNombre(report.id_prioridad),
       estado: estadoNombre.toUpperCase(),
       likes: report.likes,
-      fecha: report.fecha,
-      producto: productoNombre,
-      solicitud: <SolicitudButton id_report={report.id} id_dev={id_dev}></SolicitudButton>
+      fecha: report.date,
+      producto: <p > {productoNombre}</p> ,
+      solicitud:<SolicitudButton id_report={report.id} id_dev={id_dev}></SolicitudButton>
     };
   });
 
@@ -174,20 +168,21 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
 
 
   return (
-    <Container className="search-container">
-      <Card>
-        <Card.Body>
-          <Card.Title className="text-black">
-            Reportes asignados actualmente
-          </Card.Title>
-          <div style={{ maxHeight: '33vh', overflowY: 'scroll' }}>
-            <MDBTable>
-              <MDBTableHead columns={data.columns} />
-              <MDBTableBody rows={data.rows} />
-            </MDBTable>
-          </div>
-        </Card.Body>
-      </Card>
+    <Container>
+          <Card >
+            <Card.Body >
+              <Card.Title className="text-black">
+                Reportes asignados actualmente
+              </Card.Title>
+              <div style={{ width: '75rem', height: '36rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+              </div>
+              
+            </Card.Body>
+          </Card>
     </Container>
 
   );

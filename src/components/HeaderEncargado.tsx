@@ -17,8 +17,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/Asignacion">Reportes sin asignar</Nav.Link>
-              <Nav.Link href="/MenuReasignacion">Solicitudes de reasignacion</Nav.Link>
-              <Nav.Link href="/">Acerca de Nosotros</Nav.Link>
+              <Nav.Link href="/Reportes">Todos los reportes</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link href="#link">Encargado emomeza@udec.cl</Nav.Link>
