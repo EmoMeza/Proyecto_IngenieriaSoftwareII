@@ -2,6 +2,7 @@ import internal from "stream";
 
 class Bug {
   id: number;
+  id_prioridad: number;
   titulo: string;
   cuerpo: string;
   encargado: string;
@@ -9,6 +10,7 @@ class Bug {
   likes: number;
   constructor(
     id = 0,
+    id_prioridad=0,
     titulo = "vacio",
     cuerpo = "vacio",
     encargado = "vacio",
@@ -16,6 +18,7 @@ class Bug {
     likes = 0
   ) {
     this.id = id;
+    this.id_prioridad=id_prioridad;
     this.cuerpo = cuerpo;
     this.titulo = titulo;
     this.encargado = encargado;

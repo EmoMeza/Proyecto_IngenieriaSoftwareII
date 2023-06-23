@@ -3,6 +3,7 @@ import {Stack,Card,Container,Button, Dropdown} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
+import "./Prioridades.css";
 import DropdownPrioridad from './DropdownPrioridad';
 
 interface IReportes_sin_AsignarProps {
@@ -25,14 +26,58 @@ type producto = {
   id: number;
   id_encargado: number;
 }
+type prioridad = {
+  id: number;
+  nombre: string;
+};
+const getPrioridades = (): prioridad[] => {
+  const [prioridades, setPrioridades] = useState<prioridad[]>([]);
 
+  useEffect(() => {
+    const fetchPrioridades = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/reports/prioridad/all');
+        if (response.ok) {
+          const data = await response.json();
+          setPrioridades(data);
+        } else {
+          console.error('Failed to fetch prioridades');
+        }
+      } catch (error) {
+        console.error('An error occurred while fetching prioridades:', error);
+      }
+    };
 
+    fetchPrioridades();
+  }, []); // Empty dependency array to run the effect only once
+
+  return prioridades;
+};
 
 const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> = (props) => {
 
   const [ id_product, setId_product] = useState(1);
   const [datos, setDatos] = useState([]);
+  const prioridades = getPrioridades();
+
   // const [data, setData] = useState({});
+
+  const getPrioridadNombre =(id:number) =>{
+    const  prio = prioridades.find((item: prioridad) => item.id === id);
+    if (!prio) {
+      return <h5 className="prioridadCero">NO ASIGNADO</h5>;
+    } else if (prio.id === 0) {
+      return <h5 className="prioridadCero">{prio.nombre.toUpperCase()}</h5>;
+    } else if (prio.id === 1) {
+      return <h5 className="prioridadUno">{prio.nombre.toUpperCase()}</h5>;
+    } else if (prio.id === 2) {
+      return <h5 className="prioridadDos">{prio.nombre.toUpperCase()}</h5>;
+    } else if (prio.id === 3) {
+      return <h5 className="prioridadTres">{prio.nombre.toUpperCase()}</h5>;
+    } else {
+      return <h5 className="prioridadCero">NO ASIGNADO</h5>;
+    }
+  };
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setId_product(parseInt(event.target.value,10));
@@ -70,9 +115,9 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button  href={"/VerReporteEnv/"+reports.id} variant="link">{reports.title}</Button>, 
+      titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.title}</Button>, 
+      prioridad: getPrioridadNombre(reports.id_prioridad),
       likes:reports.likes,
-      prioridad:nombreP(reports.id_prioridad),
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
       prioridad_a: <DropdownPrioridad  id_report={reports.id}></DropdownPrioridad>
     } 
@@ -85,6 +130,12 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
         label: 'Titulo',  
         field: 'titulo',
         sort: 'asc'
+      },
+      {
+        label: 'Prioridad',
+        field: 'prioridad',
+        sort: 'asc'
+
       },
       {
         label: 'Likes',

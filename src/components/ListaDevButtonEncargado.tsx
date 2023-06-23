@@ -5,8 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
-import './ListaDevButton.css'
-
+import CambiarPrioridadButton from './CambiarPrioridadButton';
+import "./PrioridadesModal.css"
 interface IListaDevButtonProps {
   id_dev: number;
   id_producto: number;
@@ -18,14 +18,14 @@ type FormValues = {
 
 type reporte = {
   id: number;
-  title:string;
+  titulo:string;
   descripcion:string;
   likes:number;
-  date:string;
+  fecha:string;
   id_estado: number;
   id_prioridad: number;
   id_producto: number;
-};
+}
 
 type producto = {
   nombre: string;
@@ -51,16 +51,59 @@ const getData = (id_dev: number) => {
   };
 
   useEffect(() => {
-  
-    return () => {
+    // Configurar la consulta periódica cada X segundos
+    const interval = setInterval(() => {
       fetchUserData();
+    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => {
+      clearInterval(interval);
     };
   }, []);
 
   return datos;
 };
+/**
+const getProducts = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  const productos = products.filter((producto:producto) => producto.id_encargado === 2).map((item: producto) =>{
+    return {
+      nombre:item.nombre, id:item.id
+      }
+    });
+
+  return productos;
+};
 
 
+const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({id_dev, id_producto})  =>   {
+  const [show, setShow] = useState(false);
+  //const [isButtonDisabled, setButtonDisabled] = useState(false); // Added state variable
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const datos = getData(id_dev);
+
+  const reports = datos
+  .filter((report) => report.id_producto === id_producto)
+  .map((reports:reporte) => {
+    return {
+      titulo:<Button href={"/VerReporte/" + reports.id} variant="link">{reports.titulo}</Button>, 
+      likes:reports.likes,
+      fecha:reports.fecha,
+      reasignacion: <AsignacionButton id_report ={reports.id}></AsignacionButton>
+    }
+  });
+**/
 const getPrioridades = (): prioridad[] => {
   const [prioridades, setPrioridades] = useState<prioridad[]>([]);
 
@@ -84,37 +127,33 @@ const getPrioridades = (): prioridad[] => {
 
   return prioridades;
 };
-const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev, id_producto }) => {
+const ListaDevButtonEncargado: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev, id_producto }) => {
   const [show, setShow] = useState(false);
   const [products, setProducts] = useState([]);
   const prioridades = getPrioridades();
 
 
-
   const getPrioridadNombre =(id:number) =>{
     const  prio = prioridades.find((item: prioridad) => item.id === id);
     if (!prio) {
-      return <h5 className="prioridadCero">NO ASIGNADO</h5>;
+      return <h5 className="prioridadCeroModal">NO ASIGNADO</h5>;
     } else if (prio.id === 0) {
-      return <h5 className="prioridadCero">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadCeroModal">{prio.nombre.toUpperCase()}</h5>;
     } else if (prio.id === 1) {
-      return <h5 className="prioridadUno">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadUnoModal">{prio.nombre.toUpperCase()}</h5>;
     } else if (prio.id === 2) {
-      return <h5 className="prioridadDos">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadDosModal">{prio.nombre.toUpperCase()}</h5>;
     } else if (prio.id === 3) {
-      return <h5 className="prioridadTres">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadTresModal">{prio.nombre.toUpperCase()}</h5>;
     } else {
-      return <h5 className="prioridadCero">NO ASIGNADO</h5>;
+      return <h5 className="prioridadCeroModal">NO ASIGNADO</h5>;
     }
   };
-
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-
-  
     fetch("http://127.0.0.1:5000/products/all")
       .then((response) => response.json())
       .then((data) => setProducts(data));
@@ -125,21 +164,21 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       .filter((producto: producto) => producto.id_encargado === 2)
       .map((item: producto) => item.id);
   };
-  
 
   const productIds = getProductIds();
   const datos = getData(id_dev);
 
   const reports = datos
-    .filter((report :reporte) => report.id_producto == (id_producto))
+    .filter((report:reporte) => productIds.includes(report.id_producto))
     .map((report: reporte) => {
       return {
-        titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
+        titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.titulo}</Button>,
         prioridad: getPrioridadNombre(report.id_prioridad),
         likes: report.likes,
-        fecha: report.date,
+        fecha: report.fecha,
         producto: report.id_producto,
-        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>
+        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>,
+        cambiarprioridad:  <CambiarPrioridadButton id={report.id}></CambiarPrioridadButton>
       };
     });
 
@@ -175,6 +214,11 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
         label: 'Reasignar',
         field: 'reasignacion',
         sort: 'asc'
+      },
+      {
+        label: 'Cambiar Prioridad',
+        field: 'cambiarprioridad',
+        sort: 'asc'
       }
     ],
     rows: reports
@@ -187,12 +231,12 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       Asignados
       </Button>
 
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className="text-black">Reportes asignados al desarrollador</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <MDBTable scrollY maxHeight='400vh' maxWidth ='200vh'>
+        <MDBTable scrollY>
                 <MDBTableHead columns={data.columns} />
                 <MDBTableBody rows={data.rows} />
         </MDBTable>
@@ -202,4 +246,4 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
   );
 }
 
-export default ListaDevButton;
+export default ListaDevButtonEncargado;

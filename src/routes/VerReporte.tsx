@@ -87,7 +87,7 @@ const getReporte = async (id_reporte: number): Promise<Bug> => {
     .then((response) => {
       return response.json();
     });
-  return new Bug(report.id, report.title, report.description, encargado.nombre, estados[report.id_estado], report.likes);
+  return new Bug(report.id,report.id_prioridad, report.title, report.description, encargado.nombre, estados[report.id_estado], report.likes);
 }
 
 function VerReporte() {

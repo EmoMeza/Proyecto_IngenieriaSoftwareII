@@ -6,6 +6,8 @@ import "../routes/App.css"
 import "./SearchBar.css"
 import LikeButton from "./LikeButton";
 import dayjs from "dayjs";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 type reporte = {
@@ -13,6 +15,7 @@ type reporte = {
   description: string;
   id_estado: number;
   id: number;
+  id_prioridad:number;
   id_producto: number;
   likes: number;
   title: string;
@@ -88,6 +91,7 @@ export default function SearchBar() {
   const estados = getEstados();
   const [id_product, setId_product] = useState(1);
   const [query, setQuery] = useState("");
+  const [name_product, setName] = useState("jarro3000v1.69");
   const filteredItems = getFilteredItems(query, users);
   const reports = filteredItems.map((report: reporte) => {
     return {
@@ -95,7 +99,7 @@ export default function SearchBar() {
       fecha: dayjs(report.date).format("MM/DD/YYYY"),
       estado: estados[report.id_estado],
       likes: report.likes,
-      like: <LikeButton id={report.id}></LikeButton>,
+      like: <LikeButton id_bug={report.id} id_user={2}></LikeButton>,   //// HARDCODEADO EL ID DEL USUARIO :C
       id_producto: report.id_producto
     }
   });
@@ -155,32 +159,31 @@ export default function SearchBar() {
   };
 
   const products = getProducts();
-
+  
   
   return (
     <div className="search-container">
       <Col>
-      <h1 className="titulo">
-        Productos
-      </h1>
-      <div style={{ marginBottom: '25px' }}>
-        <Row  md={4}>
+        <Row >
+        
+        <DropdownButton
+          size="lg"
+          id="dropdown-button-dark"
+          variant="primary" 
+          align="end"
+          title={name_product}
+          >
           {products.map((product) => (
-            <Col >
-              <Card >
-                <Card.Body className="body-card">
-                  <Button variant="primary" size="lg" onClick={() => {
-                    setId_product(product.id)
-                }}>
-                    {product.nombre}
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))} 
-        </Row>
-        </div>
+            <Dropdown.Item onClick={() => {(setId_product(product.id));  (setName(product.nombre))}}>
+              {product.nombre}
+            </Dropdown.Item>
+          ))}
 
+        </DropdownButton>
+        
+        </Row>
+
+        <br></br>
       <Row >
         <input
           id="custom-search-bar"

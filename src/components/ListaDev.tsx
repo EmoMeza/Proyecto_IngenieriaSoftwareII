@@ -2,8 +2,10 @@ import * as React from 'react';
 import {Stack, Card, Container } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import ListaDevButton from './ListaDevButton';
-import "./ReportTable.css"
+import ListaDevButtonEncargado from './ListaDevButtonEncargado';
+import "./ReportTable.css";
+import "./PrioridadesModal.css";
+import Product from './Product';
 
 interface IListaDevProps { }
 
@@ -13,6 +15,10 @@ type Dev = {
   email: string;
   num_reportes: string;
 }
+type prioridad = {
+  id: number;
+  nombre: string;
+};
 
 const useDevData = (url: string, id_product: number) => {
   const [datos, setUsers] = useState<Dev[]>([]);
@@ -66,7 +72,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
         nombre: dev.nombre,
         email: dev.email,
         num_reportes: num_rep.total_reports + ' (' + num_rep.product_reports + ')',
-        modal: <ListaDevButton id_dev={dev.id} id_producto={id_product}></ListaDevButton>,
+        modal: <ListaDevButtonEncargado id_dev={dev.id} id_producto={id_product}></ListaDevButtonEncargado>,
       };
     });
 
