@@ -99,7 +99,7 @@ export default function SearchBar() {
       fecha: dayjs(report.date).format("MM/DD/YYYY"),
       estado: estados[report.id_estado],
       likes: report.likes,
-      like: <LikeButton id={report.id}></LikeButton>,
+      like: <LikeButton id_bug={report.id} id_user={2}></LikeButton>,   //// HARDCODEADO EL ID DEL USUARIO :C
       id_producto: report.id_producto
     }
   });
