@@ -4,8 +4,8 @@ import { Col ,Card, Container, Button, Row } from 'react-bootstrap';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import "../routes/App.css"
 import "./SearchBar.css"
-import ReportTable from "./ReportTable"
 import LikeButton from "./LikeButton";
+import dayjs from "dayjs";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -33,6 +33,28 @@ interface Estado {
 
 type EstadoDictionary = Record<number, string>;
 
+const getEstados = (): EstadoDictionary => {
+  const [estados, setEstados] = useState<EstadoDictionary>({});
+
+  const fetchEstados = () => {
+    fetch("http://127.0.0.1:5000/reports/estados/all")
+      .then((response) => response.json())
+      .then((data: Estado[]) => {
+        const estadosDictionary: EstadoDictionary = {};
+        data.forEach((estado) => {
+          estadosDictionary[estado.id] = estado.nombre;
+        });
+        setEstados(estadosDictionary);
+      });
+  };
+
+  useEffect(() => {
+    fetchEstados();
+  }, []);
+
+  return estados;
+};
+
 
 
 const getData = () => {
@@ -55,22 +77,6 @@ const getData = () => {
 };
 
 
-const EstadoBug = (id: number) => {
-  if (id == 0) {
-    return "No Asignado";
-  }
-  else if (id == 1) {
-    return "Pendiente";
-  }
-  else if (id == 2) {
-    return "En proceso";
-  }
-  else if (id == 3) {
-    return "Cerrado";
-  }
-}
-
-
 const getFilteredItems = (query: string, items: reporte[]) => {
   query = query.toLowerCase();
   if (!query) {
@@ -81,6 +87,7 @@ const getFilteredItems = (query: string, items: reporte[]) => {
 
 export default function SearchBar() {
   const users = getData();
+  const estados = getEstados();
   const [id_product, setId_product] = useState(1);
   const [query, setQuery] = useState("");
   const [name_product, setName] = useState("jarro3000v1.69");
@@ -88,8 +95,8 @@ export default function SearchBar() {
   const reports = filteredItems.map((report: reporte) => {
     return {
       titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
-      fecha: report.date,
-      estado: EstadoBug(report.id_estado),
+      fecha: dayjs(report.date).format("MM/DD/YYYY"),
+      estado: estados[report.id_estado],
       likes: report.likes,
       like: <LikeButton id={report.id}></LikeButton>,
       id_producto: report.id_producto
@@ -151,7 +158,6 @@ export default function SearchBar() {
   };
 
   const products = getProducts();
-
   
   
   return (
