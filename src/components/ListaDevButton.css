@@ -1,0 +1,13 @@
+.Modal {
+  display:block;
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 145vh;
+  min-height: 100vh;
+  z-index: auto;
+  margin-bottom: 0px;
+  line-height: 21px;
+}

@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
+import './ListaDevButton.css'
 
 interface IListaDevButtonProps {
   id_dev: number;
@@ -131,12 +132,12 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       Asignados
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title className="text-black">Reportes asignados al desarrollador</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <MDBTable scrollY>
+        <MDBTable scrollY maxHeight='400vh' maxWidth ='200vh'>
                 <MDBTableHead columns={data.columns} />
                 <MDBTableBody rows={data.rows} />
         </MDBTable>
