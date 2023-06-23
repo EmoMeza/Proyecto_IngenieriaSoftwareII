@@ -22,6 +22,7 @@
     font-size: 2em;
     margin: 0;
     line-height: 1pt;
+    margin-top:-1.8%;
 
   }
   h2 {
@@ -57,6 +58,7 @@
   hr.tittle-separator{
     border: 5px solid rgb(0, 0, 0);
     border-radius: 2px;
+    margin-top:2%;
   }
   h1.space-taker{
     height: 10px;
@@ -89,4 +91,42 @@
       position: relative;
       z-index: 2;
     }
-    
+    .prioridadCeroCustom{
+      background-color: rgb(94, 148, 87);
+      text-align: center;
+      border-radius: 25px;
+      border: 2px solid #585757;
+      max-width: 10%;
+      margin-top: -3.5%;
+      margin-left: 0%;
+      font-size: 90%;
+  }
+  .prioridadUnoCustom{
+      background-color: rgb(77, 206, 3);
+      text-align: center;
+      border-radius: 25px;
+      border: 2px solid #504d4d;
+      max-width: 7%;
+      margin-top: -3.5%;
+
+  }
+  .prioridadDosCustom{
+      background-color: rgb(224, 221, 46);
+      text-align: center;
+      border-radius: 25px;
+      border: 2px solid #4d4a4a;
+      margin-top: -3.5%;
+
+      max-width: 7%;
+  }
+  
+  .prioridadTresCustom{
+      background-color: rgb(248, 6, 6);
+      text-align: center;
+      border-radius: 25px;
+      margin-top: -3.5%;
+
+      border: 2px solid #757171;
+      max-width: 7%;
+  }
+  

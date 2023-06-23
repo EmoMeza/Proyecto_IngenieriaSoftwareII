@@ -5,7 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
-
+import CambiarPrioridadButton from './CambiarPrioridadButton';
+import "./PrioridadesModal.css"
 interface IListaDevButtonProps {
   id_dev: number;
   id_producto: number;
@@ -126,30 +127,28 @@ const getPrioridades = (): prioridad[] => {
 
   return prioridades;
 };
-const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev, id_producto }) => {
+const ListaDevButtonEncargado: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev, id_producto }) => {
   const [show, setShow] = useState(false);
   const [products, setProducts] = useState([]);
   const prioridades = getPrioridades();
 
 
-
   const getPrioridadNombre =(id:number) =>{
     const  prio = prioridades.find((item: prioridad) => item.id === id);
     if (!prio) {
-      return <h5 className="prioridadCero">NO ASIGNADO</h5>;
+      return <h5 className="prioridadCeroModal">NO ASIGNADO</h5>;
     } else if (prio.id === 0) {
-      return <h5 className="prioridadCero">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadCeroModal">{prio.nombre.toUpperCase()}</h5>;
     } else if (prio.id === 1) {
-      return <h5 className="prioridadUno">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadUnoModal">{prio.nombre.toUpperCase()}</h5>;
     } else if (prio.id === 2) {
-      return <h5 className="prioridadDos">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadDosModal">{prio.nombre.toUpperCase()}</h5>;
     } else if (prio.id === 3) {
-      return <h5 className="prioridadTres">{prio.nombre.toUpperCase()}</h5>;
+      return <h5 className="prioridadTresModal">{prio.nombre.toUpperCase()}</h5>;
     } else {
-      return <h5 className="prioridadCero">NO ASIGNADO</h5>;
+      return <h5 className="prioridadCeroModal">NO ASIGNADO</h5>;
     }
   };
-
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -178,7 +177,8 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
         likes: report.likes,
         fecha: report.fecha,
         producto: report.id_producto,
-        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>
+        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>,
+        cambiarprioridad:  <CambiarPrioridadButton id={report.id}></CambiarPrioridadButton>
       };
     });
 
@@ -214,6 +214,11 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
         label: 'Reasignar',
         field: 'reasignacion',
         sort: 'asc'
+      },
+      {
+        label: 'Cambiar Prioridad',
+        field: 'cambiarprioridad',
+        sort: 'asc'
       }
     ],
     rows: reports
@@ -241,4 +246,4 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
   );
 }
 
-export default ListaDevButton;
+export default ListaDevButtonEncargado;

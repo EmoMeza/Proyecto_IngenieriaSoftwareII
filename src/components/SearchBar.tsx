@@ -6,11 +6,13 @@ import "../routes/App.css"
 import "./SearchBar.css"
 import ReportTable from "./ReportTable"
 import LikeButton from "./LikeButton";
+import "./Prioridades.css"
 type reporte = {
   date: Date;
   description: string;
   id_estado: number;
   id: number;
+  id_prioridad:number;
   id_producto: number;
   likes: number;
   title: string;

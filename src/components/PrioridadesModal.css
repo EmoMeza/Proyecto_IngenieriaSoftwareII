@@ -1,0 +1,42 @@
+.prioridadCeroModal{
+    background-color: rgb(94, 148, 87);
+    text-align: center;
+    vertical-align: center;
+    border-radius: 25px;
+    border: 2px solid #585757;
+    max-width: 100%;
+    font-size: 68%;
+}
+.prioridadUnoModal{
+    background-color: rgb(77, 206, 3);
+    text-align: center;
+    vertical-align: center;
+    
+    border-radius: 25px;
+    border: 2px solid #504d4d;
+    max-width: 100%;
+    font-size: 90%;
+
+}
+.prioridadDosModal{
+    background-color: rgb(224, 221, 46);
+    vertical-align: center;
+
+    text-align: center;
+    border-radius: 25px;
+    border: 2px solid #4d4a4a;
+    max-width: 100%;
+    font-size: 90%;
+
+}
+
+.prioridadTresModal{
+    background-color: rgb(248, 6, 6);
+    vertical-align: center;
+
+    text-align: center;
+    border-radius: 25px;
+    border: 2px solid #757171;
+    max-width: 100%;
+    font-size: 90%;
+}

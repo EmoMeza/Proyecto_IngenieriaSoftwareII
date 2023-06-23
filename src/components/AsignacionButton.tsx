@@ -16,7 +16,12 @@ type Desarollador = {
   id:number;
   id_rol: number;
   nombre: string;
-}
+};
+type prioridad = {
+  id: number;
+  nombre: string;
+};
+
 const AsignacionButton: React.FunctionComponent<IAsignacionButtonProps> = ({id_report})  =>   {
   const [show, setShow] = useState(false);
 
