@@ -50,8 +50,9 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
                 {report.title}
             </Button>
         ),
-        likes: report.likes,
-        fecha: report.date
+        fecha: report.date,
+        estado: report.id_estado,
+        likes: report.likes
     }));
 
     const data = {
@@ -62,15 +63,21 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
                 sort: 'asc'
             },
             {
+                label: 'Fecha',
+                field: 'fecha',
+                sort: 'asc'
+            },
+            {
+                label: 'Estado',
+                field: 'estado',
+                sort: 'asc'
+            },
+            {
                 label: 'Likes',
                 field: 'likes',
                 sort: 'asc'
             },
-            {
-                label: 'Fecha',
-                field: 'fecha',
-                sort: 'asc'
-            }
+            
         ],
         rows: rows
     };
