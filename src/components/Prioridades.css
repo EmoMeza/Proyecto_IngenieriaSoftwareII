@@ -3,23 +3,27 @@
     text-align: center;
     border-radius: 25px;
     border: 2px solid #585757;
-    max-width: 60%;
-    margin-left: -7%;
-    font-size: 90%;
+    max-width: 100%;
+    min-height: 100%;
+    font-size: 75%;
 }
 .prioridadUno{
     background-color: rgb(77, 206, 3);
     text-align: center;
     border-radius: 25px;
     border: 2px solid #504d4d;
-    max-width: 45%;
+    max-width: 100%;
+    min-height: 100%;
+    font-size: 85%;
 }
 .prioridadDos{
     background-color: rgb(224, 221, 46);
     text-align: center;
     border-radius: 25px;
     border: 2px solid #4d4a4a;
-    max-width: 45%;
+    max-width: 100%;
+    min-height: 100%;
+    font-size: 85%;
 }
 
 .prioridadTres{
@@ -27,5 +31,7 @@
     text-align: center;
     border-radius: 25px;
     border: 2px solid #757171;
-    max-width: 45%;
+    max-width: 100%;
+    min-height: 100%;
+    font-size: 85%;
 }

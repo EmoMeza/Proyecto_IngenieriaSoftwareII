@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import SolicitudButton from './SolicitudButton';
 import "./ReportTable.css"
+import dayjs from "dayjs";
 interface IReportesDev {
 
 }
@@ -106,7 +107,7 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
       return <h5 className="prioridadCero">NO ASIGNADO</h5>;
     }
   };
-
+  //REVISAR LOS ESTADOS REHACER LA VISTA
   const reports = datosReporte.map((report: reporte) => {
     const estadoNombre = datosEstado[report.id_estado]?.nombre || "";
     const productoNombre = datosProducto[report.id_producto]?.nombre || "";
@@ -116,8 +117,9 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
       prioridad: getPrioridadNombre(report.id_prioridad),
       estado: estadoNombre.toUpperCase(),
       likes: report.likes,
-      fecha: report.date,
-      producto: <p > {productoNombre}</p> ,
+      
+      fecha: dayjs(report.date).format("DD/MM/YYYY"),
+      producto: productoNombre,
       solicitud:<SolicitudButton id_report={report.id} id_dev={id_dev}></SolicitudButton>
     };
   });

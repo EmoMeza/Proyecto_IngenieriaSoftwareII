@@ -3,12 +3,9 @@ import {Stack,Card,Container,Button, Dropdown} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
-<<<<<<< HEAD
 import "./Prioridades.css";
-=======
 import DropdownPrioridad from './DropdownPrioridad';
 
->>>>>>> main
 interface IReportes_sin_AsignarProps {
     
 }
@@ -61,12 +58,9 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const [ id_product, setId_product] = useState(1);
   const [datos, setDatos] = useState([]);
-<<<<<<< HEAD
   const prioridades = getPrioridades();
 
-=======
   // const [data, setData] = useState({});
->>>>>>> main
 
   const getPrioridadNombre =(id:number) =>{
     const  prio = prioridades.find((item: prioridad) => item.id === id);
@@ -121,14 +115,9 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const reports = datos.map((reports:reporte) => {
     return {
-<<<<<<< HEAD
       titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.title}</Button>, 
       prioridad: getPrioridadNombre(reports.id_prioridad),
-=======
-      titulo:<Button  href={"/VerReporteEnv/"+reports.id} variant="link">{reports.title}</Button>, 
->>>>>>> main
       likes:reports.likes,
-      prioridad:nombreP(reports.id_prioridad),
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
       prioridad_a: <DropdownPrioridad  id_report={reports.id}></DropdownPrioridad>
     } 
