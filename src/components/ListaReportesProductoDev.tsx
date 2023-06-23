@@ -102,7 +102,6 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
 
       return {
         titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.title}</Button>,
-        titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.title}</Button>,
         estado: EstadoBug(item.id_estado).toUpperCase(),
         likes: item.likes, 
         fecha: item.date,    
