@@ -9,10 +9,10 @@ interface IMisReportesProps { }
 
 type reporte = {
     id: number;
-    titulo: string;
-    descripcion: string;
+    title: string;
+    description: string;
     likes: number;
-    fecha: string;
+    date: string;
     id_estado: number;
     id_prioridad: number;
     id_producto: number;
@@ -47,11 +47,11 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
     const rows = reports.map((report: reporte) => ({
         titulo: (
             <Button variant="link" onClick={() => handleInspectBug(report.id)}>
-                {report.titulo}
+                {report.title}
             </Button>
         ),
         likes: report.likes,
-        fecha: report.fecha
+        fecha: report.date
     }));
 
     const data = {
