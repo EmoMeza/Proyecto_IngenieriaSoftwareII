@@ -10,3 +10,26 @@
   margin-bottom: 0px;
   line-height: 21px;
 }
+
+.titulo{
+  text-align: center;
+  margin: 40px;
+}
+
+.text-black{
+  text-align: center;
+  line-height: 35px;
+
+}
+
+.body-card{
+  text-align: center;
+}
+
+
+.tabla{
+  min-height: 80px;
+  min-width: 1200px;
+
+}
+

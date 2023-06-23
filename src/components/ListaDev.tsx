@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Container } from 'react-bootstrap';
+import {Stack, Card, Container } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import ListaDevButton from './ListaDevButton';
@@ -30,12 +30,9 @@ const useDevData = (url: string, id_product: number) => {
 
     fetchData();
 
-    const interval = setInterval(() => {
-      fetchData();
-    }, 5000);
 
     return () => {
-      clearInterval(interval);
+      fetchData();
     };
   }, [url, id_product]);
 
@@ -86,14 +83,6 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
     };
 
     fetchData();
-
-    const interval = setInterval(() => {
-      fetchData();
-    }, 5000);
-
-    return () => {
-      clearInterval(interval);
-    };
   }, [datos, id_product]);
 
   const getProducts = async () => {
@@ -118,6 +107,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
       setProducts(productos);
     });
   }, []);
+
   const data = {
     columns: [
       {
@@ -145,26 +135,28 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
   };
 
   return (
-    <Container className='search-container'>
-      <Card>
+    <Container>
+      <Card style={{ width: '40rem', height: '20rem'}}>
         <Card.Body>
-          <Card.Title className="text-black">Desarrolladores</Card.Title>
-          <div>
-            <select name="Producto" onChange={selectChange}>
-              {products.map((product) => (
-                <option key={product.id} value={product.id}>
-                  {product.nombre}
-                </option>
-              ))}
-            </select>
-          </div>
-          //hay que ajustar maxHeight para un valor decente
-          <div style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
-            <MDBTable>
-              <MDBTableHead columns={data.columns} />
-              <MDBTableBody rows={data.rows} />
-            </MDBTable>
-          </div>
+          <Stack direction="horizontal" gap={3}>
+            <div >
+              <Card.Title className="text-black">Desarrolladores de :</Card.Title>
+            </div>
+            <div>
+              <select name="Producto" onChange={selectChange}>
+                {products.map((product) => (
+                  <option key={product.id} value={product.id}>
+                    {product.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </Stack>
+
+          <MDBTable scrollY >
+            <MDBTableHead columns={data.columns} />
+            <MDBTableBody rows={data.rows} />
+          </MDBTable>
         </Card.Body>
       </Card>
     </Container>

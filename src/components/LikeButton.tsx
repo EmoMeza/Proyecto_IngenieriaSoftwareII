@@ -16,7 +16,7 @@ const LikeButton = (props: { id_bug: number }) => {
 
   return (
     //<button className="btn btn-primary btn-edit like-Button"> onClick={() => handleLike(bug.id)} +</button>
-    <button className ="btn btn-primary btn-edit like-Button" onClick={addLike}>+</button>
+    <button className ="btn btn-primary btn-edit like-Button" onClick={addLike} type='submit'>+</button>
   );
 };
 

@@ -17,10 +17,10 @@ type FormValues = {
 
 type reporte = {
   id: number;
-  titulo:string;
+  title:string;
   descripcion:string;
   likes:number;
-  fecha:string;
+  date:string;
   id_estado: number;
   id_prioridad: number;
   id_producto: number;
@@ -46,59 +46,15 @@ const getData = (id_dev: number) => {
   };
 
   useEffect(() => {
-    // Configurar la consulta periódica cada X segundos
-    const interval = setInterval(() => {
-      fetchUserData();
-    }, 5000); // Consulta cada 5 segundos (ajusta este valor según tus necesidades)
-
-    // Limpiar el intervalo cuando el componente se desmonte
+  
     return () => {
-      clearInterval(interval);
+      fetchUserData();
     };
   }, []);
 
   return datos;
 };
-/**
-const getProducts = () => {
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:5000/products/all")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
-
-  const productos = products.filter((producto:producto) => producto.id_encargado === 2).map((item: producto) =>{
-    return {
-      nombre:item.nombre, id:item.id
-      }
-    });
-
-  return productos;
-};
-
-
-const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({id_dev, id_producto})  =>   {
-  const [show, setShow] = useState(false);
-  //const [isButtonDisabled, setButtonDisabled] = useState(false); // Added state variable
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const datos = getData(id_dev);
-
-  const reports = datos
-  .filter((report) => report.id_producto === id_producto)
-  .map((reports:reporte) => {
-    return {
-      titulo:<Button href={"/VerReporte/" + reports.id} variant="link">{reports.titulo}</Button>, 
-      likes:reports.likes,
-      fecha:reports.fecha,
-      reasignacion: <AsignacionButton id_report ={reports.id}></AsignacionButton>
-    }
-  });
-**/
 
 const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev, id_producto }) => {
   const [show, setShow] = useState(false);
@@ -108,6 +64,8 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
   const handleShow = () => setShow(true);
 
   useEffect(() => {
+
+  
     fetch("http://127.0.0.1:5000/products/all")
       .then((response) => response.json())
       .then((data) => setProducts(data));
@@ -118,17 +76,18 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       .filter((producto: producto) => producto.id_encargado === 2)
       .map((item: producto) => item.id);
   };
+  
 
   const productIds = getProductIds();
   const datos = getData(id_dev);
 
   const reports = datos
-    .filter((report) => productIds.includes(report.id_producto))
+    .filter((report :reporte) => report.id_producto == (id_producto))
     .map((report: reporte) => {
       return {
-        titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.titulo}</Button>,
+        titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
         likes: report.likes,
-        fecha: report.fecha,
+        fecha: report.date,
         producto: report.id_producto,
         reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>
       };

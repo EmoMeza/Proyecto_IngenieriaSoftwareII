@@ -8,13 +8,13 @@ import "./ReportTable.css"
 
 type reporte = {
   descripcion: string;
-  fecha: Date;
+  date: Date;
   id: number;
   id_estado: number;
   id_prioridad: number;
   id_producto: number;
   likes: number;
-  titulo: string;
+  title: string;
 }
 
 const EstadoBug = (id: number) => {
@@ -54,8 +54,10 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
 
       return {
         titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.title}</Button>,
+        titulo: <Button href={"/VerReporte/" + item.id} variant="link">{item.title}</Button>,
         estado: EstadoBug(item.id_estado).toUpperCase(),
         likes: item.likes,
+        fecha: item.date,    
         fecha: item.date,    
       };
 
@@ -87,20 +89,21 @@ export default function ListaReportesProductoDev(props: { id_product: string, no
     rows: items
   };
   return (
-    <Container className="search-container">
-      <Card className="table-bugs-productos">
-        <Card.Body>
-          <Card.Title className="text-black">
-            Reportes de {props.nombre_producto}
-          </Card.Title>
-          <div style={{ maxHeight: '55vh', overflowY: 'scroll' }}>
-            <MDBTable>
-              <MDBTableHead columns={data.columns} />
-              <MDBTableBody rows={data.rows} />
-            </MDBTable>
-          </div>
-        </Card.Body>
-      </Card>
+    <Container>
+          <Card >
+            <Card.Body >
+              <Card.Title className="text-black">
+                Reportes de {props.nombre_producto}
+              </Card.Title>
+              <div style={{ width: '75rem', height: '36rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+              </div>
+              
+            </Card.Body>
+          </Card>
     </Container>
   );
 }

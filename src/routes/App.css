@@ -28,8 +28,7 @@
     color: #f0f0f0;
     align-items: center;
     justify-content: center;
-    min-height: 90vh;
-    min-width: 90vh;
+    
   }
   .form-ingresar{
     display: flex;

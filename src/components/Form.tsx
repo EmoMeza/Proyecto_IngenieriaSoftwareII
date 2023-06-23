@@ -2,6 +2,7 @@ import * as React from "react";
 import {useState, useEffect} from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { Col,Row } from 'react-bootstrap';
 import Product from "./Product";
 type FormValues = {
   title: string;
@@ -35,11 +36,7 @@ function Form(): JSX.Element {
   });
   const { register, handleSubmit } = useForm<FormValues>();
   const navigate = useNavigate();
-  const navigateHome = () => {
-    // 👇️ navigate to /
-    navigate("/");
-  };
-
+ 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const id_producto = data.id_product;
     const id_cliente = 2;
@@ -49,40 +46,50 @@ function Form(): JSX.Element {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({title:data.title,description:data.description}),
     });
 
     if (!response.ok) {
       throw new Error(response.statusText);
     } else {
-      navigateHome();
+      navigate("/");
     }
   };
 
 
-//PROBLEMA VALUE ESTA HARDCODEADO A 1 CUANDO DEBERIA SER EL VALOR DEL ELEMENTO QUE APARECE EN EL DROPDOWN
   return (
     <div style={{ display: "flex" }}>
       <br />
       <form onSubmit={handleSubmit(onSubmit)} className="form-react">
+        <Col>
         <div className="form-title">
           <h2 className="space-taker"></h2>
           <label>Titulo</label>
-          <input type="text" {...register("title")} />
+          <input placeholder="No puedo .. / Error al ... / Cuando ..." type="text" {...register("title")} />
         </div>
+        </Col>
+        <Col>
         <div className="form-product">
-      <label>Producto</label>
-      <select {...register("id_product", { value: 1})}>
-        {products.map((product) => (
-          <option key={product.id} value={product.id}>
-            {product.nombre}
-          </option>
-        ))}
-      </select>
-    </div>
+          <label>Producto</label>
+          <select {...register("id_product")}>
+            {products.map((product) => (
+              <option key={product.id} value={product.id}>
+                {product.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        </Col>
+        
         <div className="form-description">
           <label>Descripcion</label>
-          <textarea {...register("description")}></textarea>
+          <textarea placeholder="Pasos para recrear el Bug:
+          1.- ...
+          2.- ...
+          3.- ...
+
+          Con este Bug no puedo ... .
+          " {...register("description")}></textarea>
         </div>
         <button type="submit">Send</button>
       </form>
