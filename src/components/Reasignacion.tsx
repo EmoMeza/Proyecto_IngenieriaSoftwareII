@@ -16,6 +16,7 @@ type reporte = {
     motivo:string;
     developer_name:string;
     report_title:string;
+    id_prioridad:number;
 }
 
 type producto = {
@@ -50,12 +51,24 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
   }, [id_product]);
 
 
+  const nombreP = (id_prioridad:number) => {
+    switch (id_prioridad) {
+      case 1:
+        return "Alta";
+      case 2:
+        return "Media";
+      case 3:
+        return "Baja";
+      default:
+        return "Sin Prioridad";
+    }
+  }
 
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href={"/VerReporte/"+reports.id_report}  variant="link">{reports.report_title}</Button>, 
+      titulo:<Button href={"/VerReporteEnv/"+reports.id_report}  variant="link">{reports.report_title}</Button>, 
       desarollador: reports.developer_name,
-      prioridad_a: reports.date,
+      prioridad_a: nombreP(reports.id_prioridad),
       asignacion:<ReasignacionButton id_producto={id_product} id_report ={reports.id_report} id_developer={reports.id_developer} developer_name={reports.developer_name} date={reports.date} motivo={reports.motivo} ></ReasignacionButton>
     }
   });

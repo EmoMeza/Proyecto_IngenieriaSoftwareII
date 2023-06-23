@@ -20,7 +20,7 @@ type reporte = {
   title:string;
   descripcion:string;
   likes:number;
-  fecha:string;
+  date:string;
   id_estado: number;
   id_prioridad: number;
   id_producto: number;
@@ -87,7 +87,7 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       return {
         titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
         likes: report.likes,
-        fecha: report.fecha,
+        fecha: report.date,
         producto: report.id_producto,
         reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>
       };
@@ -131,7 +131,7 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       Asignados
       </Button>
 
-      <Modal  show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className="text-black">Reportes asignados al desarrollador</Modal.Title>
         </Modal.Header>

@@ -5,10 +5,12 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import "../routes/App.css"
 import "./SearchBar.css"
 import LikeButton from "./LikeButton";
+
+
 type reporte = {
   date: Date;
   description: string;
-  estado: string;
+  id_estado: number;
   id: number;
   id_producto: number;
   likes: number;
@@ -47,6 +49,23 @@ const getData = () => {
   return users;
 };
 
+
+const EstadoBug = (id: number) => {
+  if (id == 0) {
+    return "No Asignado";
+  }
+  else if (id == 1) {
+    return "Pendiente";
+  }
+  else if (id == 2) {
+    return "En proceso";
+  }
+  else if (id == 3) {
+    return "Cerrado";
+  }
+}
+
+
 const getFilteredItems = (query: string, items: reporte[]) => {
   query = query.toLowerCase();
   if (!query) {
@@ -63,9 +82,9 @@ export default function SearchBar() {
     return {
       titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
       fecha: report.date,
-      estado: report.estado,
+      estado: EstadoBug(report.id_estado),
       likes: report.likes,
-      like: <LikeButton id={report.id} />,
+      like: <LikeButton id={report.id}></LikeButton>,
       id_producto: report.id_producto
     }
   });

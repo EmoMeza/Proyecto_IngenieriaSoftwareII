@@ -87,6 +87,13 @@ def get_dev_info():
     developer_json = {'id': developer.id, 'nombre': developer.nombre, 'email': developer.email, 'id_rol': developer.id_rol}
     return jsonify(developer_json)    
 
+@user_controller.route('/user/reports/', methods=['GET'])
+def get_user_reports():
+    id_user = request.args.get('id_user')
+    reportes = database.reporte.query.filter_by(id_cliente=id_user).all()
+    reportes_json = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reportes]
+    return jsonify(reportes_json), 200   
+
 async def add_desarrollador(nombre, email, id_rol):
     desarrollador = database.desarrollador(nombre, email, id_rol)
     db.session.add(desarrollador)

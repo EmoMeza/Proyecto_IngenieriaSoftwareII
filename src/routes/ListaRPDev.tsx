@@ -44,7 +44,7 @@ class ListaRPDev extends React.Component<
           />
         </div>
         <h1 className="space-taker">    </h1>
-        <div className="bugs-list-container">
+        <div >
           <ListaReportesProductoDev
             id_product={id_dev.toString()}
             nombre_producto={nombre_producto}

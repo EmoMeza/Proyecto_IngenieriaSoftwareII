@@ -9,15 +9,15 @@ type Props = {};
 
 
 
-const Dev = (props: Props) => {
+const Reportes = (props: Props) => {
     return (
       <div>
         <HeaderDev></HeaderDev>
         <br />
-        <ReportesDev></ReportesDev>
-        
+
+        <ListaRPDev></ListaRPDev>
       </div>
     );
   };
   
-  export default Dev;
+  export default Reportes;

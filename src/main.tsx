@@ -12,6 +12,7 @@ import Dev from "./routes/Dev"
 import ListaDesarrolladores from "./routes/ListaDesarrolladores"
 import MenuReasignacion from "./routes/MenuReasignacion";
 import ListaRPDev from "./routes/ListaRPDev";
+import Reportes from "./routes/Reportes";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/ListaRPDev",
     element: <ListaRPDev/>,
+  },
+  {
+    path: "/Reportes",
+    element: <Reportes/>,
   }
 ]);
 

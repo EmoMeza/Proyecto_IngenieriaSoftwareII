@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "./CustomCard.css";
 import VerReporte from "../routes/VerReporte";
 import { useNavigate } from "react-router-dom";
+import DropdownPrioridad from './DropdownPrioridad';
 
 function CustomCardEnv(props: { bug: Bug }) {
   let tittle = props.bug.titulo;
@@ -37,24 +38,9 @@ function CustomCardEnv(props: { bug: Bug }) {
       <div className="card-header"></div>
       <div className="card-body">
         <div className="bug-info-container">
-          <div className="bug-state">
             
-            <select name="Producto" onChange={handleBugStateChange} >
-                    
-              <option key={1} value={1}>
-                Alta
-              </option>
-              <option key={2} value={2}>
-                Media
-              </option>
-              <option key={3} value={3}>
-                Baja
-              </option>
-              
-                    
-              </select>
+          <DropdownPrioridad  id_report={props.bug.id}></DropdownPrioridad>
             
-          </div>
           <LikeButton bug={props.bug}></LikeButton>
         </div>
         <p className="titulardo">{props.bug.titulo}</p>
