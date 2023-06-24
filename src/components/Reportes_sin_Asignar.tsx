@@ -115,7 +115,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
 
   const reports = datos.map((reports:reporte) => {
     return {
-      titulo:<Button href={"/VerReporte/"+reports.id} variant="link">{reports.title}</Button>, 
+      titulo:<Button href={"/VerReporteEnv/"+reports.id} variant="link">{reports.title}</Button>, 
       prioridad: getPrioridadNombre(reports.id_prioridad),
       likes:reports.likes,
       asignacion:<AsignacionButton id_report ={reports.id}  ></AsignacionButton>,
@@ -152,12 +152,7 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
         field: 'asignacion',
         sort: 'asc'
         }
-        ,
-      {
-        label: 'Asignacion de ',
-        field: 'prioridad_a',
-        sort: 'asc'
-        }
+        
     ],
     rows: reports
   };

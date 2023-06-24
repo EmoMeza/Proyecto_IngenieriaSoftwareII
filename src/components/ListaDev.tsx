@@ -146,7 +146,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
 
   return (
     <Container>
-      <Card style={{ width: '80rem', height: '20rem'}}>
+      <Card style={{ width: '43rem', height: '20rem'}}>
         <Card.Body>
           <Stack direction="horizontal" gap={3}>
             <div >
@@ -163,10 +163,12 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
             </div>
           </Stack>
 
-          <MDBTable scrollY minHeight>
-            <MDBTableHead columns={data.columns} />
-            <MDBTableBody rows={data.rows} />
-          </MDBTable>
+          <div style={{ width: '41rem', height: '15rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+          </div>
         </Card.Body>
       </Card>
     </Container>

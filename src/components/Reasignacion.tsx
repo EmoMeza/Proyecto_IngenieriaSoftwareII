@@ -82,7 +82,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
         sort: 'asc'
       },
       {
-        label: 'Desarrollador Asignado',
+        label: 'Desarrollador',
         field: 'desarollador',
         sort: 'asc'
       },
@@ -122,7 +122,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
 
   return (
     <Container>
-          <Card style={{ width: '80rem', height: '18rem'}}>
+          <Card style={{ width: '43rem', height: '19rem'}}>
             <Card.Body>
               <Stack direction="horizontal" gap={3}>
                 <div >
@@ -141,11 +141,13 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
                 </div>
               </Stack>
 
-                           
-              <MDBTable scrollY>
-                <MDBTableHead columns={data.columns} />
-                <MDBTableBody rows={data.rows} />
-              </MDBTable>
+              <div style={{ width: '41rem', height: '14rem', overflowY: 'scroll' }}>
+                <MDBTable >
+                  <MDBTableHead  columns={data.columns} />
+                  <MDBTableBody rows={data.rows } />
+                </MDBTable>
+            </div>            
+              
               
             </Card.Body>
           </Card>

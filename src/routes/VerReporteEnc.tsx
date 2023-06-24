@@ -18,6 +18,12 @@ type contenidoReporte = {
   titulo: string;
   descripcion: string;
 }
+interface Estado {
+  id: number;
+  nombre: string;
+}
+
+type EstadoDictionary = Record<number, string>;
 
 const getCommentsdb = async (reportId: number) => {
   const fetchCommentData = async () => {
@@ -56,13 +62,31 @@ const getReportedb = async (reportId: number) => {
   return report;
 };
 
+const getEstados = async (): Promise<EstadoDictionary> => {
+  return new Promise((resolve, reject) => {
+    fetch("http://127.0.0.1:5000/reports/estados/all")
+      .then((response) => response.json())
+      .then((data: Estado[]) => {
+        const estadosDictionary: EstadoDictionary = {};
+        data.forEach((estado) => {
+          estadosDictionary[estado.id] = estado.nombre;
+        });
+        resolve(estadosDictionary);
+      })
+      .catch(reject);
+  });
+};
+
+
 const getReporte = async (id_reporte: number): Promise<Bug> => {
   const report = await getReportedb(id_reporte);
+  const estados = await getEstados();
   const encargado = await fetch("http://127.0.0.1:5000/dev/info/?id_dev=" + report.id_developer)
     .then((response) => {
       return response.json();
     });
-  return new Bug(report.id, report.title, report.description, encargado.nombre, report.estado, report.likes);
+    return new Bug(report.id,report.id_prioridad, report.title, report.description, encargado.nombre, estados[report.id_estado], report.likes);
+
 }
 
 function VerReporte() {
