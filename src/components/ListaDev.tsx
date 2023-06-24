@@ -48,9 +48,13 @@ const useDevData = (url: string, id_product: number) => {
 
 const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
   const [id_product, setId_product] = useState<number>(1);
+  const [devs, setDevs] = useState<Dev[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
-  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     setId_product(parseInt(event.target.value, 10));
+
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAa change to {parseInt(event.target.value, 10}" );
   };
 
   const datos = useDevData('http://127.0.0.1:5000/products/get/developers', id_product);
@@ -64,6 +68,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
       console.error('Error fetching num_reports data:', error);
     }
   };
+
 
   const fetchDevData = async () => {
     const devs = datos.map(async (dev: Dev) => {
@@ -81,23 +86,23 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
     return updatedDevs;
   };
 
-  const [devs, setDevs] = useState<Dev[]>([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
       const updatedDevs = await fetchDevData();
       setDevs(updatedDevs);
     };
-
     fetchData();
+    console.log("se realiza la actualizacion")
   }, [datos, id_product]);
 
   const getProducts = async () => {
     const response = await fetch('http://127.0.0.1:5000/products/all');
     const data = await response.json();
     const productos = data
-      .filter((producto: Producto) => producto.id_encargado === 2)
-      .map((item: Producto) => {
+      .filter((producto: Product) => producto.id_encargado === 2)
+      .map((item: Product) => {
         return {
           nombre: item.nombre,
           id: item.id,
@@ -106,8 +111,6 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
 
     return productos;
   };
-
-  const [products, setProducts] = useState<Producto[]>([]);
 
   useEffect(() => {
     getProducts().then((productos) => {

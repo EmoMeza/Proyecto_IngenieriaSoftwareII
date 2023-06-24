@@ -218,7 +218,7 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
           <Modal.Title className="text-black">Reportes asignados al desarrollador {devInfo['nombre']} en el proyecto {productInfo['nombre']}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <MDBTable scrollY maxHeight='70vh' maxWidth ='200vh'>
+        <MDBTable scrollY maxHeight='70vh'>
                 <MDBTableHead columns={data.columns} />
                 <MDBTableBody rows={data.rows} />
         </MDBTable>
