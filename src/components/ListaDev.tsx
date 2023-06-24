@@ -6,6 +6,7 @@ import ListaDevButtonEncargado from './ListaDevButtonEncargado';
 import "./ReportTable.css";
 import "./PrioridadesModal.css";
 import Product from './Product';
+import ListaDevButton from './ListaDevButton';
 
 interface IListaDevProps { }
 
@@ -72,7 +73,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
         nombre: dev.nombre,
         email: dev.email,
         num_reportes: num_rep.total_reports + ' (' + num_rep.product_reports + ')',
-        modal: <ListaDevButtonEncargado id_dev={dev.id} id_producto={id_product}></ListaDevButtonEncargado>,
+        modal: <ListaDevButton id_dev={dev.id} id_producto={id_product}></ListaDevButton>,
       };
     });
 
@@ -142,7 +143,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
 
   return (
     <Container>
-      <Card style={{ width: '40rem', height: '20rem'}}>
+      <Card style={{ width: '80rem', height: '20rem'}}>
         <Card.Body>
           <Stack direction="horizontal" gap={3}>
             <div >
@@ -159,7 +160,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
             </div>
           </Stack>
 
-          <MDBTable scrollY >
+          <MDBTable scrollY minHeight>
             <MDBTableHead columns={data.columns} />
             <MDBTableBody rows={data.rows} />
           </MDBTable>

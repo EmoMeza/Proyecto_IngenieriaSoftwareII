@@ -122,7 +122,7 @@ const Reasignacion: React.FunctionComponent<IReasignacionProps> = (props) => {
 
   return (
     <Container>
-          <Card style={{ width: '40rem', height: '18rem'}}>
+          <Card style={{ width: '80rem', height: '18rem'}}>
             <Card.Body>
               <Stack direction="horizontal" gap={3}>
                 <div >

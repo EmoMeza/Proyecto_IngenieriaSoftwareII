@@ -3,10 +3,11 @@ import Bug from "../components/Bug";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './VerReporte.css';
-import HeaderDev from '../components/HeaderDev';
+import Header from '../components/Header';
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import CustomCard from '../components/CustomCard';
 import CustomCardDev from '../components/CustomCardDev';
 
 
@@ -20,6 +21,13 @@ type contenidoReporte = {
   titulo: string;
   descripcion: string;
 }
+
+interface Estado {
+  id: number;
+  nombre: string;
+}
+
+type EstadoDictionary = Record<number, string>;
 
 const getCommentsdb = async (reportId: number) => {
   const fetchCommentData = async () => {
@@ -58,13 +66,29 @@ const getReportedb = async (reportId: number) => {
   return report;
 };
 
+const getEstados = async (): Promise<EstadoDictionary> => {
+  return new Promise((resolve, reject) => {
+    fetch("http://127.0.0.1:5000/reports/estados/all")
+      .then((response) => response.json())
+      .then((data: Estado[]) => {
+        const estadosDictionary: EstadoDictionary = {};
+        data.forEach((estado) => {
+          estadosDictionary[estado.id] = estado.nombre;
+        });
+        resolve(estadosDictionary);
+      })
+      .catch(reject);
+  });
+};
+
 const getReporte = async (id_reporte: number): Promise<Bug> => {
   const report = await getReportedb(id_reporte);
+  const estados = await getEstados();
   const encargado = await fetch("http://127.0.0.1:5000/dev/info/?id_dev=" + report.id_developer)
     .then((response) => {
       return response.json();
     });
-  return new Bug(report.id, report.title, report.description, encargado.nombre, report.estado, report.likes);
+  return new Bug(report.id,report.id_prioridad, report.title, report.description, encargado.nombre, estados[report.id_estado], report.likes);
 }
 
 function VerReporte() {
@@ -116,7 +140,7 @@ function VerReporte() {
 
   return (
     <div>
-      <HeaderDev/>
+      <Header />
       <div className="main-container">
         <div>
           {report ? (
@@ -126,6 +150,7 @@ function VerReporte() {
           )
           }
         </div>
+
         <div className="comment-section">
           {comments.map((text, index) => (
             <div className="comment-container" key={index}>
@@ -148,6 +173,8 @@ function VerReporte() {
               Submit
             </button>
           </div>
+
+
         </div>
       </div>
     </div>

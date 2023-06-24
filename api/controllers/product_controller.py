@@ -20,6 +20,16 @@ def get_reports():
     reports_json = [{'id': reporte.id, 'title': reporte.titulo, 'description': reporte.descripcion, 'likes': reporte.likes, 'date': reporte.fecha, 'id_estado': reporte.id_estado, 'id_prioridad': reporte.id_prioridad, 'id_producto': reporte.id_producto, 'id_developer' : reporte.id_developer} for reporte in reports]    
     return jsonify(reports_json), 200    
 
+@product_controller.route('/product/get', methods=['GET'])
+def get_product():
+    id_product = request.args.get('id_product')
+    product = database.producto.query.get_or_404(id_product)
+    product_json = {}
+    product_json['id'] = product.id
+    product_json['nombre'] = product.nombre
+    product_json['id_encargado'] = product.id_encargado
+    return jsonify(product_json), 200   
+
 @product_controller.route('/products/get/all_reports', methods=['GET'])
 def get_all_reports():
     id_product = request.args.get('id_product')

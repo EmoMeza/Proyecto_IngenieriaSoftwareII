@@ -109,3 +109,8 @@
   .bugs-list-container{
     width:80vh;
   }
+
+  .custom-modal .modal-dialog {
+    max-width: 80%;
+    width: 80%;
+  }

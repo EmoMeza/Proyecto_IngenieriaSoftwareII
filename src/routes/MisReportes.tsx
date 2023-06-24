@@ -178,8 +178,9 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
 
     return (
         <Container>
-            <Container className="search-container">
-                <Header />
+            <Header />
+            <Container className="Container">
+                
                 <Card>
                     <Card.Body>
                         <Card.Title className="text-black">
@@ -194,8 +195,7 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
                     </Card.Body>
                 </Card>
             </Container>
-            <Container className="search-container">
-                <Header/>
+            <Container className="Container">
                 <Card>
                     <Card.Body>
                         <Card.Title className="text-black">

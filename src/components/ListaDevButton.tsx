@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
 import './ListaDevButton.css'
+import CambiarPrioridadButton from './CambiarPrioridadButton';
 
 interface IListaDevButtonProps {
   id_dev: number;
@@ -37,8 +38,10 @@ type prioridad = {
   nombre: string;
 };
 
-const getData = (id_dev: number) => {
+const getData = (id_dev: number, id_product: number) => {
   const [datos, setUsers] = useState([]);
+  const [devInfo, setDevInfo] = useState([]);
+  const [productInfo, setProductInfo] = useState([]);
 
   const fetchUserData = () => {
     fetch("http://127.0.0.1:5000/dev/reportes/?id_dev=" + id_dev)
@@ -50,14 +53,36 @@ const getData = (id_dev: number) => {
       });
   };
 
+  const fetchDevInfo = () => {
+    fetch("http://127.0.0.1:5000/dev/info/?id_dev=" + id_dev)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setDevInfo(data);
+      });
+  };
+
+  const fetchProductData = () => {
+    fetch("http://127.0.0.1:5000/product/get?id_product=" + id_product)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setProductInfo(data);
+      });
+  };
+
   useEffect(() => {
   
     return () => {
       fetchUserData();
+      fetchDevInfo();
+      fetchProductData();
     };
   }, []);
 
-  return datos;
+  return [datos, devInfo, productInfo];
 };
 
 
@@ -128,7 +153,7 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
   
 
   const productIds = getProductIds();
-  const datos = getData(id_dev);
+  const [datos,devInfo,productInfo] = getData(id_dev, id_producto);
 
   const reports = datos
     .filter((report :reporte) => report.id_producto == (id_producto))
@@ -139,7 +164,8 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
         likes: report.likes,
         fecha: report.date,
         producto: report.id_producto,
-        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>
+        reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>,
+        cambiarprioridad: <CambiarPrioridadButton id={report.id}></CambiarPrioridadButton>
       };
     });
 
@@ -187,12 +213,12 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
       Asignados
       </Button>
 
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal show={show} onHide={handleClose} dialogClassName="modal-dialog modal-xl">
         <Modal.Header closeButton>
-          <Modal.Title className="text-black">Reportes asignados al desarrollador</Modal.Title>
+          <Modal.Title className="text-black">Reportes asignados al desarrollador {devInfo['nombre']} en el proyecto {productInfo['nombre']}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <MDBTable scrollY maxHeight='400vh' maxWidth ='200vh'>
+        <MDBTable scrollY maxHeight='70vh' maxWidth ='200vh'>
                 <MDBTableHead columns={data.columns} />
                 <MDBTableBody rows={data.rows} />
         </MDBTable>

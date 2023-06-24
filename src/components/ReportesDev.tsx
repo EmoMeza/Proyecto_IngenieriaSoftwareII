@@ -24,6 +24,71 @@ type prioridad = {
   nombre: string;
 };
 
+interface Estado {
+  id: number;
+  nombre: string;
+}
+
+
+
+interface Producto {
+  id: number;
+  nombre: string;
+}
+
+type productoDictionary = Record<number, string>;
+type EstadoDictionary = Record<number, string>;
+
+const getProductos = (): productoDictionary => {
+  const [productos, setProductos] = useState<productoDictionary>({});
+
+  const fetchProductos = () => {
+    fetch("http://127.0.0.1:5000/products/all")
+      .then((response) => response.json())
+      .then((data: Producto[]) => {
+        const productDictionary: productoDictionary = {};
+        data.forEach((producto) => {
+          productDictionary[producto.id] = producto.nombre;
+        });
+        setProductos(productDictionary);
+      });
+  };
+
+  useEffect(() => {
+    fetchProductos();
+  }, []);
+
+  return productos;
+};
+
+
+
+
+
+
+
+const getEstados = (): EstadoDictionary => {
+  const [estados, setEstados] = useState<EstadoDictionary>({});
+
+  const fetchEstados = () => {
+    fetch("http://127.0.0.1:5000/reports/estados/all")
+      .then((response) => response.json())
+      .then((data: Estado[]) => {
+        const estadosDictionary: EstadoDictionary = {};
+        data.forEach((estado) => {
+          estadosDictionary[estado.id] = estado.nombre;
+        });
+        setEstados(estadosDictionary);
+      });
+  };
+
+  useEffect(() => {
+    fetchEstados();
+  }, []);
+
+  return estados;
+};
+
 
 const id_dev = 5;
 
@@ -61,7 +126,7 @@ const getData = () => {
     };
   }, []);
 
-  return [datosReporte, datosProducto, datosEstado];
+  return [datosReporte, datosProducto];
 };
 const getPrioridades = (): prioridad[] => {
   const [prioridades, setPrioridades] = useState<prioridad[]>([]);
@@ -87,7 +152,9 @@ const getPrioridades = (): prioridad[] => {
   return prioridades;
 };
 const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
-  const [datosReporte, datosProducto, datosEstado] = getData();
+  const [datosReporte, datosProducto] = getData();
+  const estados = getEstados();
+  const productos = getProductos();
   const prioridades = getPrioridades();
 
 
@@ -109,15 +176,13 @@ const ReportesDev: React.FunctionComponent<IReportesDev> = (props) => {
   };
   //REVISAR LOS ESTADOS REHACER LA VISTA
   const reports = datosReporte.map((report: reporte) => {
-    const estadoNombre = datosEstado[report.id_estado]?.nombre || "";
-    const productoNombre = datosProducto[report.id_producto]?.nombre || "";
-
+    const estadoNombre = estados[report.id_estado];
+    const productoNombre = productos[report.id_producto];
     return {
       titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
       prioridad: getPrioridadNombre(report.id_prioridad),
       estado: estadoNombre.toUpperCase(),
       likes: report.likes,
-      
       fecha: dayjs(report.date).format("DD/MM/YYYY"),
       producto: productoNombre,
       solicitud:<SolicitudButton id_report={report.id} id_dev={id_dev}></SolicitudButton>

@@ -15,7 +15,6 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
             <Nav className="me-auto">
               <Nav.Link href="/IngresarBug">Ingresar Bug</Nav.Link>
               <Nav.Link href="/MisReportes">Mis Reportes</Nav.Link>
-              <Nav.Link href="/MisLikes">Mis Likes</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link href="#link">Cliente</Nav.Link>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useState, useEffect} from 'react';
-import  { Button,Modal,Form } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Button, Modal, Form, Container } from 'react-bootstrap';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
@@ -18,10 +18,10 @@ type FormValues = {
 
 type reporte = {
   id: number;
-  titulo:string;
-  descripcion:string;
-  likes:number;
-  fecha:string;
+  titulo: string;
+  descripcion: string;
+  likes: number;
+  fecha: string;
   id_estado: number;
   id_prioridad: number;
   id_producto: number;
@@ -133,8 +133,8 @@ const ListaDevButtonEncargado: React.FunctionComponent<IListaDevButtonProps> = (
   const prioridades = getPrioridades();
 
 
-  const getPrioridadNombre =(id:number) =>{
-    const  prio = prioridades.find((item: prioridad) => item.id === id);
+  const getPrioridadNombre = (id: number) => {
+    const prio = prioridades.find((item: prioridad) => item.id === id);
     if (!prio) {
       return <h5 className="prioridadCeroModal">NO ASIGNADO</h5>;
     } else if (prio.id === 0) {
@@ -169,7 +169,7 @@ const ListaDevButtonEncargado: React.FunctionComponent<IListaDevButtonProps> = (
   const datos = getData(id_dev);
 
   const reports = datos
-    .filter((report:reporte) => productIds.includes(report.id_producto))
+    .filter((report: reporte) => productIds.includes(report.id_producto))
     .map((report: reporte) => {
       return {
         titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.titulo}</Button>,
@@ -178,7 +178,7 @@ const ListaDevButtonEncargado: React.FunctionComponent<IListaDevButtonProps> = (
         fecha: report.fecha,
         producto: report.id_producto,
         reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>,
-        cambiarprioridad:  <CambiarPrioridadButton id={report.id}></CambiarPrioridadButton>
+        cambiarprioridad: <CambiarPrioridadButton id={report.id}></CambiarPrioridadButton>
       };
     });
 
@@ -226,23 +226,24 @@ const ListaDevButtonEncargado: React.FunctionComponent<IListaDevButtonProps> = (
 
 
   return (
-    <>
+    <Container>
       <Button variant="success" onClick={handleShow}>
-      Asignados
+        Asignados
       </Button>
-
-      <Modal show={show} onHide={handleClose}>
+      <div className="modal-dialog modal-xl">
+      <Modal show={show} onHide={handleClose} dialogClassName="modal-dialog modal-xl" maxheight='50vh'>
         <Modal.Header closeButton>
           <Modal.Title className="text-black">Reportes asignados al desarrollador</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <MDBTable scrollY>
-                <MDBTableHead columns={data.columns} />
-                <MDBTableBody rows={data.rows} />
-        </MDBTable>
+          <MDBTable scrollY maxHeight='70vh'>
+            <MDBTableHead columns={data.columns} />
+            <MDBTableBody rows={data.rows} />
+          </MDBTable>
         </Modal.Body>
       </Modal>
-    </>
+      </div>
+    </Container>
   );
 }
 
