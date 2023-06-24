@@ -30,13 +30,13 @@ const DropdownPrioridad: React.FC<DropdownPrioridadProps> = ({id_report}) => {
       variant="success" 
       title={"Prioridad"}
       >
-        <Dropdown.Item onClick={() => handleDropdownItemClick(1,id_report)}>
+        <Dropdown.Item onClick={() => handleDropdownItemClick(3,id_report)}>
           Alta
         </Dropdown.Item>
         <Dropdown.Item onClick={() => handleDropdownItemClick(2,id_report)}>
           Media
         </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleDropdownItemClick(3,id_report)}>
+        <Dropdown.Item onClick={() => handleDropdownItemClick(1,id_report)}>
           Baja
         </Dropdown.Item>
 
