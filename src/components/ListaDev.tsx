@@ -54,7 +54,7 @@ const ListaDev: React.FunctionComponent<IListaDevProps> = (props) => {
   const selectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     setId_product(parseInt(event.target.value, 10));
 
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAa change to {parseInt(event.target.value, 10}" );
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAa change to");
   };
 
   const datos = useDevData('http://127.0.0.1:5000/products/get/developers', id_product);
