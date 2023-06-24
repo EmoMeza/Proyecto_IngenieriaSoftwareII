@@ -37,18 +37,9 @@ class ListaRPDev extends React.Component<
 
     return (
       <div className="center">
-        <div className="dropdown-container">
-          <DropdownDeveloperButton
-            id_dev={id_dev.toString()}
-            nombre={nombre_producto}
-            onIdDevChange={this.handleIdDevChange}
-          />
-        </div>
         <h1 className="space-taker">    </h1>
         <div >
           <ListaReportesProductoDev
-            id_product={id_dev.toString()}
-            nombre_producto={nombre_producto}
           />
         </div>
       </div>
