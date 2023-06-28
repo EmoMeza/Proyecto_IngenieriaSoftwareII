@@ -183,11 +183,6 @@ export default function SearchBar() {
         field: 'prioridad',
         sort: 'asc'
 
-      },
-      {
-        label: 'Cambiar Prioridad',
-        field: 'prioridadBoton',
-        sort: 'asc'
       }
     ],
     rows: reports
