@@ -141,7 +141,7 @@ export default function SearchBar() {
   };
   const reports = filteredItems.map((report: reporte) => {
     return {
-      titulo: <Button href={"/VerReporte/" + report.id} variant="link">{report.title}</Button>,
+      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
       fecha: dayjs(report.date).format("MM/DD/YYYY"),
       estado: estados[report.id_estado],
       likes: report.likes,
