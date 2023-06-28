@@ -12,12 +12,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     <div className="header">
       <Navbar fixed='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">Monster-Inc</Navbar.Brand>
+          <Navbar.Brand href="/ReportesEnc">Monster-Inc</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/Asignacion">Reportes sin asignar</Nav.Link>
-              <Nav.Link href="/Reportes">Todos los reportes</Nav.Link>
+              <Nav.Link href="/Asignacion">Asignacion</Nav.Link>
+              <Nav.Link href="/ReportesEnc">Todos los reportes</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link href="#link">Encargado emomeza@udec.cl</Nav.Link>

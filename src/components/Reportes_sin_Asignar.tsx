@@ -143,15 +143,16 @@ const Reportes_sin_Asignar: React.FunctionComponent<IReportes_sin_AsignarProps> 
         sort: 'asc'
       },
       {
-        label: 'Prioridad',
-        field: 'prioridad',
-        sort: 'asc'
-      },
-      {
         label: 'Asignacion',
         field: 'asignacion',
         sort: 'asc'
-        }
+        },
+      {
+        label: 'Prioridad',
+        field: 'prioridad',
+        sort: 'asc'
+      }
+     
         
     ],
     rows: reports

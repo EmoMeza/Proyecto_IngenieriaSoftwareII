@@ -103,7 +103,7 @@ const MisReportes: React.FunctionComponent<IMisReportesProps> = (props) => {
                 {report.title}
             </Button>
         ),
-        fecha: dayjs(report.date).format("MM/DD/YYYY"),
+        fecha: dayjs(report.date).format("DD/MM/YYYY"),
         estado: estados[report.id_estado],
         likes: report.likes
     }));

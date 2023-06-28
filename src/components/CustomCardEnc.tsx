@@ -99,6 +99,7 @@ function CustomCardEnv(props: { bug: Bug }) {
       <div className="card-header"></div>
       <div className="card-body">
         <div className="bug-info-container">
+        <div className="comp-comp"><DropdownPrioridad  id_report={props.bug.id}/></div>
         <div >
             <select
               className="bug-state-select"
@@ -135,12 +136,9 @@ function CustomCardEnv(props: { bug: Bug }) {
                 </React.Fragment>
               )}
             </select>
-            {"   " + props.bug.likes}
+            {"   " + props.bug.likes+" likes"}
           </div>
-
-          <DropdownPrioridad  id_report={props.bug.id}></DropdownPrioridad>
-            
-          <LikeButton bug={props.bug}></LikeButton>
+          
         </div>
         <p className="titulardo">{props.bug.titulo}</p>
         <div>

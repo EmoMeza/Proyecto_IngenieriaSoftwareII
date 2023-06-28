@@ -9,6 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import CustomCard from '../components/CustomCard';
 import CustomCardDev from '../components/CustomCardDev';
+import dayjs from "dayjs";
 
 
 type comentario = {
@@ -102,7 +103,7 @@ function VerReporte() {
     const fetchComments = async () => {
       const comentariolistacomentarios = await GetComments(Number(id));
       setComments(comentariolistacomentarios.map((item: comentario) => item.contenido));
-      setDetcomment(comentariolistacomentarios.map((item: comentario) => item.date))
+      setDetcomment(comentariolistacomentarios.map((item: comentario) => dayjs(item.date).format("DD/MM/YYYY")))
     };
 
     const fetchReport = async () => {

@@ -16,6 +16,7 @@ import MenuReasignacion from "./routes/MenuReasignacion";
 import ListaRPDev from "./routes/ListaRPDev";
 import { Container } from "react-bootstrap";
 import Reportes from "./routes/Reportes";
+import ReportesEnc from "./routes/ReportesEnc";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
   {
     path: "/Reportes",
     element: <Reportes/>,
+  }
+  ,
+  {
+    path: "/ReportesEnc",
+    element: <ReportesEnc/>,
   }
 ]);
 

@@ -8,6 +8,7 @@ import LikeButton from "./LikeButton";
 import dayjs from "dayjs";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownPrioridad from "./DropdownPrioridad"
 
 
 type reporte = {
@@ -141,13 +142,13 @@ export default function SearchBar() {
   };
   const reports = filteredItems.map((report: reporte) => {
     return {
-      titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
-      fecha: dayjs(report.date).format("DD/MM/YYYY"),
+      titulo: <Button href={"/VerReporteEnv/" + report.id} variant="link">{report.title}</Button>,
+      fecha: dayjs(report.date).format("MM/DD/YYYY"),
       estado: estados[report.id_estado],
       likes: report.likes,
       id_producto: report.id_producto,
       prioridad: getPrioridadNombre(report.id_prioridad),
-
+      CambioPrioridad : <DropdownPrioridad  id_report={report.id}></DropdownPrioridad>
     }
   });
 
@@ -182,7 +183,11 @@ export default function SearchBar() {
         label: 'Prioridad',
         field: 'prioridad',
         sort: 'asc'
-
+      },
+      {
+        label: 'Cambio Prioridad',
+        field: 'prioridad',
+        sort: 'asc'
       }
     ],
     rows: reports
@@ -261,6 +266,7 @@ export default function SearchBar() {
                         <td>{row.estado}</td>
                         <td>{row.likes}</td>
                         <td>{row.prioridad}</td>
+                        <td>{row.CambioPrioridad}</td>
                       </tr>
                     ))}
                   </MDBTableBody>

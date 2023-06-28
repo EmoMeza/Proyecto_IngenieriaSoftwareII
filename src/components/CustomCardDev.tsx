@@ -137,9 +137,9 @@ function CustomCardDev(props: { bug: Bug }) {
                 </React.Fragment>
               )}
             </select>
-            {"   " + props.bug.likes}
+            
           </div>
-          <LikeButton bug={props.bug}></LikeButton>
+          {"  " + props.bug.likes+" likes"}
         </div>
         <p className="titulardo">{props.bug.titulo}</p>
         <div>

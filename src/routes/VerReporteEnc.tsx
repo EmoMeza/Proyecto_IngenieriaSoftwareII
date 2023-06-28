@@ -6,6 +6,7 @@ import './VerReporte.css';
 import HeaderDev from '../components/HeaderDev';
 import { useParams } from 'react-router-dom';
 import CustomCardEnv from '../components/CustomCardEnc';
+import dayjs from "dayjs";
 
 
 type comentario = {
@@ -100,7 +101,7 @@ function VerReporte() {
     const fetchComments = async () => {
       const comentariolistacomentarios = await GetComments(Number(id));
       setComments(comentariolistacomentarios.map((item: comentario) => item.contenido));
-      setDetcomment(comentariolistacomentarios.map((item: comentario) => item.date))
+      setDetcomment(comentariolistacomentarios.map((item: comentario) => dayjs(item.date).format("DD/MM/YYYY")));
     };
 
     const fetchReport = async () => {

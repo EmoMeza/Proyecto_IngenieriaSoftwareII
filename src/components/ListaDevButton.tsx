@@ -7,6 +7,7 @@ import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import AsignacionButton from './AsignacionButton';
 import './ListaDevButton.css'
 import CambiarPrioridadButton from './CambiarPrioridadButton';
+import dayjs from "dayjs";
 
 interface IListaDevButtonProps {
   id_dev: number;
@@ -159,10 +160,10 @@ const ListaDevButton: React.FunctionComponent<IListaDevButtonProps> = ({ id_dev,
     .filter((report :reporte) => report.id_producto == (id_producto))
     .map((report: reporte) => {
       return {
-        titulo: <Button href={"/VerReporteDev/" + report.id} variant="link">{report.title}</Button>,
+        titulo: <Button href={"/VerReporteEnv/" + report.id} variant="link">{report.title}</Button>,
         prioridad: getPrioridadNombre(report.id_prioridad),
         likes: report.likes,
-        fecha: report.date,
+        fecha: dayjs(report.date).format("DD/MM/YYYY"),
         producto: report.id_producto,
         reasignacion: <AsignacionButton id_report={report.id}></AsignacionButton>,
         cambiarprioridad: <CambiarPrioridadButton id={report.id}></CambiarPrioridadButton>
